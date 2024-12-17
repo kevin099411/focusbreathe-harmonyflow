@@ -12,7 +12,7 @@ const timeOptions = [
 ];
 
 export const TimeSelection = () => {
-  const [selectedTime, setSelectedTime] = useState<number | null>(null);
+  const [selectedTime, setSelectedTime] = useState<number>(10); // Set default to 10
   const session = useSession();
   const navigate = useNavigate();
 
