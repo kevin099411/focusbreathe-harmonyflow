@@ -10,7 +10,7 @@ const Index = () => {
       duration: "1 分鐘",
       description: "使用852赫茲頻率進行快速冥想，提升心智清晰度",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
-      audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852hz.mp3",
+      audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/relax%20forrest%20music.mp3",
     },
     {
       title: "平靜紛亂思緒",
