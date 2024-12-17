@@ -1,159 +1,47 @@
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-import { Download } from "lucide-react";
-import { Button } from "./ui/button";
 
 interface PayPalButtonProps {
   amount: string;
   planTitle: string;
-  fileUrl?: string;
+  hostedButtonId: string;
 }
 
-export const PayPalButton = ({ amount, planTitle, fileUrl }: PayPalButtonProps) => {
+export const PayPalButton = ({ hostedButtonId }: PayPalButtonProps) => {
   const { toast } = useToast();
 
-  const handleDownload = async () => {
-    try {
-      if (!fileUrl) {
-        toast({
-          title: "Error",
-          description: "No file available for download",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      console.log('Attempting to download file:', fileUrl);
-
-      const { data, error } = await supabase.storage
-        .from('file_paypal')
-        .download(fileUrl);
-
-      if (error) {
-        console.error('Download error:', error);
-        throw error;
-      }
-
-      // Create a download link
-      const url = window.URL.createObjectURL(data);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', fileUrl);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
-
-      toast({
-        title: "Success",
-        description: "File downloaded successfully!",
-      });
-    } catch (error) {
-      console.error("Download error:", error);
-      toast({
-        title: "Download Error",
-        description: "Failed to download the file. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
-
-  const handlePaymentSuccess = async (details: any) => {
-    console.log("Payment successful", details);
+  useEffect(() => {
+    // Load PayPal SDK
+    const script = document.createElement('script');
+    script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&components=hosted-buttons&disable-funding=venmo&currency=USD`;
+    script.async = true;
     
-    try {
-      // Get the current user
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        throw new Error("User not authenticated");
+    script.onload = () => {
+      // @ts-ignore
+      if (window.paypal) {
+        // @ts-ignore
+        window.paypal.HostedButtons({
+          hostedButtonId: hostedButtonId,
+        }).render(`#paypal-container-${hostedButtonId}`);
       }
+    };
 
-      const { error } = await supabase.from('payments').insert({
-        amount: parseFloat(amount),
-        status: 'completed',
-        payment_method: 'paypal',
-        payment_id: details.id,
-        user_id: user.id
-      });
-
-      if (error) throw error;
-
+    script.onerror = () => {
       toast({
-        title: "Payment Successful!",
-        description: `Thank you for purchasing the ${planTitle} plan!`,
-      });
-
-      // If there's a file associated, show the download button
-      if (fileUrl) {
-        handleDownload();
-      }
-    } catch (error) {
-      console.error("Error saving payment:", error);
-      toast({
-        variant: "destructive",
         title: "Error",
-        description: "There was an error processing your payment. Please try again.",
+        description: "Failed to load PayPal. Please try again.",
+        variant: "destructive",
       });
-    }
-  };
+    };
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [hostedButtonId, toast]);
 
   return (
-    <div className="space-y-4">
-      <PayPalScriptProvider options={{ 
-        clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID || '',
-        currency: "USD"
-      }}>
-        <PayPalButtons
-          style={{ 
-            layout: "horizontal",
-            color: "gold",
-            shape: "rect",
-            label: "pay",
-            tagline: false
-          }}
-          createOrder={(data, actions) => {
-            return actions.order.create({
-              intent: "CAPTURE",
-              purchase_units: [
-                {
-                  description: `${planTitle} Plan`,
-                  amount: {
-                    currency_code: "USD",
-                    value: amount
-                  },
-                },
-              ],
-            });
-          }}
-          onApprove={async (data, actions) => {
-            if (actions.order) {
-              const details = await actions.order.capture();
-              handlePaymentSuccess(details);
-            }
-          }}
-          onError={(err) => {
-            console.error("PayPal error:", err);
-            toast({
-              variant: "destructive",
-              title: "Payment Error",
-              description: "There was an error processing your PayPal payment. Please try again.",
-            });
-          }}
-        />
-      </PayPalScriptProvider>
-      
-      {fileUrl && (
-        <Button 
-          onClick={handleDownload}
-          className="w-full flex items-center justify-center gap-2"
-          variant="outline"
-        >
-          <Download className="h-4 w-4" />
-          Download File
-        </Button>
-      )}
-    </div>
+    <div id={`paypal-container-${hostedButtonId}`} className="w-full" />
   );
 };

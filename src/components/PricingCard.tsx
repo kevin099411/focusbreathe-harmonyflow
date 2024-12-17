@@ -6,10 +6,10 @@ interface PricingCardProps {
   price: string;
   features: string[];
   isPopular?: boolean;
-  fileUrl?: string;
+  hostedButtonId: string;
 }
 
-export const PricingCard = ({ title, price, features, isPopular, fileUrl }: PricingCardProps) => {
+export const PricingCard = ({ title, price, features, isPopular, hostedButtonId }: PricingCardProps) => {
   return (
     <div className={`relative rounded-2xl p-8 ${
       isPopular 
@@ -38,7 +38,7 @@ export const PricingCard = ({ title, price, features, isPopular, fileUrl }: Pric
         <PayPalButton 
           amount={price} 
           planTitle={title}
-          fileUrl={fileUrl}
+          hostedButtonId={hostedButtonId}
         />
       </div>
     </div>

@@ -12,7 +12,7 @@ const Pricing = () => {
         "Daily mindfulness tips",
         "Community forum access",
       ],
-      fileUrl: "basic-guide.pdf"
+      hostedButtonId: "UZXYSVGZKPA76"
     },
     {
       title: "Premium Zen",
@@ -25,7 +25,7 @@ const Pricing = () => {
         "Premium meditation guide"
       ],
       isPopular: true,
-      fileUrl: "premium-guide.pdf"
+      hostedButtonId: "UZXYSVGZKPA77"
     },
     {
       title: "Master Package",
@@ -38,7 +38,7 @@ const Pricing = () => {
         "Complete meditation library",
         "Exclusive workshops"
       ],
-      fileUrl: "master-guide.pdf"
+      hostedButtonId: "UZXYSVGZKPA78"
     },
   ];
 
@@ -60,7 +60,7 @@ const Pricing = () => {
               price={plan.price}
               features={plan.features}
               isPopular={plan.isPopular}
-              fileUrl={plan.fileUrl}
+              hostedButtonId={plan.hostedButtonId}
             />
           ))}
         </div>
