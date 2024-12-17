@@ -1,8 +1,12 @@
 import { MeditationCategories } from "@/components/MeditationCategories";
 import { TimeSelection } from "@/components/TimeSelection";
 import { AudioPlayer } from "@/components/AudioPlayer";
+import { PayPalButton } from "@/components/PayPalButton";
+import { useState } from "react";
 
 const Meditate = () => {
+  const [selectedPractice, setSelectedPractice] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen bg-[#222222] text-white pt-20 px-4">
       <div className="container mx-auto space-y-12 max-w-4xl">
@@ -15,9 +19,22 @@ const Meditate = () => {
         </div>
         
         <div className="space-y-8">
-          <MeditationCategories />
+          <MeditationCategories onSelect={setSelectedPractice} />
           <TimeSelection />
           
+          {/* PayPal Integration */}
+          <div className="bg-[#1a1a1a] p-6 rounded-lg">
+            <h2 className="text-xl font-semibold mb-4">Premium Meditation Access</h2>
+            <p className="text-gray-300 mb-6">
+              Unlock all meditation practices and downloadable content with a premium subscription.
+            </p>
+            <PayPalButton 
+              amount="29.99"
+              planTitle="Premium Meditation"
+              fileUrl="meditation-guides/premium-guide.pdf"
+            />
+          </div>
+
           {/* Player Section */}
           <div className="fixed bottom-0 left-0 right-0 bg-[#1a1a1a] p-4 border-t border-gray-800">
             <div className="max-w-4xl mx-auto flex items-center justify-between">
@@ -27,7 +44,9 @@ const Meditate = () => {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium">Current Session</h3>
-                  <p className="text-xs text-gray-400">Select a practice to begin</p>
+                  <p className="text-xs text-gray-400">
+                    {selectedPractice || "Select a practice to begin"}
+                  </p>
                 </div>
               </div>
               <AudioPlayer />

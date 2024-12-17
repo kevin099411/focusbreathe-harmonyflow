@@ -10,6 +10,10 @@ interface Category {
   icon: string;
 }
 
+interface MeditationCategoriesProps {
+  onSelect?: (category: string) => void;
+}
+
 const categories: Category[] = [
   {
     id: "autoplay",
@@ -55,12 +59,18 @@ const categories: Category[] = [
   },
 ];
 
-export const MeditationCategories = () => {
+export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleShuffle = () => {
     const randomIndex = Math.floor(Math.random() * categories.length);
     setSelectedCategory(categories[randomIndex].id);
+    onSelect?.(categories[randomIndex].id);
+  };
+
+  const handleSelect = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    onSelect?.(categoryId);
   };
 
   return (
@@ -81,7 +91,7 @@ export const MeditationCategories = () => {
                 ? "ring-2 ring-primary"
                 : ""
             }`}
-            onClick={() => setSelectedCategory(category.id)}
+            onClick={() => handleSelect(category.id)}
           >
             <div className="flex flex-col items-center text-center space-y-2">
               <span className="text-2xl mb-2">{category.icon}</span>
