@@ -23,6 +23,24 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const getNavText = (key: string) => {
+    const translations: Record<string, { en: string; zh: string }> = {
+      meditate: {
+        en: "Meditate",
+        zh: "冥想"
+      },
+      breathwork: {
+        en: "Daily Knowledge",
+        zh: "每日知識"
+      },
+      pricing: {
+        en: "Pricing",
+        zh: "價格"
+      }
+    };
+    return translations[key][language];
+  };
+
   return (
     <div className="min-h-screen relative">
       {/* Header */}
@@ -38,13 +56,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             </div>
             <nav className="flex items-center space-x-6">
               <Link to="/meditate" className="text-gray-600 hover:text-primary">
-                冥想
+                {getNavText("meditate")}
               </Link>
               <Link to="/breathwork" className="text-gray-600 hover:text-primary">
-                每日知識
+                {getNavText("breathwork")}
               </Link>
               <Link to="/pricing" className="text-gray-600 hover:text-primary">
-                價格
+                {getNavText("pricing")}
               </Link>
             </nav>
           </div>
