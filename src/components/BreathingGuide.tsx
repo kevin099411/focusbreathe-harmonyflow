@@ -10,20 +10,23 @@ export const BreathingGuide = ({ phase, duration }: BreathingGuideProps) => {
   
   useEffect(() => {
     const timing = {
-      inhale: { scale: 1.4, duration: 4000 },
-      hold: { scale: 1.4, duration: 7000 },
-      exhale: { scale: 1, duration: 8000 },
-      rest: { scale: 1, duration: 2000 }
+      inhale: { scale: 1.4, duration: duration * 1000 },
+      hold: { scale: 1.4, duration: duration * 1000 },
+      exhale: { scale: 1, duration: duration * 1000 },
+      rest: { scale: 1, duration: duration * 1000 }
     };
 
     setScale(timing[phase].scale);
-  }, [phase]);
+  }, [phase, duration]);
 
   return (
     <div className="relative w-full h-[400px] flex items-center justify-center">
       <div 
-        className="absolute w-72 h-72 bg-primary/10 rounded-full transition-transform duration-[4000ms] flex items-center justify-center"
-        style={{ transform: `scale(${scale})` }}
+        className="absolute w-72 h-72 bg-primary/10 rounded-full transition-transform flex items-center justify-center"
+        style={{ 
+          transform: `scale(${scale})`,
+          transitionDuration: `${duration}s`
+        }}
       >
         <div className="absolute w-64 h-64 bg-primary/20 rounded-full animate-pulse" />
         <div className="absolute w-56 h-56 bg-primary/30 rounded-full" />
