@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import { Layout } from "./components/Layout";
 import Index from "./pages/Index";
 import Meditate from "./pages/Meditate";
 import Breathwork from "./pages/Breathwork";
@@ -20,12 +21,14 @@ const App = () => (
         <Sonner />
         <LanguageSwitcher />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/meditate" element={<Meditate />} />
-            <Route path="/breathwork" element={<Breathwork />} />
-            <Route path="/pricing" element={<Pricing />} />
-          </Routes>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/meditate" element={<Meditate />} />
+              <Route path="/breathwork" element={<Breathwork />} />
+              <Route path="/pricing" element={<Pricing />} />
+            </Routes>
+          </Layout>
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>

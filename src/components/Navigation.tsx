@@ -1,7 +1,10 @@
-import { Home, Wind } from "lucide-react";
+import { Wind } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Navigation = () => {
+  const { language } = useLanguage();
+  
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-50">
       <div className="container mx-auto px-4">
@@ -10,18 +13,15 @@ export const Navigation = () => {
             <Wind className="h-5 w-5 text-primary" />
             <span className="text-lg font-bold text-primary">FocusZen</span>
           </Link>
-          <div className="flex items-center space-x-3 text-sm">
-            <Link to="/" className="text-gray-600 hover:text-primary">
-              <Home className="h-4 w-4" />
-            </Link>
+          <div className="flex items-center space-x-6">
             <Link to="/meditate" className="text-gray-600 hover:text-primary">
-              冥想
+              {language === 'en' ? 'Meditate' : '冥想'}
             </Link>
             <Link to="/breathwork" className="text-gray-600 hover:text-primary">
-              每日知識
+              {language === 'en' ? 'Daily Knowledge' : '每日知識'}
             </Link>
             <Link to="/pricing" className="text-gray-600 hover:text-primary">
-              價格
+              {language === 'en' ? 'Pricing' : '價格'}
             </Link>
           </div>
         </div>
