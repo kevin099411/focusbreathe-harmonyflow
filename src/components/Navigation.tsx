@@ -18,7 +18,7 @@ export const Navigation = () => {
               冥想
             </Link>
             <Link to="/breathwork" className="text-gray-600 hover:text-primary">
-              呼吸
+              每日知識
             </Link>
             <Link to="/pricing" className="text-gray-600 hover:text-primary">
               價格
