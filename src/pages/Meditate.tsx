@@ -24,9 +24,6 @@ const Meditate = () => {
           {/* PayPal Integration */}
           <div className="bg-[#1a1a1a] p-6 rounded-lg">
             <h2 className="text-xl font-semibold mb-4">高級冥想訪問</h2>
-            <p className="text-gray-300 mb-6">
-              通過高級訂閱解鎖所有冥想練習和可下載內容。
-            </p>
             <PayPalButton 
               amount="29.99"
               planTitle="高級冥想"
