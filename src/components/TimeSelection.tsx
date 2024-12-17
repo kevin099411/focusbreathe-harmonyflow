@@ -5,22 +5,22 @@ import { toast } from "./ui/use-toast";
 import { useNavigate } from "react-router-dom";
 
 const timeOptions = [
-  { value: 10, label: "10 mins" },
-  { value: 30, label: "30 mins" },
-  { value: 60, label: "1 hour" },
-  { value: 120, label: "2 hours" },
+  { value: 20, label: "20 分鐘" },
+  { value: 30, label: "30 分鐘" },
+  { value: 60, label: "1 小時" },
+  { value: 120, label: "2 小時" },
 ];
 
 export const TimeSelection = () => {
-  const [selectedTime, setSelectedTime] = useState<number>(10); // Set default to 10
+  const [selectedTime, setSelectedTime] = useState<number>(20); // Set default to 20
   const session = useSession();
   const navigate = useNavigate();
 
   const handleTimeSelect = (value: number) => {
-    if (value > 10 && (!session || !session.user)) {
+    if (value > 20 && (!session || !session.user)) {
       toast({
         title: "Premium Feature",
-        description: "Please upgrade to access longer meditation sessions",
+        description: "請升級以使用更長的冥想課程",
         variant: "destructive",
       });
       navigate("/pricing");
@@ -40,7 +40,7 @@ export const TimeSelection = () => {
               selectedTime === option.value
                 ? "ring-2 ring-primary"
                 : ""
-            } ${option.value > 10 && (!session || !session.user) ? "opacity-50" : ""}`}
+            } ${option.value > 20 && (!session || !session.user) ? "opacity-50" : ""}`}
             onClick={() => handleTimeSelect(option.value)}
           >
             <span className="font-medium text-white">{option.label}</span>
