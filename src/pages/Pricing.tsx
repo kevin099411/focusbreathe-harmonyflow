@@ -4,41 +4,38 @@ import { Navigation } from "@/components/Navigation";
 const Pricing = () => {
   const pricingPlans = [
     {
-      title: "Basic Meditation",
+      title: "基礎冥想",
       price: "9.99",
       features: [
-        "5 guided meditations",
-        "Basic breathing exercises",
-        "Daily mindfulness tips",
-        "Community forum access",
-      ],
-      hostedButtonId: "UZXYSVGZKPA76"
+        "5個引導冥想",
+        "基礎呼吸練習",
+        "每日正念提示",
+        "社區論壇訪問",
+      ]
     },
     {
-      title: "Premium Zen",
+      title: "高級禪修",
       price: "19.99",
       features: [
-        "20 guided meditations",
-        "Advanced breathing techniques",
-        "Personal meditation tracker",
-        "Weekly live sessions",
-        "Premium meditation guide"
+        "20個引導冥想",
+        "進階呼吸技巧",
+        "個人冥想追蹤",
+        "每週直播課程",
+        "高級冥想指南"
       ],
-      isPopular: true,
-      hostedButtonId: "UZXYSVGZKPA77"
+      isPopular: true
     },
     {
-      title: "Master Package",
+      title: "大師套餐",
       price: "49.99",
       features: [
-        "Unlimited guided meditations",
-        "1-on-1 meditation coaching",
-        "Custom meditation plans",
-        "Priority support",
-        "Complete meditation library",
-        "Exclusive workshops"
-      ],
-      hostedButtonId: "UZXYSVGZKPA78"
+        "無限制引導冥想",
+        "一對一冥想指導",
+        "定制冥想計劃",
+        "優先支持",
+        "完整冥想庫",
+        "獨家工作坊"
+      ]
     },
   ];
 
@@ -47,9 +44,9 @@ const Pricing = () => {
       <Navigation />
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Choose Your Path to Mindfulness</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">選擇您的正念之路</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Select the perfect plan to support your meditation journey and unlock exclusive content
+            選擇最適合您冥想之旅的方案，解鎖獨家內容
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -60,7 +57,6 @@ const Pricing = () => {
               price={plan.price}
               features={plan.features}
               isPopular={plan.isPopular}
-              hostedButtonId={plan.hostedButtonId}
             />
           ))}
         </div>

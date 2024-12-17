@@ -11,10 +11,9 @@ const Meditate = () => {
     <div className="min-h-screen bg-[#222222] text-white pt-20 px-4">
       <div className="container mx-auto space-y-12 max-w-4xl">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-primary mb-4">Meditation Practice</h1>
+          <h1 className="text-4xl font-bold text-primary mb-4">冥想練習</h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Choose from various meditation practices designed to enhance your focus,
-            relaxation, and overall well-being.
+            從各種冥想練習中選擇，旨在提升您的專注力、放鬆度和整體健康。
           </p>
         </div>
         
@@ -24,14 +23,13 @@ const Meditate = () => {
           
           {/* PayPal Integration */}
           <div className="bg-[#1a1a1a] p-6 rounded-lg">
-            <h2 className="text-xl font-semibold mb-4">Premium Meditation Access</h2>
+            <h2 className="text-xl font-semibold mb-4">高級冥想訪問</h2>
             <p className="text-gray-300 mb-6">
-              Unlock all meditation practices and downloadable content with a premium subscription.
+              通過高級訂閱解鎖所有冥想練習和可下載內容。
             </p>
             <PayPalButton 
               amount="29.99"
-              planTitle="Premium Meditation"
-              hostedButtonId="UZXYSVGZKPA77"
+              planTitle="高級冥想"
             />
           </div>
 
@@ -43,9 +41,9 @@ const Meditate = () => {
                   <div className="w-6 h-6 text-primary">🧘</div>
                 </div>
                 <div>
-                  <h3 className="text-sm font-medium">Current Session</h3>
+                  <h3 className="text-sm font-medium">當前練習</h3>
                   <p className="text-xs text-gray-400">
-                    {selectedPractice || "Select a practice to begin"}
+                    {selectedPractice || "選擇練習開始"}
                   </p>
                 </div>
               </div>

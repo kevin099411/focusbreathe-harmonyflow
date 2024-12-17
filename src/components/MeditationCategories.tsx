@@ -17,44 +17,44 @@ interface MeditationCategoriesProps {
 const categories: Category[] = [
   {
     id: "autoplay",
-    title: "Autoplay",
-    description: "Continuous meditation sessions",
+    title: "自動播放",
+    description: "連續冥想課程",
     icon: "🔄"
   },
   {
     id: "colored-noise",
-    title: "Colored Noise",
-    description: "White, pink, and brown noise for focus",
+    title: "彩色噪音",
+    description: "白噪音、粉噪音和棕噪音助於專注",
     icon: "🌊"
   },
   {
     id: "focus",
-    title: "Focus",
-    description: "Enhance concentration and clarity",
+    title: "專注",
+    description: "增強集中力和清晰度",
     icon: "🎯"
   },
   {
     id: "relax",
-    title: "Relax",
-    description: "Deep relaxation and stress relief",
+    title: "放鬆",
+    description: "深度放鬆和緩解壓力",
     icon: "🧘"
   },
   {
     id: "deep-work",
-    title: "Deep Work",
-    description: "Extended focus sessions",
+    title: "深度工作",
+    description: "延長專注時段",
     icon: "💪"
   },
   {
     id: "read",
-    title: "Reading",
-    description: "Background sounds for reading",
+    title: "閱讀",
+    description: "閱讀時的背景聲音",
     icon: "📚"
   },
   {
     id: "power-nap",
-    title: "Power Nap",
-    description: "Quick rejuvenation breaks",
+    title: "能量小憩",
+    description: "快速恢復活力休息",
     icon: "😴"
   },
 ];
@@ -76,10 +76,10 @@ export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) =>
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-white">Choose Your Practice</h2>
+        <h2 className="text-2xl font-semibold text-white">選擇您的練習</h2>
         <Button onClick={handleShuffle} variant="ghost" className="gap-2 text-gray-300 hover:text-white">
           <Shuffle className="h-4 w-4" />
-          Shuffle
+          隨機選擇
         </Button>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
