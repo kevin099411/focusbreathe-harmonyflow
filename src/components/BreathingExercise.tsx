@@ -13,10 +13,9 @@ export const BreathingExercise = () => {
   const [phase, setPhase] = useState<BreathingPhase>("inhale");
   const [selectedPattern, setSelectedPattern] = useState<BreathingPattern>(breathingPatterns[0]);
   const [breathCount, setBreathCount] = useState(0);
-  const inhaleSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
-  const exhaleSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
-  const holdSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
-  const bellSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
+  
+  // Single tingsha sound for all phases
+  const tingshaSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
   const timerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
@@ -27,16 +26,18 @@ export const BreathingExercise = () => {
       return;
     }
 
-    const playPhaseSound = (phase: BreathingPhase) => {
-      if (phase === "inhale") {
-        inhaleSound.current.currentTime = 0;
-        inhaleSound.current.play().catch(console.error);
-      } else if (phase === "hold") {
-        holdSound.current.currentTime = 0;
-        holdSound.current.play().catch(console.error);
-      } else if (phase === "exhale") {
-        exhaleSound.current.currentTime = 0;
-        exhaleSound.current.play().catch(console.error);
+    const playTingshaSound = () => {
+      console.log('Playing tingsha sound');
+      if (tingshaSound.current) {
+        tingshaSound.current.currentTime = 0;
+        tingshaSound.current.play().catch(error => {
+          console.error('Error playing sound:', error);
+          toast({
+            title: "聲音播放錯誤",
+            description: "無法播放提示音，請檢查音量設置。",
+            variant: "destructive",
+          });
+        });
       }
     };
 
@@ -44,7 +45,7 @@ export const BreathingExercise = () => {
       if (selectedPattern.countBreaths && breathCount >= (selectedPattern.maxBreaths || 0)) {
         setBreathCount(0);
         setIsPlaying(false);
-        bellSound.current.play().catch(console.error);
+        playTingshaSound();
         toast({
           title: "練習完成",
           description: `你已經完成了${selectedPattern.maxBreaths}次呼吸！`,
@@ -52,42 +53,30 @@ export const BreathingExercise = () => {
         return;
       }
 
-      // Start with inhale phase
+      // Start inhale phase (4 seconds)
       setPhase("inhale");
-      playPhaseSound("inhale");
+      playTingshaSound();
 
-      // Schedule hold phase
+      // Schedule hold phase (7 seconds)
       timerRef.current = setTimeout(() => {
-        if (selectedPattern.hold > 0) {
-          setPhase("hold");
-          playPhaseSound("hold");
-          
-          // Schedule exhale phase
-          timerRef.current = setTimeout(() => {
-            setPhase("exhale");
-            playPhaseSound("exhale");
-            
-            // Schedule rest phase
-            timerRef.current = setTimeout(() => {
-              setPhase("rest");
-              if (selectedPattern.countBreaths) {
-                setBreathCount(prev => prev + 1);
-              }
-              // Schedule next cycle
-              timerRef.current = setTimeout(runBreathingCycle, selectedPattern.rest * 1000);
-            }, selectedPattern.exhale * 1000);
-          }, selectedPattern.hold * 1000);
-        } else {
+        setPhase("hold");
+        playTingshaSound();
+        
+        // Schedule exhale phase (8 seconds)
+        timerRef.current = setTimeout(() => {
           setPhase("exhale");
-          playPhaseSound("exhale");
+          playTingshaSound();
+          
+          // Schedule rest phase
           timerRef.current = setTimeout(() => {
             setPhase("rest");
             if (selectedPattern.countBreaths) {
               setBreathCount(prev => prev + 1);
             }
-            timerRef.current = setTimeout(runBreathingCycle, selectedPattern.rest * 1000);
+            // Schedule next cycle after a short rest
+            timerRef.current = setTimeout(runBreathingCycle, 1000);
           }, selectedPattern.exhale * 1000);
-        }
+        }, selectedPattern.hold * 1000);
       }, selectedPattern.inhale * 1000);
     };
 
@@ -96,6 +85,10 @@ export const BreathingExercise = () => {
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
+      }
+      if (tingshaSound.current) {
+        tingshaSound.current.pause();
+        tingshaSound.current.currentTime = 0;
       }
     };
   }, [isPlaying, selectedPattern, breathCount]);
