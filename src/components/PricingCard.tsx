@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { PayPalButton } from "./PayPalButton";
 
 interface PricingCardProps {
   title: string;
@@ -28,15 +29,9 @@ export const PricingCard = ({ title, price, features, isPopular }: PricingCardPr
           </li>
         ))}
       </ul>
-      <button
-        className={`w-full py-2 rounded-lg transition-colors ${
-          isPopular
-            ? 'bg-white text-primary hover:bg-gray-100'
-            : 'bg-primary text-white hover:bg-primary/90'
-        }`}
-      >
-        Get Started
-      </button>
+      <div className="mt-6">
+        <PayPalButton amount={price} planTitle={title} />
+      </div>
     </div>
   );
 };
