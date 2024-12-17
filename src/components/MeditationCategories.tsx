@@ -125,7 +125,11 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
           ))}
         </div>
       </ScrollArea>
-      <AudioPlayer audioUrl={selectedCategoryData?.audioUrl} />
+      <div className="fixed bottom-0 left-0 right-0 bg-[#1a1a1a] p-4 border-t border-gray-800">
+        <div className="max-w-4xl mx-auto">
+          <AudioPlayer audioUrl={selectedCategoryData?.audioUrl} />
+        </div>
+      </div>
     </div>
   );
 };
