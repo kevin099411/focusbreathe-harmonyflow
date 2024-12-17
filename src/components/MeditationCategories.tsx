@@ -6,6 +6,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 import { toast } from "./ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Lock } from "lucide-react";
+import { AudioPlayer } from "./AudioPlayer";
 
 interface Category {
   id: string;
@@ -13,6 +14,7 @@ interface Category {
   description: string;
   icon: string;
   requiresPremium?: boolean;
+  audioUrl?: string;  // Added this property
 }
 
 interface MeditationCategoriesProps {
