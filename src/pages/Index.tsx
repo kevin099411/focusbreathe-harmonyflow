@@ -9,19 +9,19 @@ const Index = () => {
       title: "Focus Reset in 5 Minutes",
       duration: "5 min",
       description: "Quick meditation with 852 Hz frequency for mental clarity",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
     },
     {
       title: "Mindfulness for Racing Thoughts",
       duration: "10 min",
       description: "Guided session to calm an overactive mind",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
     },
     {
       title: "Energy Boost with 852 Hz",
       duration: "15 min",
       description: "Energizing meditation with healing frequencies",
-      image: "/placeholder.svg",
+      image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
     },
   ];
 
@@ -60,11 +60,17 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+      <div 
+        className="fixed inset-0 -z-10 bg-cover bg-center opacity-10"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80')`
+        }}
+      />
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4">
+      <section className="pt-24 pb-12 px-4 relative">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Breathe Deep, Focus Sharp, Live Calm
@@ -72,14 +78,14 @@ const Index = () => {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Discover peace and clarity through guided meditations, Sri Sri breathing techniques, and healing 852 Hz frequencies.
           </p>
-          <button className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors">
+          <button className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
             Start Your Journey
           </button>
         </div>
       </section>
 
       {/* Featured Meditations */}
-      <section className="py-12 px-4 bg-white">
+      <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             Featured Meditations
@@ -93,7 +99,7 @@ const Index = () => {
       </section>
 
       {/* Breathing Exercise */}
-      <section className="py-12 px-4 bg-gray-50">
+      <section className="py-12 px-4 bg-gradient-to-b from-white/50 to-gray-50/50 backdrop-blur-sm">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">
             Take a Moment to Breathe
@@ -103,7 +109,7 @@ const Index = () => {
       </section>
 
       {/* Pricing */}
-      <section className="py-12 px-4 bg-white">
+      <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             Choose Your Path
