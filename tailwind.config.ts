@@ -58,9 +58,18 @@ export default {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(1.2)" },
         },
+        wind: {
+          "0%, 100%": {
+            transform: "translate(0, 0) scale(1.1)",
+          },
+          "50%": {
+            transform: "translate(-1%, 1%) scale(1.15)",
+          },
+        },
       },
       animation: {
         breathe: "breathe 4s ease-in-out infinite",
+        wind: "wind 15s ease-in-out infinite",
       },
     },
   },
