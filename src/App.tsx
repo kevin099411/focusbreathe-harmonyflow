@@ -8,37 +8,65 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { Layout } from "./components/Layout";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 import Index from "./pages/Index";
 import Meditate from "./pages/Meditate";
 import Breathwork from "./pages/Breathwork";
 import Pricing from "./pages/Pricing";
 import Login from "./pages/Login";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      onError: (error) => {
+        console.error('Query error:', error);
+        toast({
+          title: "數據加載錯誤",
+          description: "無法加載數據，請重試。",
+          variant: "destructive",
+        });
+      },
+    },
+  },
+});
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <SessionContextProvider supabaseClient={supabase}>
-      <LanguageProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <LanguageSwitcher />
-          <BrowserRouter>
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/meditate" element={<Meditate />} />
-                <Route path="/breathwork" element={<Breathwork />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/login" element={<Login />} />
-              </Routes>
-            </Layout>
-          </BrowserRouter>
-        </TooltipProvider>
-      </LanguageProvider>
-    </SessionContextProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SessionContextProvider supabaseClient={supabase}>
+        <LanguageProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <LanguageSwitcher />
+            <BrowserRouter>
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/meditate" element={<Meditate />} />
+                  <Route path="/breathwork" element={<Breathwork />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="*" element={
+                    <div className="min-h-screen flex items-center justify-center">
+                      <div className="text-center">
+                        <h2 className="text-2xl font-bold mb-4">頁面未找到</h2>
+                        <p className="text-gray-600 mb-6">抱歉，您請求的頁面不存在。</p>
+                        <Button onClick={() => window.location.href = '/'}>
+                          返回首頁
+                        </Button>
+                      </div>
+                    </div>
+                  } />
+                </Routes>
+              </Layout>
+            </BrowserRouter>
+          </TooltipProvider>
+        </LanguageProvider>
+      </SessionContextProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

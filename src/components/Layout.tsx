@@ -4,10 +4,27 @@ import { Wind } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { toast } from "@/hooks/use-toast";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
   const { language } = useLanguage();
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const handleError = (event: ErrorEvent) => {
+      console.error('Global error caught:', event.error);
+      setError(event.error);
+      toast({
+        title: "發生錯誤",
+        description: "很抱歉，發生了意外錯誤。請重新整理頁面或稍後再試。",
+        variant: "destructive",
+      });
+    };
+
+    window.addEventListener('error', handleError);
+    return () => window.removeEventListener('error', handleError);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +56,23 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     };
     return translations[key][language];
   };
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">很抱歉，發生了錯誤</h2>
+          <p className="text-gray-600 mb-6">請重新整理頁面或稍後再試</p>
+          <Button 
+            onClick={() => window.location.reload()}
+            variant="outline"
+          >
+            重新整理頁面
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen relative">

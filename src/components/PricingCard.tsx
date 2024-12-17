@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { PayPalButton } from "./PayPalButton";
 import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 interface PricingCardProps {
   title: string;
@@ -12,10 +13,23 @@ interface PricingCardProps {
 export const PricingCard = ({ title, price, features, isPopular }: PricingCardProps) => {
   const [isSelected, setIsSelected] = useState(false);
   const [showPayPal, setShowPayPal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
-    setIsSelected(!isSelected);
-    setShowPayPal(true);
+    try {
+      setIsLoading(true);
+      setIsSelected(!isSelected);
+      setShowPayPal(true);
+    } catch (error) {
+      console.error('Error selecting plan:', error);
+      toast({
+        title: "選擇方案錯誤",
+        description: "無法選擇此方案，請稍後再試。",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -59,6 +73,11 @@ export const PricingCard = ({ title, price, features, isPopular }: PricingCardPr
             amount={price} 
             planTitle={title}
           />
+        </div>
+      )}
+      {isLoading && (
+        <div className="absolute inset-0 bg-black/20 rounded-2xl flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
         </div>
       )}
     </div>
