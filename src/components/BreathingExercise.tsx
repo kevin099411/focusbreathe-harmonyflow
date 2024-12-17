@@ -13,34 +13,24 @@ export const BreathingExercise = () => {
   const [phase, setPhase] = useState<BreathingPhase>("inhale");
   const [selectedPattern, setSelectedPattern] = useState<BreathingPattern>(breathingPatterns[0]);
   const [breathCount, setBreathCount] = useState(0);
-  
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    // Initialize audio
-    if (selectedPattern.audioUrl && !audioRef.current) {
-      console.log('Initializing audio with URL:', selectedPattern.audioUrl);
-      const audio = new Audio(selectedPattern.audioUrl);
-      audio.loop = true;
-      audioRef.current = audio;
-    }
+    const audio = new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3");
+    audio.loop = false;
+    audioRef.current = audio;
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
+      audio.pause();
+      audio.src = "";
     };
-  }, [selectedPattern.audioUrl]);
+  }, []);
 
   useEffect(() => {
     if (!isPlaying) {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
-      }
-      if (audioRef.current) {
-        audioRef.current.pause();
       }
       return;
     }
@@ -49,9 +39,6 @@ export const BreathingExercise = () => {
       if (selectedPattern.countBreaths && breathCount >= (selectedPattern.maxBreaths || 0)) {
         setBreathCount(0);
         setIsPlaying(false);
-        if (audioRef.current) {
-          audioRef.current.pause();
-        }
         toast({
           title: "練習完成",
           description: `你已經完成了${selectedPattern.maxBreaths}次呼吸！`,
@@ -59,41 +46,39 @@ export const BreathingExercise = () => {
         return;
       }
 
-      // Start inhale phase
-      console.log('Starting inhale phase');
       setPhase("inhale");
-      if (audioRef.current && selectedPattern.audioUrl) {
-        audioRef.current.play().catch(error => {
-          console.error('Error playing audio:', error);
-          toast({
-            title: "音頻播放錯誤",
-            description: "無法播放音頻指導，請檢查音量設置。",
-            variant: "destructive",
-          });
+      audioRef.current?.play().catch(error => {
+        console.error("Audio playback error:", error);
+        toast({
+          title: "音頻播放錯誤",
+          description: "無法播放音頻，請重試。",
+          variant: "destructive",
         });
-      }
+      });
 
-      // Schedule hold phase
       timerRef.current = setTimeout(() => {
-        console.log('Starting hold phase');
-        setPhase("hold");
-        
-        // Schedule exhale phase
-        timerRef.current = setTimeout(() => {
-          console.log('Starting exhale phase');
-          setPhase("exhale");
-          
-          // Schedule rest phase
+        if (selectedPattern.hold > 0) {
+          setPhase("hold");
           timerRef.current = setTimeout(() => {
-            console.log('Starting rest phase');
+            setPhase("exhale");
+            timerRef.current = setTimeout(() => {
+              setPhase("rest");
+              if (selectedPattern.countBreaths) {
+                setBreathCount(prev => prev + 1);
+              }
+              timerRef.current = setTimeout(runBreathingCycle, selectedPattern.rest * 1000);
+            }, selectedPattern.exhale * 1000);
+          }, selectedPattern.hold * 1000);
+        } else {
+          setPhase("exhale");
+          timerRef.current = setTimeout(() => {
             setPhase("rest");
             if (selectedPattern.countBreaths) {
               setBreathCount(prev => prev + 1);
             }
-            // Schedule next cycle
             timerRef.current = setTimeout(runBreathingCycle, selectedPattern.rest * 1000);
           }, selectedPattern.exhale * 1000);
-        }, selectedPattern.hold * 1000);
+        }
       }, selectedPattern.inhale * 1000);
     };
 
@@ -103,9 +88,6 @@ export const BreathingExercise = () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
     };
   }, [isPlaying, selectedPattern, breathCount]);
 
@@ -113,49 +95,38 @@ export const BreathingExercise = () => {
     setSelectedPattern(pattern);
     setIsPlaying(false);
     setBreathCount(0);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 space-y-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl shadow-2xl backdrop-blur-lg">
+    <div className="w-full max-w-4xl mx-auto p-6 space-y-8">
       <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold text-white">呼吸練習</h2>
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-4">
-          <BreathingPatternSelector
-            patterns={breathingPatterns}
-            selectedPattern={selectedPattern}
-            onPatternChange={handlePatternChange}
-          />
-        </div>
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6">
-          <BreathingInstructions 
-            pattern={selectedPattern}
-            breathCount={breathCount}
-          />
-        </div>
-      </div>
-      
-      <div className="relative">
-        <div className="absolute inset-0 bg-white/5 rounded-full blur-2xl"></div>
-        <BreathingGuide 
-          phase={phase} 
-          duration={
-            phase === "inhale" ? selectedPattern.inhale :
-            phase === "hold" ? selectedPattern.hold :
-            phase === "exhale" ? selectedPattern.exhale :
-            selectedPattern.rest
-          } 
+        <h2 className="text-3xl font-bold text-primary">呼吸練習</h2>
+        <BreathingPatternSelector
+          patterns={breathingPatterns}
+          selectedPattern={selectedPattern}
+          onPatternChange={handlePatternChange}
+        />
+        <BreathingInstructions 
+          pattern={selectedPattern}
+          breathCount={breathCount}
         />
       </div>
+      
+      <BreathingGuide 
+        phase={phase} 
+        duration={
+          phase === "inhale" ? selectedPattern.inhale :
+          phase === "hold" ? selectedPattern.hold :
+          phase === "exhale" ? selectedPattern.exhale :
+          selectedPattern.rest
+        } 
+      />
       
       <div className="flex justify-center">
         <Button
           onClick={() => setIsPlaying(!isPlaying)}
           size="lg"
-          className="bg-white/20 hover:bg-white/30 text-white border-2 border-white/50 backdrop-blur-lg shadow-xl transform hover:scale-105 transition-all duration-300 gap-2"
+          className="gap-2"
         >
           {isPlaying ? (
             <>
