@@ -13,8 +13,9 @@ export const BreathingExercise = () => {
   const [phase, setPhase] = useState<BreathingPhase>("inhale");
   const [selectedPattern, setSelectedPattern] = useState<BreathingPattern>(breathingPatterns[0]);
   const [breathCount, setBreathCount] = useState(0);
-  const inhaleSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/inhale-sound.mp3"));
-  const exhaleSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/exhale-sound.mp3"));
+  const inhaleSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
+  const exhaleSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
+  const holdSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
   const bellSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
   const timerRef = useRef<NodeJS.Timeout>();
 
@@ -30,6 +31,9 @@ export const BreathingExercise = () => {
       if (phase === "inhale") {
         inhaleSound.current.currentTime = 0;
         inhaleSound.current.play().catch(console.error);
+      } else if (phase === "hold") {
+        holdSound.current.currentTime = 0;
+        holdSound.current.play().catch(console.error);
       } else if (phase === "exhale") {
         exhaleSound.current.currentTime = 0;
         exhaleSound.current.play().catch(console.error);
@@ -48,20 +52,28 @@ export const BreathingExercise = () => {
         return;
       }
 
+      // Start with inhale phase
       setPhase("inhale");
       playPhaseSound("inhale");
 
+      // Schedule hold phase
       timerRef.current = setTimeout(() => {
         if (selectedPattern.hold > 0) {
           setPhase("hold");
+          playPhaseSound("hold");
+          
+          // Schedule exhale phase
           timerRef.current = setTimeout(() => {
             setPhase("exhale");
             playPhaseSound("exhale");
+            
+            // Schedule rest phase
             timerRef.current = setTimeout(() => {
               setPhase("rest");
               if (selectedPattern.countBreaths) {
                 setBreathCount(prev => prev + 1);
               }
+              // Schedule next cycle
               timerRef.current = setTimeout(runBreathingCycle, selectedPattern.rest * 1000);
             }, selectedPattern.exhale * 1000);
           }, selectedPattern.hold * 1000);
