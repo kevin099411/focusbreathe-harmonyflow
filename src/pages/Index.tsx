@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
-import { PricingCard } from "@/components/PricingCard";
 
 const Index = () => {
   const featuredMeditations = [
@@ -24,40 +23,6 @@ const Index = () => {
       description: "Energizing meditation with healing frequencies",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
       audioUrl: "https://cdn.pixabay.com/download/audio/2023/09/20/audio_c2c5e6f3c1.mp3?filename=852-hz-solfeggio-frequencies-healing-music-meditation-sleep-study-work-zen-144235.mp3",
-    },
-  ];
-
-  const pricingPlans = [
-    {
-      title: "Beginner",
-      price: "30",
-      features: [
-        "Basic guided meditations",
-        "Simple breathing exercises",
-        "Limited 852 Hz tracks",
-        "Community access",
-      ],
-    },
-    {
-      title: "Advanced",
-      price: "50",
-      features: [
-        "All Beginner features",
-        "Advanced Sri Sri techniques",
-        "Full 852 Hz library",
-        "Progress tracking",
-      ],
-      isPopular: true,
-    },
-    {
-      title: "Guru",
-      price: "100",
-      features: [
-        "All Advanced features",
-        "1-on-1 breathing sessions",
-        "Custom meditation plans",
-        "Priority support",
-      ],
     },
   ];
 
@@ -107,20 +72,6 @@ const Index = () => {
             Take a Moment to Breathe
           </h2>
           <BreathingCircle />
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Choose Your Path
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {pricingPlans.map((plan, index) => (
-              <PricingCard key={index} {...plan} />
-            ))}
-          </div>
         </div>
       </section>
     </div>
