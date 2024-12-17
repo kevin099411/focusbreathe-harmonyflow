@@ -6,6 +6,10 @@ interface BreathingInstructionsProps {
 }
 
 export const BreathingInstructions = ({ pattern, breathCount }: BreathingInstructionsProps) => {
+  if (!pattern) {
+    return null;
+  }
+
   return (
     <div className="space-y-4 text-gray-200">
       <div className="space-y-2">
@@ -19,7 +23,7 @@ export const BreathingInstructions = ({ pattern, breathCount }: BreathingInstruc
       <div className="space-y-2">
         <h3 className="text-lg font-semibold text-primary">練習步驟：</h3>
         <ul className="list-disc list-inside space-y-2">
-          {pattern.instructions.map((instruction, index) => (
+          {pattern.instructions?.map((instruction, index) => (
             <li key={index} className="text-gray-300">
               {instruction}
             </li>
