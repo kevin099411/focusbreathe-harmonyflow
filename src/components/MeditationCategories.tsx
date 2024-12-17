@@ -44,7 +44,8 @@ const categories: Category[] = [
     title: "專注",
     description: "增強集中力和清晰度",
     icon: "🎯",
-    requiresPremium: true
+    requiresPremium: true,
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/10%20Minute%20Crystal%20Singing%20Bowl%20Meditation%20_%20Sound%20Healing%20For%20Relaxation%20&%20Stress%20Relief.m4a"
   },
   {
     id: "relax",
