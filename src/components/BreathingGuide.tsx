@@ -22,15 +22,15 @@ export const BreathingGuide = ({ phase, duration }: BreathingGuideProps) => {
   return (
     <div className="relative w-full h-[400px] flex items-center justify-center">
       <div 
-        className="absolute w-72 h-72 bg-primary/10 rounded-full transition-transform flex items-center justify-center"
+        className="absolute w-72 h-72 bg-white/5 rounded-full transition-transform flex items-center justify-center backdrop-blur-lg"
         style={{ 
           transform: `scale(${scale})`,
           transitionDuration: `${duration}s`
         }}
       >
-        <div className="absolute w-64 h-64 bg-primary/20 rounded-full animate-pulse" />
-        <div className="absolute w-56 h-56 bg-primary/30 rounded-full" />
-        <span className="text-4xl font-bold text-primary/80 uppercase">
+        <div className="absolute w-64 h-64 bg-white/10 rounded-full animate-pulse" />
+        <div className="absolute w-56 h-56 bg-white/20 rounded-full animate-wind" />
+        <span className="text-4xl font-bold text-white uppercase tracking-wider">
           {phase}
         </span>
       </div>

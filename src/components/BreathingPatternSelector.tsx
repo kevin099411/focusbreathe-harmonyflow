@@ -23,12 +23,16 @@ export const BreathingPatternSelector = ({
           }
         }}
       >
-        <SelectTrigger className="w-full">
+        <SelectTrigger className="w-full bg-white/10 border-white/20 text-white">
           <SelectValue placeholder="選擇呼吸模式" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-orange-500/90 backdrop-blur-lg border-white/20">
           {patterns.map((pattern) => (
-            <SelectItem key={pattern.name} value={pattern.name}>
+            <SelectItem 
+              key={pattern.name} 
+              value={pattern.name}
+              className="text-white hover:bg-white/20"
+            >
               {pattern.name}
             </SelectItem>
           ))}
