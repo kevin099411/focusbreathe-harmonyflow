@@ -16,13 +16,19 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    // Create audio element when component mounts
     if (audioUrl) {
-      audioRef.current = new Audio(audioUrl);
-      audioRef.current.addEventListener('ended', () => {
+      const audio = new Audio(audioUrl);
+      audioRef.current = audio;
+
+      // Add event listeners
+      audio.addEventListener('ended', () => {
+        console.log('Audio playback ended');
         setIsPlaying(false);
       });
-      audioRef.current.addEventListener('error', (e) => {
-        console.error("Audio error:", e);
+
+      audio.addEventListener('error', (e) => {
+        console.error('Audio error:', e);
         toast({
           title: "Audio Error",
           description: "There was an error loading the audio file. Please try again.",
@@ -30,15 +36,16 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
         });
         setIsPlaying(false);
       });
-    }
 
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.removeEventListener('ended', () => setIsPlaying(false));
-        audioRef.current.removeEventListener('error', () => setIsPlaying(false));
-      }
-    };
+      // Cleanup function
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.src = '';
+          audioRef.current.remove();
+        }
+      };
+    }
   }, [audioUrl]);
 
   const handlePlayPause = async () => {
@@ -51,24 +58,24 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
       return;
     }
 
-    if (audioRef.current) {
-      try {
-        if (isPlaying) {
-          audioRef.current.pause();
-          setIsPlaying(false);
-        } else {
-          await audioRef.current.play();
-          setIsPlaying(true);
-        }
-      } catch (error) {
-        console.error("Error playing audio:", error);
-        toast({
-          title: "Playback Error",
-          description: "There was an error playing the audio. Please try again.",
-          variant: "destructive",
-        });
+    try {
+      if (isPlaying && audioRef.current) {
+        console.log('Pausing audio');
+        audioRef.current.pause();
         setIsPlaying(false);
+      } else if (audioRef.current) {
+        console.log('Playing audio:', audioUrl);
+        await audioRef.current.play();
+        setIsPlaying(true);
       }
+    } catch (error) {
+      console.error('Error playing audio:', error);
+      toast({
+        title: "Playback Error",
+        description: "There was an error playing the audio. Please try again.",
+        variant: "destructive",
+      });
+      setIsPlaying(false);
     }
   };
 
