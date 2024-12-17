@@ -42,22 +42,23 @@ const Pricing = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pt-20">
       <Navigation />
-      <div className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">選擇您的正念之路</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">選擇您的正念之路</h1>
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
             選擇最適合您冥想之旅的方案，解鎖獨家內容
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 gap-6 md:gap-8 max-w-6xl mx-auto px-4 md:px-8">
           {pricingPlans.map((plan, index) => (
-            <PricingCard
-              key={index}
-              title={plan.title}
-              price={plan.price}
-              features={plan.features}
-              isPopular={plan.isPopular}
-            />
+            <div key={index} className="w-full">
+              <PricingCard
+                title={plan.title}
+                price={plan.price}
+                features={plan.features}
+                isPopular={plan.isPopular}
+              />
+            </div>
           ))}
         </div>
       </div>
