@@ -1,12 +1,12 @@
-import { Shuffle } from "lucide-react";
+import { Shuffle, Lock } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useState } from "react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { toast } from "./ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import { Lock } from "lucide-react";
 import { AudioPlayer } from "./AudioPlayer";
+import { ScrollArea } from "./ui/scroll-area";
 
 interface Category {
   id: string;
@@ -14,11 +14,7 @@ interface Category {
   description: string;
   icon: string;
   requiresPremium?: boolean;
-  audioUrl?: string;  // Added this property
-}
-
-interface MeditationCategoriesProps {
-  onSelect?: (category: string) => void;
+  audioUrl?: string;
 }
 
 const categories: Category[] = [
@@ -66,7 +62,7 @@ const categories: Category[] = [
   }
 ];
 
-export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) => {
+export const MeditationCategories = ({ onSelect }: { onSelect?: (category: string) => void }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const session = useSession();
   const navigate = useNavigate();
@@ -94,7 +90,6 @@ export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) =>
     onSelect?.(category.id);
   };
 
-  // Find the selected category's audio URL
   const selectedCategoryData = categories.find(cat => cat.id === selectedCategory);
 
   return (
@@ -106,28 +101,30 @@ export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) =>
           隨機選擇
         </Button>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-        {categories.map((category) => (
-          <Card
-            key={category.id}
-            className={`p-2 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 relative ${
-              selectedCategory === category.id
-                ? "ring-2 ring-primary"
-                : ""
-            } ${category.requiresPremium && (!session || !session.user) ? "opacity-50" : ""}`}
-            onClick={() => handleSelect(category)}
-          >
-            <div className="flex flex-col items-center text-center space-y-1">
-              <span className="text-xl">{category.icon}</span>
-              <h3 className="text-sm font-medium text-white">{category.title}</h3>
-              <p className="text-xs text-gray-400 line-clamp-2">{category.description}</p>
-              {category.requiresPremium && (!session || !session.user) && (
-                <Lock className="absolute top-1 right-1 h-4 w-4 text-gray-400" />
-              )}
-            </div>
-          </Card>
-        ))}
-      </div>
+      <ScrollArea className="h-[400px] rounded-md">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 p-1">
+          {categories.map((category) => (
+            <Card
+              key={category.id}
+              className={`p-2 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 relative ${
+                selectedCategory === category.id
+                  ? "ring-2 ring-primary"
+                  : ""
+              } ${category.requiresPremium && (!session || !session.user) ? "opacity-50" : ""}`}
+              onClick={() => handleSelect(category)}
+            >
+              <div className="flex flex-col items-center text-center space-y-1">
+                <span className="text-xl">{category.icon}</span>
+                <h3 className="text-sm font-medium text-white">{category.title}</h3>
+                <p className="text-xs text-gray-400 line-clamp-2">{category.description}</p>
+                {category.requiresPremium && (!session || !session.user) && (
+                  <Lock className="absolute top-1 right-1 h-4 w-4 text-gray-400" />
+                )}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </ScrollArea>
       <AudioPlayer audioUrl={selectedCategoryData?.audioUrl} />
     </div>
   );
