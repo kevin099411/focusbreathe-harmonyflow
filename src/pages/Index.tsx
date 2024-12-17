@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const featuredMeditations = [
@@ -64,9 +65,12 @@ const Index = () => {
           <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             通過古老的呼吸技巧、引導式冥想和治癒頻率，轉變您的生活。
           </p>
-          <button className="bg-primary text-white px-6 md:px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+          <Link 
+            to="/breathwork"
+            className="inline-block bg-primary text-white px-6 md:px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
+          >
             開始您的旅程
-          </button>
+          </Link>
         </div>
       </section>
 
