@@ -7,10 +7,9 @@ interface PricingCardProps {
   price: string;
   features: string[];
   isPopular?: boolean;
-  hostedButtonId: string;
 }
 
-export const PricingCard = ({ title, price, features, isPopular, hostedButtonId }: PricingCardProps) => {
+export const PricingCard = ({ title, price, features, isPopular }: PricingCardProps) => {
   const [isSelected, setIsSelected] = useState(false);
   const [showPayPal, setShowPayPal] = useState(false);
 
@@ -59,7 +58,6 @@ export const PricingCard = ({ title, price, features, isPopular, hostedButtonId 
           <PayPalButton 
             amount={price} 
             planTitle={title}
-            hostedButtonId={hostedButtonId}
           />
         </div>
       )}
