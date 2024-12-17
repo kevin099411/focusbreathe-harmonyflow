@@ -30,7 +30,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex items-center justify-between h-14">
             <Link to="/" className="flex items-center space-x-2">
               <Wind className="h-5 w-5 text-primary" />
-              <span className="text-lg font-bold text-primary">FocusZen</span>
+              <span className="text-lg font-bold text-primary">專注禪修</span>
             </Link>
             <nav className="flex items-center space-x-6">
               <Link to="/meditate" className="text-gray-600 hover:text-primary">
