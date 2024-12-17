@@ -1,8 +1,7 @@
-import { Play, Pause, Upload } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
-import { Input } from "./ui/input";
 
 interface MeditationCardProps {
   title: string;
@@ -14,17 +13,13 @@ interface MeditationCardProps {
 
 export const MeditationCard = ({ title, duration, description, image, audioUrl }: MeditationCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [customAudioUrl, setCustomAudioUrl] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Create audio element when component mounts
-    if (audioUrl || customAudioUrl) {
-      const audio = new Audio(customAudioUrl || audioUrl);
+    if (audioUrl) {
+      const audio = new Audio(audioUrl);
       audioRef.current = audio;
 
-      // Add event listeners
       audio.addEventListener('ended', () => {
         console.log('Audio playback ended');
         setIsPlaying(false);
@@ -40,7 +35,6 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
         setIsPlaying(false);
       });
 
-      // Cleanup function
       return () => {
         if (audioRef.current) {
           audioRef.current.pause();
@@ -49,13 +43,13 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
         }
       };
     }
-  }, [audioUrl, customAudioUrl]);
+  }, [audioUrl]);
 
   const handlePlayPause = async () => {
-    if (!audioUrl && !customAudioUrl) {
+    if (!audioUrl) {
       toast({
         title: "Audio not available",
-        description: "Please upload an MP3 file or use the default meditation audio.",
+        description: "No audio file is available for this meditation.",
         variant: "destructive",
       });
       return;
@@ -67,7 +61,7 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
         audioRef.current.pause();
         setIsPlaying(false);
       } else if (audioRef.current) {
-        console.log('Playing audio:', customAudioUrl || audioUrl);
+        console.log('Playing audio:', audioUrl);
         await audioRef.current.play();
         setIsPlaying(true);
       }
@@ -80,39 +74,6 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
       });
       setIsPlaying(false);
     }
-  };
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      if (file.type !== 'audio/mpeg') {
-        toast({
-          title: "Invalid File Type",
-          description: "Please upload an MP3 file.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      const url = URL.createObjectURL(file);
-      setCustomAudioUrl(url);
-      console.log('Custom audio file loaded:', url);
-      
-      // Reset play state when new file is uploaded
-      if (audioRef.current) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      }
-
-      toast({
-        title: "File Uploaded",
-        description: "Your MP3 file has been loaded successfully.",
-      });
-    }
-  };
-
-  const handleUploadClick = () => {
-    fileInputRef.current?.click();
   };
 
   return (
@@ -130,7 +91,7 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
           <span className="text-sm text-gray-500">{duration}</span>
         </div>
         <p className="text-gray-600 mb-4">{description}</p>
-        <div className="flex justify-between items-center gap-2">
+        <div className="flex justify-between items-center">
           <Button
             onClick={handlePlayPause}
             variant="outline"
@@ -139,23 +100,6 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
             {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             {isPlaying ? 'Pause' : 'Play'}
           </Button>
-          <div className="flex items-center gap-2">
-            <Input
-              type="file"
-              accept="audio/mpeg"
-              className="hidden"
-              ref={fileInputRef}
-              onChange={handleFileUpload}
-            />
-            <Button
-              onClick={handleUploadClick}
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              <Upload className="h-4 w-4" />
-              Upload MP3
-            </Button>
-          </div>
         </div>
       </div>
     </div>
