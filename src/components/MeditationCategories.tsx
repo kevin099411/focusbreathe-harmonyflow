@@ -21,6 +21,13 @@ interface MeditationCategoriesProps {
 
 const categories: Category[] = [
   {
+    id: "adhd",
+    title: "ADHD 852hz 改善",
+    description: "閱讀時的背景聲音",
+    icon: "🧠",
+    requiresPremium: true
+  },
+  {
     id: "autoplay",
     title: "自動播放",
     description: "連續冥想課程",
@@ -51,13 +58,6 @@ const categories: Category[] = [
     title: "深度工作",
     description: "延長專注時段",
     icon: "💪",
-    requiresPremium: true
-  },
-  {
-    id: "read",
-    title: "閱讀",
-    description: "閱讀時的背景聲音",
-    icon: "📚",
     requiresPremium: true
   }
 ];
