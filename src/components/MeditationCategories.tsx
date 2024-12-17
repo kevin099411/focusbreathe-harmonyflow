@@ -7,6 +7,7 @@ import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { AudioPlayer } from "./AudioPlayer";
 import { ScrollArea } from "./ui/scroll-area";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Category {
   id: string;
@@ -22,42 +23,42 @@ const categories: Category[] = [
     title: "ADHD 852hz 改善",
     description: "閱讀時的背景聲音",
     icon: "🧠",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
+    audioUrl: `${supabase.storage.from('audio').getPublicUrl('852hz.mp3').data.publicUrl}`
   },
   {
     id: "autoplay",
     title: "自動播放",
     description: "連續冥想課程",
     icon: "🔄",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3"
+    audioUrl: `${supabase.storage.from('audio').getPublicUrl('relax forrest music.mp3').data.publicUrl}`
   },
   {
     id: "colored-noise",
     title: "彩色噪音",
     description: "白噪音、粉噪音和棕噪音助於專注",
     icon: "🌊",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/10%20Minute%20Crystal%20Singing%20Bowl%20Meditation%20_%20Sound%20Healing%20For%20Relaxation%20&%20Stress%20Relief.m4a"
+    audioUrl: `${supabase.storage.from('audio').getPublicUrl('crystal singing bowl.m4a').data.publicUrl}`
   },
   {
     id: "focus",
     title: "專注",
     description: "增強集中力和清晰度",
     icon: "🎯",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3"
+    audioUrl: `${supabase.storage.from('audio').getPublicUrl('focus music.mp3').data.publicUrl}`
   },
   {
     id: "relax",
     title: "放鬆",
     description: "深度放鬆和緩解壓力",
     icon: "🧘",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
+    audioUrl: `${supabase.storage.from('audio').getPublicUrl('Inner Voicings.mp3').data.publicUrl}`
   },
   {
     id: "deep-work",
     title: "深度工作",
     description: "延長專注時段",
     icon: "💪",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
+    audioUrl: `${supabase.storage.from('audio').getPublicUrl('Inner Voicings.mp3').data.publicUrl}`
   }
 ];
 
@@ -74,6 +75,8 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   };
 
   const handleSelect = (category: Category) => {
+    console.log('Selected category:', category);
+    console.log('Audio URL:', category.audioUrl);
     setSelectedCategory(category.id);
     onSelect?.(category.id);
   };
