@@ -55,7 +55,8 @@ const categories: Category[] = [
     id: "deep-work",
     title: "深度工作",
     description: "延長專注時段",
-    icon: "💪"
+    icon: "💪",
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
   }
 ];
 
