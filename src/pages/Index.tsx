@@ -27,8 +27,26 @@ const Index = () => {
     },
   ];
 
+  const sriSriBreathingTechniques = [
+    {
+      name: "Bhastrika Pranayama",
+      description: "Energizing breath technique that increases prana in the body",
+      steps: ["Sit comfortably", "Take deep breaths", "Forcefully exhale", "Repeat 20 times"],
+    },
+    {
+      name: "Nadi Shodhan Pranayama",
+      description: "Alternate nostril breathing for mental clarity and balance",
+      steps: ["Close right nostril", "Inhale left", "Close left nostril", "Exhale right"],
+    },
+    {
+      name: "Ujjayi Breath",
+      description: "Ocean breath that calms the nervous system",
+      steps: ["Constrict throat", "Breathe deeply", "Create ocean sound", "Maintain rhythm"],
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-blue-50">
       <div 
         className="fixed inset-0 -z-10 bg-cover bg-center opacity-10 animate-wind scale-110 origin-center"
         style={{
@@ -40,27 +58,47 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-4 relative">
         <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Breathe Deep, Focus Sharp, Live Calm
+          <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+            Experience the Power of Sri Sri Breathing
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Discover peace and clarity through guided meditations, Sri Sri breathing techniques, and healing 852 Hz frequencies.
+            Transform your life through ancient breathing techniques, guided meditations, and healing frequencies.
           </p>
           <button className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-            Start Your Journey
+            Begin Your Journey
           </button>
         </div>
       </section>
 
-      {/* Featured Meditations */}
+      {/* Sri Sri Breathing Techniques */}
       <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Featured Meditations
+          <h2 className="text-3xl font-bold text-secondary mb-8 text-center">
+            Sri Sri Breathing Techniques
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredMeditations.map((meditation, index) => (
-              <MeditationCard key={index} {...meditation} />
+            {sriSriBreathingTechniques.map((technique, index) => (
+              <div 
+                key={index}
+                className="p-6 rounded-lg bg-white shadow-lg hover:shadow-xl transition-shadow border border-orange-100"
+              >
+                <h3 className="text-xl font-semibold text-primary mb-3">
+                  {technique.name}
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  {technique.description}
+                </p>
+                <ul className="space-y-2">
+                  {technique.steps.map((step, stepIndex) => (
+                    <li key={stepIndex} className="flex items-center text-gray-700">
+                      <span className="w-6 h-6 rounded-full bg-orange-100 text-primary flex items-center justify-center mr-2 text-sm">
+                        {stepIndex + 1}
+                      </span>
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </div>
@@ -69,10 +107,24 @@ const Index = () => {
       {/* Breathing Exercise */}
       <section className="py-12 px-4 bg-gradient-to-b from-white/50 to-gray-50/50 backdrop-blur-sm">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
-            Take a Moment to Breathe
+          <h2 className="text-3xl font-bold text-secondary mb-8">
+            Practice Mindful Breathing
           </h2>
           <BreathingCircle />
+        </div>
+      </section>
+
+      {/* Featured Meditations */}
+      <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold text-secondary mb-8 text-center">
+            Featured Meditations
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredMeditations.map((meditation, index) => (
+              <MeditationCard key={index} {...meditation} />
+            ))}
+          </div>
         </div>
       </section>
     </div>
