@@ -2,12 +2,17 @@ import { Shuffle } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useState } from "react";
+import { useSession } from "@supabase/auth-helpers-react";
+import { toast } from "./ui/use-toast";
+import { useNavigate } from "react-router-dom";
+import { Lock } from "lucide-react";
 
 interface Category {
   id: string;
   title: string;
   description: string;
   icon: string;
+  requiresPremium?: boolean;
 }
 
 interface MeditationCategoriesProps {
@@ -31,46 +36,58 @@ const categories: Category[] = [
     id: "focus",
     title: "專注",
     description: "增強集中力和清晰度",
-    icon: "🎯"
+    icon: "🎯",
+    requiresPremium: true
   },
   {
     id: "relax",
     title: "放鬆",
     description: "深度放鬆和緩解壓力",
-    icon: "🧘"
+    icon: "🧘",
+    requiresPremium: true
   },
   {
     id: "deep-work",
     title: "深度工作",
     description: "延長專注時段",
-    icon: "💪"
+    icon: "💪",
+    requiresPremium: true
   },
   {
     id: "read",
     title: "閱讀",
     description: "閱讀時的背景聲音",
-    icon: "📚"
-  },
-  {
-    id: "power-nap",
-    title: "能量小憩",
-    description: "快速恢復活力休息",
-    icon: "😴"
-  },
+    icon: "📚",
+    requiresPremium: true
+  }
 ];
 
 export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const session = useSession();
+  const navigate = useNavigate();
 
   const handleShuffle = () => {
-    const randomIndex = Math.floor(Math.random() * categories.length);
-    setSelectedCategory(categories[randomIndex].id);
-    onSelect?.(categories[randomIndex].id);
+    const availableCategories = categories.filter(cat => 
+      !cat.requiresPremium || (session && session.user)
+    );
+    const randomIndex = Math.floor(Math.random() * availableCategories.length);
+    setSelectedCategory(availableCategories[randomIndex].id);
+    onSelect?.(availableCategories[randomIndex].id);
   };
 
-  const handleSelect = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-    onSelect?.(categoryId);
+  const handleSelect = (category: Category) => {
+    if (category.requiresPremium && (!session || !session.user)) {
+      toast({
+        title: "Premium Feature",
+        description: "Please upgrade to access this meditation category",
+        variant: "destructive",
+      });
+      navigate("/pricing");
+      return;
+    }
+    setSelectedCategory(category.id);
+    onSelect?.(category.id);
   };
 
   return (
@@ -86,17 +103,20 @@ export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) =>
         {categories.map((category) => (
           <Card
             key={category.id}
-            className={`p-4 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 ${
+            className={`p-4 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 relative ${
               selectedCategory === category.id
                 ? "ring-2 ring-primary"
                 : ""
-            }`}
-            onClick={() => handleSelect(category.id)}
+            } ${category.requiresPremium && (!session || !session.user) ? "opacity-50" : ""}`}
+            onClick={() => handleSelect(category)}
           >
             <div className="flex flex-col items-center text-center space-y-2">
               <span className="text-2xl mb-2">{category.icon}</span>
               <h3 className="text-lg font-semibold text-white">{category.title}</h3>
               <p className="text-sm text-gray-400">{category.description}</p>
+              {category.requiresPremium && (!session || !session.user) && (
+                <Lock className="absolute top-2 right-2 h-5 w-5 text-gray-400" />
+              )}
             </div>
           </Card>
         ))}
