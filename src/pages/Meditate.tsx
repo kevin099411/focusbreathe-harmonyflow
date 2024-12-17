@@ -31,7 +31,7 @@ const Meditate = () => {
             <PayPalButton 
               amount="29.99"
               planTitle="Premium Meditation"
-              fileUrl="meditation-guides/premium-guide.pdf"
+              hostedButtonId="UZXYSVGZKPA77"
             />
           </div>
 
