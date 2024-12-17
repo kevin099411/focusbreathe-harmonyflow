@@ -40,16 +40,16 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pt-20">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pt-16">
       <Navigation />
-      <div className="container mx-auto px-4 py-8 md:py-12">
-        <div className="text-center mb-8 md:mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">選擇您的正念之路</h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-            選擇最適合您冥想之旅的方案，解鎖獨家內容
+      <div className="container mx-auto px-4 py-6 md:py-12">
+        <div className="text-center mb-6 md:mb-12">
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-4">選擇方案</h1>
+          <p className="text-base md:text-xl text-gray-600 max-w-xl mx-auto px-2">
+            解鎖專屬內容
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:gap-8 max-w-6xl mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 gap-6 md:gap-8 max-w-6xl mx-auto px-2 md:px-8">
           {pricingPlans.map((plan, index) => (
             <div key={index} className="w-full">
               <PricingCard
