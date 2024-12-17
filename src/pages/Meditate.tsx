@@ -8,12 +8,12 @@ const Meditate = () => {
   const [selectedPractice, setSelectedPractice] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#222222] text-white pt-20 px-4">
-      <div className="container mx-auto space-y-12 max-w-4xl">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-primary mb-4">冥想練習</h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            從各種冥想練習中選擇，旨在提升您的專注力、放鬆度和整體健康。
+    <div className="min-h-screen bg-[#222222] text-white pt-16">
+      <div className="container mx-auto px-4 py-6 md:py-12">
+        <div className="text-center mb-6 md:mb-12">
+          <h1 className="text-2xl md:text-4xl font-bold text-primary mb-2 md:mb-4">冥想練習</h1>
+          <p className="text-base md:text-xl text-gray-300 max-w-xl mx-auto px-2">
+            專注放鬆
           </p>
         </div>
         
