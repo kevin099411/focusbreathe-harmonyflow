@@ -14,38 +14,44 @@ export const BreathingExercise = () => {
   const [selectedPattern, setSelectedPattern] = useState<BreathingPattern>(breathingPatterns[0]);
   const [breathCount, setBreathCount] = useState(0);
   
-  // Single tingsha sound for all phases
-  const tingshaSound = useRef(new Audio("https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"));
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout>();
+
+  useEffect(() => {
+    // Initialize audio
+    if (selectedPattern.audioUrl && !audioRef.current) {
+      console.log('Initializing audio with URL:', selectedPattern.audioUrl);
+      const audio = new Audio(selectedPattern.audioUrl);
+      audio.loop = true;
+      audioRef.current = audio;
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [selectedPattern.audioUrl]);
 
   useEffect(() => {
     if (!isPlaying) {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
       return;
     }
-
-    const playTingshaSound = () => {
-      console.log('Playing tingsha sound');
-      if (tingshaSound.current) {
-        tingshaSound.current.currentTime = 0;
-        tingshaSound.current.play().catch(error => {
-          console.error('Error playing sound:', error);
-          toast({
-            title: "聲音播放錯誤",
-            description: "無法播放提示音，請檢查音量設置。",
-            variant: "destructive",
-          });
-        });
-      }
-    };
 
     const runBreathingCycle = () => {
       if (selectedPattern.countBreaths && breathCount >= (selectedPattern.maxBreaths || 0)) {
         setBreathCount(0);
         setIsPlaying(false);
-        playTingshaSound();
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
         toast({
           title: "練習完成",
           description: `你已經完成了${selectedPattern.maxBreaths}次呼吸！`,
@@ -53,28 +59,39 @@ export const BreathingExercise = () => {
         return;
       }
 
-      // Start inhale phase (4 seconds)
+      // Start inhale phase
+      console.log('Starting inhale phase');
       setPhase("inhale");
-      playTingshaSound();
+      if (audioRef.current && selectedPattern.audioUrl) {
+        audioRef.current.play().catch(error => {
+          console.error('Error playing audio:', error);
+          toast({
+            title: "音頻播放錯誤",
+            description: "無法播放音頻指導，請檢查音量設置。",
+            variant: "destructive",
+          });
+        });
+      }
 
-      // Schedule hold phase (7 seconds)
+      // Schedule hold phase
       timerRef.current = setTimeout(() => {
+        console.log('Starting hold phase');
         setPhase("hold");
-        playTingshaSound();
         
-        // Schedule exhale phase (8 seconds)
+        // Schedule exhale phase
         timerRef.current = setTimeout(() => {
+          console.log('Starting exhale phase');
           setPhase("exhale");
-          playTingshaSound();
           
           // Schedule rest phase
           timerRef.current = setTimeout(() => {
+            console.log('Starting rest phase');
             setPhase("rest");
             if (selectedPattern.countBreaths) {
               setBreathCount(prev => prev + 1);
             }
-            // Schedule next cycle after a short rest
-            timerRef.current = setTimeout(runBreathingCycle, 1000);
+            // Schedule next cycle
+            timerRef.current = setTimeout(runBreathingCycle, selectedPattern.rest * 1000);
           }, selectedPattern.exhale * 1000);
         }, selectedPattern.hold * 1000);
       }, selectedPattern.inhale * 1000);
@@ -86,9 +103,8 @@ export const BreathingExercise = () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
-      if (tingshaSound.current) {
-        tingshaSound.current.pause();
-        tingshaSound.current.currentTime = 0;
+      if (audioRef.current) {
+        audioRef.current.pause();
       }
     };
   }, [isPlaying, selectedPattern, breathCount]);
@@ -97,6 +113,10 @@ export const BreathingExercise = () => {
     setSelectedPattern(pattern);
     setIsPlaying(false);
     setBreathCount(0);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
   };
 
   return (
