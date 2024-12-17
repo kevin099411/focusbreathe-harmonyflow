@@ -16,6 +16,7 @@ const Index = () => {
       duration: "10 min",
       description: "Guided session to calm an overactive mind",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
+      audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/relax%20forrest%20music.mp3",
     },
     {
       title: "Energy Boost with 852 Hz",
