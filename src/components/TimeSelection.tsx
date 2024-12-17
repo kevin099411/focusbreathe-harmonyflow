@@ -17,19 +17,19 @@ export const TimeSelection = () => {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-semibold text-secondary">Select Duration</h2>
+      <h2 className="text-2xl font-semibold text-white">Select Duration</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {timeOptions.map((option) => (
           <Card
             key={option.value}
-            className={`p-4 cursor-pointer text-center transition-all hover:scale-105 ${
+            className={`p-4 cursor-pointer text-center transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 ${
               selectedTime === option.value
-                ? "bg-primary/10 ring-2 ring-primary"
-                : "bg-gray-50"
+                ? "ring-2 ring-primary"
+                : ""
             }`}
             onClick={() => setSelectedTime(option.value)}
           >
-            <span className="font-medium">{option.label}</span>
+            <span className="font-medium text-white">{option.label}</span>
           </Card>
         ))}
       </div>

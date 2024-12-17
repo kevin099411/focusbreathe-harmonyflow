@@ -1,4 +1,4 @@
-import { Play, Pause } from "lucide-react";
+import { Play, Pause, Timer } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
@@ -44,8 +44,8 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
   const handlePlayPause = async () => {
     if (!audioUrl) {
       toast({
-        title: "Audio not available",
-        description: "No audio file is available for this meditation.",
+        title: "Select a Practice",
+        description: "Please select a meditation practice to begin.",
         variant: "destructive",
       });
       return;
@@ -73,13 +73,24 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
   };
 
   return (
-    <Button
-      onClick={handlePlayPause}
-      variant="outline"
-      className="flex items-center gap-2"
-    >
-      {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-      {isPlaying ? 'Pause' : 'Play'}
-    </Button>
+    <div className="flex items-center gap-4">
+      <Button
+        onClick={handlePlayPause}
+        size="icon"
+        className="w-12 h-12 rounded-full bg-primary hover:bg-primary/90"
+      >
+        {isPlaying ? 
+          <Pause className="h-6 w-6 text-white" /> : 
+          <Play className="h-6 w-6 text-white ml-1" />
+        }
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="text-gray-400 hover:text-white"
+      >
+        <Timer className="h-5 w-5" />
+      </Button>
+    </div>
   );
 };

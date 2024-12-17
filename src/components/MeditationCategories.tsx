@@ -7,7 +7,7 @@ interface Category {
   id: string;
   title: string;
   description: string;
-  color: string;
+  icon: string;
 }
 
 const categories: Category[] = [
@@ -15,43 +15,43 @@ const categories: Category[] = [
     id: "autoplay",
     title: "Autoplay",
     description: "Continuous meditation sessions",
-    color: "bg-primary/10",
+    icon: "🔄"
   },
   {
     id: "colored-noise",
     title: "Colored Noise",
     description: "White, pink, and brown noise for focus",
-    color: "bg-secondary/10",
+    icon: "🌊"
   },
   {
     id: "focus",
     title: "Focus",
     description: "Enhance concentration and clarity",
-    color: "bg-primary/20",
+    icon: "🎯"
   },
   {
     id: "relax",
     title: "Relax",
     description: "Deep relaxation and stress relief",
-    color: "bg-secondary/20",
+    icon: "🧘"
   },
   {
     id: "deep-work",
     title: "Deep Work",
     description: "Extended focus sessions",
-    color: "bg-primary/30",
+    icon: "💪"
   },
   {
     id: "read",
     title: "Reading",
     description: "Background sounds for reading",
-    color: "bg-secondary/30",
+    icon: "📚"
   },
   {
     id: "power-nap",
     title: "Power Nap",
     description: "Quick rejuvenation breaks",
-    color: "bg-primary/40",
+    icon: "😴"
   },
 ];
 
@@ -66,27 +66,28 @@ export const MeditationCategories = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-secondary">Choose Your Practice</h2>
-        <Button onClick={handleShuffle} variant="outline" className="gap-2">
+        <h2 className="text-2xl font-semibold text-white">Choose Your Practice</h2>
+        <Button onClick={handleShuffle} variant="ghost" className="gap-2 text-gray-300 hover:text-white">
           <Shuffle className="h-4 w-4" />
           Shuffle
         </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {categories.map((category) => (
           <Card
             key={category.id}
-            className={`p-6 cursor-pointer transition-all hover:scale-105 ${
-              category.color
-            } ${
+            className={`p-4 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 ${
               selectedCategory === category.id
                 ? "ring-2 ring-primary"
                 : ""
             }`}
             onClick={() => setSelectedCategory(category.id)}
           >
-            <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
-            <p className="text-gray-600">{category.description}</p>
+            <div className="flex flex-col items-center text-center space-y-2">
+              <span className="text-2xl mb-2">{category.icon}</span>
+              <h3 className="text-lg font-semibold text-white">{category.title}</h3>
+              <p className="text-sm text-gray-400">{category.description}</p>
+            </div>
           </Card>
         ))}
       </div>
