@@ -9,6 +9,7 @@ import { Layout } from "./components/Layout";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 import Index from "./pages/Index";
 import Meditate from "./pages/Meditate";
 import Breathwork from "./pages/Breathwork";
@@ -19,13 +20,15 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 2,
-      onError: (error) => {
-        console.error('Query error:', error);
-        toast({
-          title: "數據加載錯誤",
-          description: "無法加載數據，請重試。",
-          variant: "destructive",
-        });
+      meta: {
+        onError: (error: Error) => {
+          console.error('Query error:', error);
+          toast({
+            title: "數據加載錯誤",
+            description: "無法加載數據，請重試。",
+            variant: "destructive",
+          });
+        },
       },
     },
   },
