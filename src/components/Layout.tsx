@@ -4,6 +4,7 @@ import { Wind } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -28,10 +29,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-14">
-            <Link to="/" className="flex items-center space-x-2">
-              <Wind className="h-5 w-5 text-primary" />
-              <span className="text-lg font-bold text-primary">FocusZen</span>
-            </Link>
+            <div className="flex flex-col items-start">
+              <Link to="/" className="flex items-center space-x-2">
+                <Wind className="h-5 w-5 text-primary" />
+                <span className="text-lg font-bold text-primary">FocusZen</span>
+              </Link>
+              <LanguageSwitcher />
+            </div>
             <nav className="flex items-center space-x-6">
               <Link to="/meditate" className="text-gray-600 hover:text-primary">
                 冥想

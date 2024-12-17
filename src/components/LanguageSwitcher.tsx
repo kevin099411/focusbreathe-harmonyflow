@@ -7,8 +7,9 @@ export const LanguageSwitcher = () => {
   return (
     <Button
       variant="ghost"
+      size="sm"
       onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
-      className="fixed top-4 left-4 z-50"
+      className="mt-1 px-2 py-1 h-auto text-sm"
     >
       {language === 'en' ? '中文' : 'English'}
     </Button>
