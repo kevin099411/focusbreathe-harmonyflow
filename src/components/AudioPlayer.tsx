@@ -1,7 +1,9 @@
-import { Play, Pause, Timer, Repeat } from "lucide-react";
+import { Timer } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { toast } from "@/hooks/use-toast";
+import { PlayButton } from "./PlayButton";
+import { LoopButton } from "./LoopButton";
 
 interface AudioPlayerProps {
   audioUrl?: string;
@@ -140,25 +142,15 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
 
   return (
     <div className="flex items-center gap-4">
-      <Button
+      <PlayButton 
+        isPlaying={isPlaying}
+        isLoaded={isLoaded}
         onClick={handlePlayPause}
-        size="icon"
-        className="w-12 h-12 rounded-full bg-primary hover:bg-primary/90"
-        disabled={!isLoaded}
-      >
-        {isPlaying ? 
-          <Pause className="h-6 w-6 text-white" /> : 
-          <Play className="h-6 w-6 text-white ml-1" />
-        }
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        className={`text-gray-400 hover:text-white ${isLooping ? 'text-primary' : ''}`}
+      />
+      <LoopButton 
+        isLooping={isLooping}
         onClick={toggleLoop}
-      >
-        <Repeat className="h-5 w-5" />
-      </Button>
+      />
       <Button
         variant="ghost"
         size="icon"
