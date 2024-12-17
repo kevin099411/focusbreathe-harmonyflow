@@ -34,13 +34,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             </Link>
             <nav className="flex items-center space-x-6">
               <Link to="/meditate" className="text-gray-600 hover:text-primary">
-                {language === 'en' ? 'Meditate' : '冥想'}
+                冥想
               </Link>
               <Link to="/breathwork" className="text-gray-600 hover:text-primary">
-                {language === 'en' ? 'Daily Knowledge' : '每日知識'}
+                每日知識
               </Link>
               <Link to="/pricing" className="text-gray-600 hover:text-primary">
-                {language === 'en' ? 'Pricing' : '價格'}
+                價格
               </Link>
             </nav>
           </div>
