@@ -1,4 +1,4 @@
-import { Shuffle, Lock } from "lucide-react";
+import { Shuffle } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useState } from "react";
@@ -13,7 +13,6 @@ interface Category {
   title: string;
   description: string;
   icon: string;
-  requiresPremium?: boolean;
   audioUrl?: string;
 }
 
@@ -29,7 +28,8 @@ const categories: Category[] = [
     id: "autoplay",
     title: "自動播放",
     description: "連續冥想課程",
-    icon: "🔄"
+    icon: "🔄",
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3"
   },
   {
     id: "colored-noise",
@@ -43,13 +43,14 @@ const categories: Category[] = [
     title: "專注",
     description: "增強集中力和清晰度",
     icon: "🎯",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3?t=2024-12-17T10%3A00%3A41.084Z"
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3"
   },
   {
     id: "relax",
     title: "放鬆",
     description: "深度放鬆和緩解壓力",
-    icon: "🧘"
+    icon: "🧘",
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
   },
   {
     id: "deep-work",
