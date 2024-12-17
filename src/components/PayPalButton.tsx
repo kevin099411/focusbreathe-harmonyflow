@@ -97,7 +97,7 @@ export const PayPalButton = ({ amount, planTitle, fileUrl }: PayPalButtonProps) 
   return (
     <div className="space-y-4">
       <PayPalScriptProvider options={{ 
-        clientId: process.env.VITE_PAYPAL_CLIENT_ID || '',
+        clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID || '',
         currency: "USD"
       }}>
         <PayPalButtons
