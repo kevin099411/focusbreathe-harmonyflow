@@ -4,35 +4,41 @@ import { Navigation } from "@/components/Navigation";
 const Pricing = () => {
   const pricingPlans = [
     {
-      title: "Beginner",
-      price: "30",
+      title: "Basic Meditation",
+      price: "9.99",
       features: [
-        "Basic guided meditations",
-        "Simple breathing exercises",
-        "Limited 852 Hz tracks",
-        "Community access",
+        "5 guided meditations",
+        "Basic breathing exercises",
+        "Daily mindfulness tips",
+        "Community forum access",
       ],
+      fileUrl: "basic-guide.pdf"
     },
     {
-      title: "Advanced",
-      price: "50",
+      title: "Premium Zen",
+      price: "19.99",
       features: [
-        "All Beginner features",
-        "Advanced Sri Sri techniques",
-        "Full 852 Hz library",
-        "Progress tracking",
+        "20 guided meditations",
+        "Advanced breathing techniques",
+        "Personal meditation tracker",
+        "Weekly live sessions",
+        "Premium meditation guide"
       ],
       isPopular: true,
+      fileUrl: "premium-guide.pdf"
     },
     {
-      title: "Guru",
-      price: "100",
+      title: "Master Package",
+      price: "49.99",
       features: [
-        "All Advanced features",
-        "1-on-1 breathing sessions",
+        "Unlimited guided meditations",
+        "1-on-1 meditation coaching",
         "Custom meditation plans",
         "Priority support",
+        "Complete meditation library",
+        "Exclusive workshops"
       ],
+      fileUrl: "master-guide.pdf"
     },
   ];
 
@@ -41,14 +47,21 @@ const Pricing = () => {
       <Navigation />
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Choose Your Path</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Choose Your Path to Mindfulness</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Select the perfect plan to support your meditation and mindfulness journey
+            Select the perfect plan to support your meditation journey and unlock exclusive content
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {pricingPlans.map((plan, index) => (
-            <PricingCard key={index} {...plan} />
+            <PricingCard
+              key={index}
+              title={plan.title}
+              price={plan.price}
+              features={plan.features}
+              isPopular={plan.isPopular}
+              fileUrl={plan.fileUrl}
+            />
           ))}
         </div>
       </div>
