@@ -14,11 +14,19 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
     console.log("Payment successful", details);
     
     try {
+      // Get the current user
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        throw new Error("User not authenticated");
+      }
+
       const { error } = await supabase.from('payments').insert({
         amount: parseFloat(amount),
         status: 'completed',
         payment_method: 'paypal',
-        payment_id: details.id
+        payment_id: details.id,
+        user_id: user.id
       });
 
       if (error) throw error;
@@ -50,6 +58,7 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
               {
                 description: `${planTitle} Plan`,
                 amount: {
+                  currency_code: "USD",
                   value: amount
                 },
               },
