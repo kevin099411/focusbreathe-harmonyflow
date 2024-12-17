@@ -32,8 +32,8 @@ export const TimeSelection = () => {
   };
 
   return (
-    <div className="space-y-2">
-      <h2 className="text-lg font-medium text-white">選擇時長</h2>
+    <div className="space-y-2 mt-8">
+      <h2 className="text-lg font-medium text-white mb-4">選擇時長</h2>
       <ScrollArea className="h-[200px] rounded-md">
         <div className="grid grid-cols-4 gap-2 p-1">
           {timeOptions.map((option) => (
