@@ -22,7 +22,7 @@ const Index = () => {
       duration: "15 min",
       description: "Energizing meditation with healing frequencies",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
-      audioUrl: "https://jumpshare.com/s/qu25PLA3WUkn28RsNXlW",
+      audioUrl: "https://assets.mixkit.co/music/preview/mixkit-meditation-bells-227.mp3",
     },
   ];
 
