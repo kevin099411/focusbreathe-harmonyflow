@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Lock, X } from "lucide-react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { VideoCard } from "./VideoCard";
+import { VideoDialog } from "./VideoDialog";
+import { UpgradePrompt } from "./UpgradePrompt";
 
 interface Video {
   id: string;
@@ -51,7 +49,6 @@ export const VideoList = () => {
 
   const handleVideoClick = (video: Video) => {
     if (watchedVideos.length >= 3 && !watchedVideos.includes(video.id)) {
-      // Redirect to pricing page for premium content
       window.location.href = "/pricing";
       return;
     }
@@ -66,65 +63,22 @@ export const VideoList = () => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {VIDEOS.map((video) => (
-          <Card key={video.id} className="overflow-hidden">
-            <div className="relative group cursor-pointer" onClick={() => handleVideoClick(video)}>
-              <img
-                src={video.thumbnail}
-                alt={video.title}
-                className="w-full aspect-video object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              {watchedVideos.length >= 3 && !watchedVideos.includes(video.id) && (
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <Lock className="w-8 h-8 text-white" />
-                </div>
-              )}
-            </div>
-            <div className="p-4">
-              <h3 className="font-semibold mb-2 line-clamp-2 h-12">{video.title}</h3>
-              <Button
-                onClick={() => handleVideoClick(video)}
-                variant={watchedVideos.includes(video.id) ? "secondary" : "default"}
-                className="w-full"
-              >
-                {watchedVideos.includes(video.id) ? "重新觀看" : "觀看影片"}
-              </Button>
-            </div>
-          </Card>
+          <VideoCard
+            key={video.id}
+            {...video}
+            isLocked={watchedVideos.length >= 3 && !watchedVideos.includes(video.id)}
+            isWatched={watchedVideos.includes(video.id)}
+            onWatch={() => handleVideoClick(video)}
+          />
         ))}
         
-        {watchedVideos.length >= 3 && (
-          <div className="col-span-full text-center mt-6">
-            <p className="text-gray-600 mb-4">想要觀看更多影片嗎？</p>
-            <Link to="/pricing">
-              <Button>升級會員</Button>
-            </Link>
-          </div>
-        )}
+        {watchedVideos.length >= 3 && <UpgradePrompt />}
       </div>
 
-      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
-        <DialogContent className="sm:max-w-[800px] p-0">
-          <div className="relative pt-[56.25%] w-full">
-            {selectedVideo && (
-              <iframe
-                className="absolute top-0 left-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}`}
-                title={selectedVideo.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            )}
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-4 top-4 rounded-full bg-white/90 hover:bg-white/75"
-            onClick={() => setSelectedVideo(null)}
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        </DialogContent>
-      </Dialog>
+      <VideoDialog
+        video={selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+      />
     </>
   );
 };
