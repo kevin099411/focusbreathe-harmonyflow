@@ -20,8 +20,8 @@ const VIDEOS = [
   {
     id: "video2",
     title: "Guided Meditation for Stress Relief | Art of Living",
-    thumbnail: "https://img.youtube.com/vi/0agYMXvEAAw/maxresdefault.jpg",
-    youtubeId: "0agYMXvEAAw"
+    thumbnail: "https://img.youtube.com/vi/sWUmAAwbZ3s/maxresdefault.jpg",
+    youtubeId: "sWUmAAwbZ3s"
   },
   {
     id: "video3",
