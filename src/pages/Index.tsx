@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
-import { VideoUpload } from "@/components/VideoUpload";
 
 const Index = () => {
   const featuredMeditations = [
@@ -49,16 +48,6 @@ const Index = () => {
           <button className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
             Start Your Journey
           </button>
-        </div>
-      </section>
-
-      {/* Video Upload Section */}
-      <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto max-w-xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Upload Your Meditation Video
-          </h2>
-          <VideoUpload />
         </div>
       </section>
 
