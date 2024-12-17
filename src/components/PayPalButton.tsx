@@ -24,17 +24,22 @@ export const PayPalButton = ({ amount, planTitle, fileUrl }: PayPalButtonProps) 
         return;
       }
 
+      console.log('Attempting to download file:', fileUrl);
+
       const { data, error } = await supabase.storage
         .from('file paypal')
         .download(fileUrl);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Download error:', error);
+        throw error;
+      }
 
       // Create a download link
       const url = window.URL.createObjectURL(data);
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', fileUrl.split('/').pop() || 'download');
+      link.setAttribute('download', fileUrl);
       document.body.appendChild(link);
       link.click();
       link.remove();
