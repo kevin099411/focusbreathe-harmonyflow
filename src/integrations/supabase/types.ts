@@ -44,7 +44,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      audio: ".mp3" | ".mp4"
     }
     CompositeTypes: {
       [_ in never]: never
