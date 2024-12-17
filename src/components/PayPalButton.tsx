@@ -27,7 +27,7 @@ export const PayPalButton = ({ amount, planTitle, fileUrl }: PayPalButtonProps) 
       console.log('Attempting to download file:', fileUrl);
 
       const { data, error } = await supabase.storage
-        .from('file paypal')
+        .from('file_paypal')
         .download(fileUrl);
 
       if (error) {
