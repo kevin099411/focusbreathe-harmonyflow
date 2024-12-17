@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useState } from "react";
 import { useSession } from "@supabase/auth-helpers-react";
-import { toast } from "./ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { AudioPlayer } from "./AudioPlayer";
 import { ScrollArea } from "./ui/scroll-area";

@@ -1,7 +1,7 @@
 import { Play, Pause, Timer, Repeat } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
-import { toast } from "./ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 
 interface AudioPlayerProps {
   audioUrl?: string;
@@ -9,13 +9,23 @@ interface AudioPlayerProps {
 
 export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLooping, setIsLooping] = useState(true); // Default to true for auto-repeat
+  const [isLooping, setIsLooping] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    console.log('AudioPlayer: URL changed:', audioUrl);
+    setIsPlaying(false);
+    setIsLoaded(false);
+
     if (audioUrl) {
       const audio = new Audio(audioUrl);
       audioRef.current = audio;
+
+      audio.addEventListener('loadeddata', () => {
+        console.log('Audio loaded successfully');
+        setIsLoaded(true);
+      });
 
       audio.addEventListener('ended', () => {
         console.log('Audio playback ended');
@@ -24,6 +34,11 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
           audio.currentTime = 0;
           audio.play().catch(error => {
             console.error('Error restarting audio:', error);
+            toast({
+              title: "播放錯誤",
+              description: "重新播放時發生錯誤，請重試。",
+              variant: "destructive",
+            });
           });
         } else {
           setIsPlaying(false);
@@ -32,19 +47,22 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
 
       audio.addEventListener('error', (e) => {
         console.error('Audio error:', e);
+        setIsLoaded(false);
         toast({
-          title: "Audio Error",
-          description: "There was an error loading the audio file. Please try again.",
+          title: "音頻錯誤",
+          description: "加載音頻文件時出錯。請重試。",
           variant: "destructive",
         });
         setIsPlaying(false);
       });
 
       return () => {
+        console.log('Cleaning up audio element');
         if (audioRef.current) {
           audioRef.current.pause();
           audioRef.current.src = '';
           audioRef.current.remove();
+          audioRef.current = null;
         }
       };
     }
@@ -53,8 +71,17 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
   const handlePlayPause = async () => {
     if (!audioUrl) {
       toast({
-        title: "Select a Practice",
-        description: "Please select a meditation practice to begin.",
+        title: "選擇練習",
+        description: "請選擇一個冥想練習開始。",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!isLoaded) {
+      toast({
+        title: "請稍候",
+        description: "音頻正在加載中...",
         variant: "destructive",
       });
       return;
@@ -73,8 +100,8 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
     } catch (error) {
       console.error('Error playing audio:', error);
       toast({
-        title: "Playback Error",
-        description: "There was an error playing the audio. Please try again.",
+        title: "播放錯誤",
+        description: "播放音頻時發生錯誤。請重試。",
         variant: "destructive",
       });
       setIsPlaying(false);
@@ -82,6 +109,7 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
   };
 
   const toggleLoop = () => {
+    console.log('Toggling loop:', !isLooping);
     setIsLooping(!isLooping);
     if (audioRef.current) {
       audioRef.current.loop = !isLooping;
@@ -94,6 +122,7 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
         onClick={handlePlayPause}
         size="icon"
         className="w-12 h-12 rounded-full bg-primary hover:bg-primary/90"
+        disabled={!isLoaded}
       >
         {isPlaying ? 
           <Pause className="h-6 w-6 text-white" /> : 
