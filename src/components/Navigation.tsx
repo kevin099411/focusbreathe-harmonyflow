@@ -15,13 +15,13 @@ export const Navigation = () => {
               <Home className="h-5 w-5" />
             </Link>
             <Link to="/meditate" className="text-gray-600 hover:text-primary">
-              Meditate
+              冥想
             </Link>
             <Link to="/breathwork" className="text-gray-600 hover:text-primary">
-              Breathwork
+              呼吸練習
             </Link>
             <Link to="/pricing" className="text-gray-600 hover:text-primary">
-              Pricing
+              價格方案
             </Link>
           </div>
         </div>

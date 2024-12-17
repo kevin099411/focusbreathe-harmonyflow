@@ -5,23 +5,23 @@ import { BreathingCircle } from "@/components/BreathingCircle";
 const Index = () => {
   const featuredMeditations = [
     {
-      title: "Focus Reset in 5 Minutes",
-      duration: "1 min",
-      description: "Quick meditation with 852 Hz frequency for mental clarity",
+      title: "五分鐘專注重置",
+      duration: "1 分鐘",
+      description: "使用852赫茲頻率進行快速冥想，提升心智清晰度",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
       audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852hz.mp3",
     },
     {
-      title: "Mindfulness for Racing Thoughts",
-      duration: "1 min",
-      description: "Guided session to calm an overactive mind",
+      title: "平靜紛亂思緒",
+      duration: "1 分鐘",
+      description: "引導式冥想，幫助平靜過度活躍的思維",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
       audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/relax%20forrest%20music.mp3",
     },
     {
-      title: "Energy Boost with 852 Hz",
-      duration: "1 min",
-      description: "Energizing meditation with healing frequencies",
+      title: "852赫茲能量提升",
+      duration: "1 分鐘",
+      description: "使用治癒頻率的能量提升冥想",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
       audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852hz.mp3",
     },
@@ -29,19 +29,19 @@ const Index = () => {
 
   const sriSriBreathingTechniques = [
     {
-      name: "Bhastrika Pranayama",
-      description: "Energizing breath technique that increases prana in the body",
-      steps: ["Sit comfortably", "Take deep breaths", "Forcefully exhale", "Repeat 20 times"],
+      name: "火神呼吸法",
+      description: "增強體內生命能量的活力呼吸技巧",
+      steps: ["舒適坐姿", "深呼吸", "用力呼氣", "重複20次"],
     },
     {
-      name: "Nadi Shodhan Pranayama",
-      description: "Alternate nostril breathing for mental clarity and balance",
-      steps: ["Close right nostril", "Inhale left", "Close left nostril", "Exhale right"],
+      name: "交替鼻孔呼吸法",
+      description: "交替鼻孔呼吸，提升心智清晰度和平衡",
+      steps: ["關閉右鼻孔", "左鼻吸氣", "關閉左鼻孔", "右鼻呼氣"],
     },
     {
-      name: "Ujjayi Breath",
-      description: "Ocean breath that calms the nervous system",
-      steps: ["Constrict throat", "Breathe deeply", "Create ocean sound", "Maintain rhythm"],
+      name: "勝利呼吸法",
+      description: "能夠平靜神經系統的海洋呼吸法",
+      steps: ["收緊喉嚨", "深呼吸", "製造海浪聲", "保持節奏"],
     },
   ];
 
@@ -58,25 +58,25 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-4 relative">
         <div className="container mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
-            Experience the Power of Sri Sri Breathing
+          <h1 className="text-3xl md:text-5xl font-bold text-secondary mb-4">
+            體驗斯里斯里呼吸的力量
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Transform your life through ancient breathing techniques, guided meditations, and healing frequencies.
+          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            通過古老的呼吸技巧、引導式冥想和治癒頻率，轉變您的生活。
           </p>
-          <button className="bg-primary text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
-            Begin Your Journey
+          <button className="bg-primary text-white px-6 md:px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+            開始您的旅程
           </button>
         </div>
       </section>
 
       {/* Sri Sri Breathing Techniques */}
-      <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
+      <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-secondary mb-8 text-center">
-            Sri Sri Breathing Techniques
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
+            斯里斯里呼吸技巧
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {sriSriBreathingTechniques.map((technique, index) => (
               <div 
                 key={index}
@@ -105,22 +105,22 @@ const Index = () => {
       </section>
 
       {/* Breathing Exercise */}
-      <section className="py-12 px-4 bg-gradient-to-b from-white/50 to-gray-50/50 backdrop-blur-sm">
+      <section className="py-8 md:py-12 px-4 bg-gradient-to-b from-white/50 to-gray-50/50 backdrop-blur-sm">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-secondary mb-8">
-            Practice Mindful Breathing
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8">
+            練習正念呼吸
           </h2>
           <BreathingCircle />
         </div>
       </section>
 
       {/* Featured Meditations */}
-      <section className="py-12 px-4 bg-white/80 backdrop-blur-sm">
+      <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-secondary mb-8 text-center">
-            Featured Meditations
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
+            精選冥想
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {featuredMeditations.map((meditation, index) => (
               <MeditationCard key={index} {...meditation} />
             ))}
