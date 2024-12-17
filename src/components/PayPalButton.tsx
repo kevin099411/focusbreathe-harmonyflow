@@ -51,9 +51,16 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
       currency: "USD"
     }}>
       <PayPalButtons
-        style={{ layout: "horizontal" }}
+        style={{ 
+          layout: "horizontal",
+          color: "gold", // PayPal's signature gold color
+          shape: "rect",
+          label: "pay",
+          tagline: false
+        }}
         createOrder={(data, actions) => {
           return actions.order.create({
+            intent: "CAPTURE", // Add this line to fix the TypeScript error
             purchase_units: [
               {
                 description: `${planTitle} Plan`,
