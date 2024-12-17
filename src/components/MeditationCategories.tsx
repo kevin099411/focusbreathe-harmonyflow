@@ -37,7 +37,7 @@ const categories: Category[] = [
     title: "彩色噪音",
     description: "白噪音、粉噪音和棕噪音助於專注",
     icon: "🌊",
-    audioUrl: `${supabase.storage.from('audio').getPublicUrl('crystal singing bowl.m4a').data.publicUrl}`
+    audioUrl: `${supabase.storage.from('audio').getPublicUrl('10 Minute Crystal Singing Bowl Meditation _ Sound Healing For Relaxation & Stress Relief.m4a').data.publicUrl}`
   },
   {
     id: "focus",
