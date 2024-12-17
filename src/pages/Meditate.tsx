@@ -1,6 +1,5 @@
 import { MeditationCategories } from "@/components/MeditationCategories";
 import { TimeSelection } from "@/components/TimeSelection";
-import { AudioPlayer } from "@/components/AudioPlayer";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const Meditate = () => {
@@ -14,11 +13,6 @@ const Meditate = () => {
         <div className="space-y-8">
           <MeditationCategories />
           <TimeSelection />
-          <div className="fixed bottom-0 left-0 right-0 bg-[#1a1a1a] p-4 border-t border-gray-800">
-            <div className="max-w-4xl mx-auto">
-              <AudioPlayer />
-            </div>
-          </div>
         </div>
       </div>
     </div>
