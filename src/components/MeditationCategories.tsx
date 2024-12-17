@@ -54,11 +54,11 @@ const categories: Category[] = [
     audioUrl: `${supabase.storage.from('audio').getPublicUrl('Inner Voicings.mp3').data.publicUrl}`
   },
   {
-    id: "om-chanting",
-    title: "唵音誦念",
-    description: "傳統的梵文誦念",
-    icon: "🕉️",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
+    id: "tingsha",
+    title: "定沙鈴聲",
+    description: "純淨的定沙銅鈴聲音",
+    icon: "🎐",
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"
   }
 ];
 
