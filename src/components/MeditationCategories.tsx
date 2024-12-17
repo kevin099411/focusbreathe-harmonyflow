@@ -23,7 +23,6 @@ const categories: Category[] = [
     title: "ADHD 852hz 改善",
     description: "閱讀時的背景聲音",
     icon: "🧠",
-    requiresPremium: true,
     audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
   },
   {
@@ -44,22 +43,19 @@ const categories: Category[] = [
     title: "專注",
     description: "增強集中力和清晰度",
     icon: "🎯",
-    requiresPremium: true,
     audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3?t=2024-12-17T10%3A00%3A41.084Z"
   },
   {
     id: "relax",
     title: "放鬆",
     description: "深度放鬆和緩解壓力",
-    icon: "🧘",
-    requiresPremium: true
+    icon: "🧘"
   },
   {
     id: "deep-work",
     title: "深度工作",
     description: "延長專注時段",
-    icon: "💪",
-    requiresPremium: true
+    icon: "💪"
   }
 ];
 
@@ -69,24 +65,13 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const navigate = useNavigate();
 
   const handleShuffle = () => {
-    const availableCategories = categories.filter(cat => 
-      !cat.requiresPremium || (session && session.user)
-    );
+    const availableCategories = categories;
     const randomIndex = Math.floor(Math.random() * availableCategories.length);
     setSelectedCategory(availableCategories[randomIndex].id);
     onSelect?.(availableCategories[randomIndex].id);
   };
 
   const handleSelect = (category: Category) => {
-    if (category.requiresPremium && (!session || !session.user)) {
-      toast({
-        title: "Premium Feature",
-        description: "Please upgrade to access this meditation category",
-        variant: "destructive",
-      });
-      navigate("/pricing");
-      return;
-    }
     setSelectedCategory(category.id);
     onSelect?.(category.id);
   };
@@ -111,16 +96,13 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
                 selectedCategory === category.id
                   ? "ring-2 ring-primary"
                   : ""
-              } ${category.requiresPremium && (!session || !session.user) ? "opacity-50" : ""}`}
+              }`}
               onClick={() => handleSelect(category)}
             >
               <div className="flex flex-col items-center text-center space-y-1">
                 <span className="text-xl">{category.icon}</span>
                 <h3 className="text-sm font-medium text-white">{category.title}</h3>
                 <p className="text-xs text-gray-400 line-clamp-2">{category.description}</p>
-                {category.requiresPremium && (!session || !session.user) && (
-                  <Lock className="absolute top-1 right-1 h-4 w-4 text-gray-400" />
-                )}
               </div>
             </Card>
           ))}
