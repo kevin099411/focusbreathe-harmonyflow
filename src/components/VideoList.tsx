@@ -13,9 +13,9 @@ interface Video {
 const VIDEOS = [
   {
     id: "video1",
-    title: "Meditation for Inner Peace | Art of Living",
-    thumbnail: "https://img.youtube.com/vi/KxwYwWoqkUY/maxresdefault.jpg",
-    youtubeId: "KxwYwWoqkUY"
+    title: "Sudarshan Kriya | Art of Living Breathing Technique",
+    thumbnail: "https://img.youtube.com/vi/xrnwWznRcHE/maxresdefault.jpg",
+    youtubeId: "xrnwWznRcHE"
   },
   {
     id: "video2",
