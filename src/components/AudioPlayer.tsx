@@ -1,4 +1,4 @@
-import { Play, Pause, Timer } from "lucide-react";
+import { Play, Pause, Timer, Repeat } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
@@ -9,6 +9,7 @@ interface AudioPlayerProps {
 
 export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLooping, setIsLooping] = useState(true); // Default to true for auto-repeat
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -18,7 +19,15 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
 
       audio.addEventListener('ended', () => {
         console.log('Audio playback ended');
-        setIsPlaying(false);
+        if (isLooping) {
+          console.log('Restarting audio (loop)');
+          audio.currentTime = 0;
+          audio.play().catch(error => {
+            console.error('Error restarting audio:', error);
+          });
+        } else {
+          setIsPlaying(false);
+        }
       });
 
       audio.addEventListener('error', (e) => {
@@ -39,7 +48,7 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
         }
       };
     }
-  }, [audioUrl]);
+  }, [audioUrl, isLooping]);
 
   const handlePlayPause = async () => {
     if (!audioUrl) {
@@ -72,6 +81,13 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
     }
   };
 
+  const toggleLoop = () => {
+    setIsLooping(!isLooping);
+    if (audioRef.current) {
+      audioRef.current.loop = !isLooping;
+    }
+  };
+
   return (
     <div className="flex items-center gap-4">
       <Button
@@ -83,6 +99,14 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
           <Pause className="h-6 w-6 text-white" /> : 
           <Play className="h-6 w-6 text-white ml-1" />
         }
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className={`text-gray-400 hover:text-white ${isLooping ? 'text-primary' : ''}`}
+        onClick={toggleLoop}
+      >
+        <Repeat className="h-5 w-5" />
       </Button>
       <Button
         variant="ghost"
