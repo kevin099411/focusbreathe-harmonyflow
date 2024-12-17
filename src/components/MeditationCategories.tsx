@@ -23,7 +23,7 @@ const categories: Category[] = [
     title: "ADHD 852hz 改善",
     description: "閱讀時的背景聲音",
     icon: "🧠",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3?t=2024-12-17T11%3A22%3A00.414Z"
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
   },
   {
     id: "autoplay",
