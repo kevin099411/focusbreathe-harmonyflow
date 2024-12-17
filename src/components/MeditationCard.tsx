@@ -1,5 +1,5 @@
 import { Play, Pause } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
 
@@ -15,7 +15,33 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const handlePlayPause = () => {
+  useEffect(() => {
+    if (audioUrl) {
+      audioRef.current = new Audio(audioUrl);
+      audioRef.current.addEventListener('ended', () => {
+        setIsPlaying(false);
+      });
+      audioRef.current.addEventListener('error', (e) => {
+        console.error("Audio error:", e);
+        toast({
+          title: "Audio Error",
+          description: "There was an error loading the audio file. Please try again.",
+          variant: "destructive",
+        });
+        setIsPlaying(false);
+      });
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.removeEventListener('ended', () => setIsPlaying(false));
+        audioRef.current.removeEventListener('error', () => setIsPlaying(false));
+      }
+    };
+  }, [audioUrl]);
+
+  const handlePlayPause = async () => {
     if (!audioUrl) {
       toast({
         title: "Audio not available",
@@ -26,19 +52,23 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
     }
 
     if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch((error) => {
-          console.error("Error playing audio:", error);
-          toast({
-            title: "Playback Error",
-            description: "There was an error playing the audio. Please try again.",
-            variant: "destructive",
-          });
+      try {
+        if (isPlaying) {
+          audioRef.current.pause();
+          setIsPlaying(false);
+        } else {
+          await audioRef.current.play();
+          setIsPlaying(true);
+        }
+      } catch (error) {
+        console.error("Error playing audio:", error);
+        toast({
+          title: "Playback Error",
+          description: "There was an error playing the audio. Please try again.",
+          variant: "destructive",
         });
+        setIsPlaying(false);
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -68,21 +98,6 @@ export const MeditationCard = ({ title, duration, description, image, audioUrl }
           </Button>
         </div>
       </div>
-      {audioUrl && (
-        <audio
-          ref={audioRef}
-          src={audioUrl}
-          onEnded={() => setIsPlaying(false)}
-          onError={(e) => {
-            console.error("Audio error:", e);
-            toast({
-              title: "Audio Error",
-              description: "There was an error with the audio file.",
-              variant: "destructive",
-            });
-          }}
-        />
-      )}
     </div>
   );
 };
