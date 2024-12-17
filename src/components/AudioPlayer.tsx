@@ -141,23 +141,25 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
   };
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center justify-center gap-6 p-4 bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-lg">
       <PlayButton 
         isPlaying={isPlaying}
         isLoaded={isLoaded}
         onClick={handlePlayPause}
       />
-      <LoopButton 
-        isLooping={isLooping}
-        onClick={toggleLoop}
-      />
-      <Button
-        variant="ghost"
-        size="icon"
-        className="text-gray-400 hover:text-white"
-      >
-        <Timer className="h-5 w-5" />
-      </Button>
+      <div className="flex items-center gap-3">
+        <LoopButton 
+          isLooping={isLooping}
+          onClick={toggleLoop}
+        />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="w-10 h-10 rounded-full text-gray-400 hover:text-white hover:scale-105 transition-all duration-200"
+        >
+          <Timer className="h-5 w-5" />
+        </Button>
+      </div>
     </div>
   );
 };
