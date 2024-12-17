@@ -9,7 +9,7 @@ const Index = () => {
       duration: "5 min",
       description: "Quick meditation with 852 Hz frequency for mental clarity",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
-      audioUrl: "https://soundcloud.com/huang-kevin-662824195/snaptik",
+      audioUrl: "https://jumpshare.com/s/qu25PLA3WUkn28RsNXlW",
     },
     {
       title: "Mindfulness for Racing Thoughts",
@@ -22,7 +22,7 @@ const Index = () => {
       duration: "15 min",
       description: "Energizing meditation with healing frequencies",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
-      audioUrl: "https://soundcloud.com/huang-kevin-662824195/snaptik",
+      audioUrl: "https://jumpshare.com/s/qu25PLA3WUkn28RsNXlW",
     },
   ];
 
