@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Link } from "react-router-dom";
 
 const Index = () => {
@@ -58,11 +59,14 @@ const Index = () => {
       
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-4 relative">
-        <div className="container mx-auto text-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-secondary mb-4">
-            體驗Sri Sri Ravi Shankar呼吸的力量
-          </h1>
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        <div className="container mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl md:text-5xl font-bold text-secondary">
+              體驗Sri Sri Ravi Shankar呼吸的力量
+            </h1>
+            <LanguageSwitcher />
+          </div>
+          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
             通過古老的呼吸技巧、引導式冥想和治癒頻率，轉變您的生活。
           </p>
           <Link 
