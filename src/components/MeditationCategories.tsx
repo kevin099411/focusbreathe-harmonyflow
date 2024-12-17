@@ -19,45 +19,45 @@ interface Category {
 
 const categories: Category[] = [
   {
-    id: "adhd",
-    title: "ADHD 852hz 改善",
-    description: "閱讀時的背景聲音",
-    icon: "🧠",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
+    id: "meditation-bells",
+    title: "冥想鈴聲",
+    description: "傳統的西藏頌缽聲音",
+    icon: "🔔",
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/tingsha-bell-sound-7571.mp3"
   },
   {
-    id: "autoplay",
-    title: "自動播放",
-    description: "連續冥想課程",
-    icon: "🔄",
+    id: "nature",
+    title: "大自然聲音",
+    description: "放鬆的森林和流水聲",
+    icon: "🌳",
     audioUrl: `${supabase.storage.from('audio').getPublicUrl('relax forrest music.mp3').data.publicUrl}`
   },
   {
-    id: "colored-noise",
-    title: "彩色噪音",
-    description: "白噪音、粉噪音和棕噪音助於專注",
-    icon: "🌊",
+    id: "crystal-bowls",
+    title: "水晶缽",
+    description: "深層放鬆的水晶缽聲音",
+    icon: "🎵",
     audioUrl: `${supabase.storage.from('audio').getPublicUrl('10 Minute Crystal Singing Bowl Meditation _ Sound Healing For Relaxation & Stress Relief.m4a').data.publicUrl}`
   },
   {
     id: "focus",
-    title: "專注",
-    description: "增強集中力和清晰度",
+    title: "專注音樂",
+    description: "幫助集中注意力的音樂",
     icon: "🎯",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3?t=2024-12-17T11%3A29%3A49.277Z"
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Focus%20Music%20for%20Work%20and%20Studying%20Background%20Music%20for%20Better%20Co.mp3"
   },
   {
-    id: "relax",
-    title: "放鬆",
-    description: "深度放鬆和緩解壓力",
-    icon: "🧘",
+    id: "ambient",
+    title: "環境音樂",
+    description: "平靜的環境音樂",
+    icon: "🌊",
     audioUrl: `${supabase.storage.from('audio').getPublicUrl('Inner Voicings.mp3').data.publicUrl}`
   },
   {
-    id: "deep-work",
-    title: "深度工作",
-    description: "延長專注時段",
-    icon: "💪",
+    id: "om-chanting",
+    title: "唵音誦念",
+    description: "傳統的梵文誦念",
+    icon: "🕉️",
     audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
   }
 ];
