@@ -91,31 +91,31 @@ export const MeditationCategories = ({ onSelect }: MeditationCategoriesProps) =>
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-white">選擇您的練習</h2>
-        <Button onClick={handleShuffle} variant="ghost" className="gap-2 text-gray-300 hover:text-white">
-          <Shuffle className="h-4 w-4" />
+        <h2 className="text-lg font-medium text-white">選擇您的練習</h2>
+        <Button onClick={handleShuffle} variant="ghost" size="sm" className="gap-1 text-gray-300 hover:text-white">
+          <Shuffle className="h-3 w-3" />
           隨機選擇
         </Button>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
         {categories.map((category) => (
           <Card
             key={category.id}
-            className={`p-4 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 relative ${
+            className={`p-2 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 relative ${
               selectedCategory === category.id
                 ? "ring-2 ring-primary"
                 : ""
             } ${category.requiresPremium && (!session || !session.user) ? "opacity-50" : ""}`}
             onClick={() => handleSelect(category)}
           >
-            <div className="flex flex-col items-center text-center space-y-2">
-              <span className="text-2xl mb-2">{category.icon}</span>
-              <h3 className="text-lg font-semibold text-white">{category.title}</h3>
-              <p className="text-sm text-gray-400">{category.description}</p>
+            <div className="flex flex-col items-center text-center space-y-1">
+              <span className="text-xl">{category.icon}</span>
+              <h3 className="text-sm font-medium text-white">{category.title}</h3>
+              <p className="text-xs text-gray-400 line-clamp-2">{category.description}</p>
               {category.requiresPremium && (!session || !session.user) && (
-                <Lock className="absolute top-2 right-2 h-5 w-5 text-gray-400" />
+                <Lock className="absolute top-1 right-1 h-4 w-4 text-gray-400" />
               )}
             </div>
           </Card>
