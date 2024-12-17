@@ -7,13 +7,21 @@ interface PayPalButtonProps {
   hostedButtonId: string;
 }
 
+declare global {
+  interface Window {
+    paypal?: any;
+  }
+}
+
 export const PayPalButton = ({ amount, planTitle, hostedButtonId }: PayPalButtonProps) => {
   const { toast } = useToast();
   const scriptRef = useRef<HTMLScriptElement | null>(null);
   const containerId = `paypal-container-${hostedButtonId}`;
+  const buttonContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Only create and append the script if it hasn't been created yet
+    console.log(`Initializing PayPal button for ${planTitle} with amount $${amount}`);
+    
     if (!scriptRef.current) {
       const script = document.createElement('script');
       script.src = `https://www.paypal.com/sdk/js?client-id=AZwwE0pNpx1qeR_mB9Qt2TxsNT1ADDRpRl9_6fIsZ89WLaOO9UHqP5DmY51tAhs_JgOcSnhWFgQXMR5L&currency=USD`;
@@ -22,13 +30,10 @@ export const PayPalButton = ({ amount, planTitle, hostedButtonId }: PayPalButton
       
       script.onload = () => {
         console.log('PayPal SDK loaded successfully');
-        const container = document.getElementById(containerId);
-        if (container && window.paypal) {
+        if (buttonContainerRef.current && window.paypal) {
           try {
-            // Clear any existing content
-            container.innerHTML = '';
+            buttonContainerRef.current.innerHTML = '';
             
-            // @ts-ignore
             window.paypal.Buttons({
               style: {
                 layout: 'vertical',
@@ -37,6 +42,7 @@ export const PayPalButton = ({ amount, planTitle, hostedButtonId }: PayPalButton
                 label: 'paypal'
               },
               createOrder: (data: any, actions: any) => {
+                console.log(`Creating order for ${planTitle} with amount $${amount}`);
                 return actions.order.create({
                   purchase_units: [{
                     amount: {
@@ -52,7 +58,7 @@ export const PayPalButton = ({ amount, planTitle, hostedButtonId }: PayPalButton
                 console.log('Payment successful:', order);
                 toast({
                   title: "Success!",
-                  description: "Your payment has been processed successfully.",
+                  description: `Your payment of $${amount} for ${planTitle} has been processed successfully.`,
                 });
               },
               onError: (err: any) => {
@@ -73,8 +79,6 @@ export const PayPalButton = ({ amount, planTitle, hostedButtonId }: PayPalButton
               variant: "destructive",
             });
           }
-        } else {
-          console.error('PayPal container not found or PayPal not loaded');
         }
       };
 
@@ -91,21 +95,18 @@ export const PayPalButton = ({ amount, planTitle, hostedButtonId }: PayPalButton
       scriptRef.current = script;
     }
 
-    // Cleanup function
     return () => {
       if (scriptRef.current && document.body.contains(scriptRef.current)) {
         document.body.removeChild(scriptRef.current);
         scriptRef.current = null;
       }
-      // Clear the container
-      const container = document.getElementById(containerId);
-      if (container) {
-        container.innerHTML = '';
+      if (buttonContainerRef.current) {
+        buttonContainerRef.current.innerHTML = '';
       }
     };
   }, [amount, containerId, planTitle, toast]);
 
   return (
-    <div id={containerId} className="w-full" />
+    <div id={containerId} ref={buttonContainerRef} className="w-full" />
   );
 };

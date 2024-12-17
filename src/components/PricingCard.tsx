@@ -12,9 +12,11 @@ interface PricingCardProps {
 
 export const PricingCard = ({ title, price, features, isPopular, hostedButtonId }: PricingCardProps) => {
   const [isSelected, setIsSelected] = useState(false);
+  const [showPayPal, setShowPayPal] = useState(false);
 
   const handleClick = () => {
     setIsSelected(!isSelected);
+    setShowPayPal(true);
   };
 
   return (
@@ -52,13 +54,15 @@ export const PricingCard = ({ title, price, features, isPopular, hostedButtonId 
           </li>
         ))}
       </ul>
-      <div className="mt-6">
-        <PayPalButton 
-          amount={price} 
-          planTitle={title}
-          hostedButtonId={hostedButtonId}
-        />
-      </div>
+      {showPayPal && (
+        <div className="mt-6">
+          <PayPalButton 
+            amount={price} 
+            planTitle={title}
+            hostedButtonId={hostedButtonId}
+          />
+        </div>
+      )}
     </div>
   );
 };
