@@ -1,6 +1,7 @@
 import { MeditationCategories } from "@/components/MeditationCategories";
 import { TimeSelection } from "@/components/TimeSelection";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { BreathingExercise } from "@/components/BreathingExercise";
 
 const Meditate = () => {
   return (
@@ -10,8 +11,11 @@ const Meditate = () => {
           <h1 className="text-2xl md:text-4xl font-bold text-primary">冥想練習</h1>
           <LanguageSwitcher />
         </div>
-        <div className="space-y-8">
-          <MeditationCategories />
+        <div className="space-y-12">
+          <BreathingExercise />
+          <div className="border-t border-gray-800 pt-12">
+            <MeditationCategories />
+          </div>
           <TimeSelection />
         </div>
       </div>
