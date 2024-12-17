@@ -58,7 +58,7 @@ const categories: Category[] = [
     title: "深度工作",
     description: "延長專注時段",
     icon: "💪",
-    audioUrl: `${supabase.storage.from('audio').getPublicUrl('Inner Voicings.mp3').data.publicUrl}`
+    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
   }
 ];
 
