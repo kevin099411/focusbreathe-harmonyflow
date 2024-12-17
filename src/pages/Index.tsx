@@ -10,7 +10,7 @@ const Index = () => {
       duration: "5 min",
       description: "Quick meditation with 852 Hz frequency for mental clarity",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/02/07/audio_d1718ab41b.mp3?filename=852hz-solfeggio-frequency-healing-music-22974.mp3",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2023/09/20/audio_c2c5e6f3c1.mp3?filename=852-hz-solfeggio-frequencies-healing-music-meditation-sleep-study-work-zen-144235.mp3",
     },
     {
       title: "Mindfulness for Racing Thoughts",
@@ -23,7 +23,7 @@ const Index = () => {
       duration: "15 min",
       description: "Energizing meditation with healing frequencies",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/02/07/audio_d1718ab41b.mp3?filename=852hz-solfeggio-frequency-healing-music-22974.mp3",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2023/09/20/audio_c2c5e6f3c1.mp3?filename=852-hz-solfeggio-frequencies-healing-music-meditation-sleep-study-work-zen-144235.mp3",
     },
   ];
 
