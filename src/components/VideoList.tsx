@@ -26,8 +26,8 @@ const VIDEOS = [
   {
     id: "video3",
     title: "Breathing Exercises for Anxiety | Art of Living",
-    thumbnail: "https://img.youtube.com/vi/CnTdWaZptHE/maxresdefault.jpg",
-    youtubeId: "CnTdWaZptHE"
+    thumbnail: "https://img.youtube.com/vi/jbhdhwSZBBQ/maxresdefault.jpg",
+    youtubeId: "jbhdhwSZBBQ"
   },
   {
     id: "video4",
