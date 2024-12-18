@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { PricingCard } from "@/components/PricingCard";
 
 const Pricing = () => {
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+
   const pricingPlans = [
     {
       title: "基礎冥想",
@@ -42,9 +45,9 @@ const Pricing = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pt-16">
       <div className="container mx-auto px-4 py-6 md:py-12">
         <div className="flex justify-between items-center mb-6 md:mb-12">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-900">選擇方案</h1>
+          <h1 className="text-2xl md:text-4xl font-bold text-[#0EA5E9]">選擇方案</h1>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:gap-8 max-w-6xl mx-auto px-2 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto px-2 md:px-8">
           {pricingPlans.map((plan, index) => (
             <div key={index} className="w-full">
               <PricingCard
@@ -52,6 +55,8 @@ const Pricing = () => {
                 price={plan.price}
                 features={plan.features}
                 isPopular={plan.isPopular}
+                isSelected={selectedPlan === plan.title}
+                onSelect={() => setSelectedPlan(plan.title)}
               />
             </div>
           ))}

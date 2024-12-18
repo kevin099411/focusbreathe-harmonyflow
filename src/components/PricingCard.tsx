@@ -8,17 +8,26 @@ interface PricingCardProps {
   price: string;
   features: string[];
   isPopular?: boolean;
+  isSelected: boolean;
+  onSelect: () => void;
 }
 
-export const PricingCard = ({ title, price, features, isPopular }: PricingCardProps) => {
-  const [isSelected, setIsSelected] = useState(false);
+export const PricingCard = ({ 
+  title, 
+  price, 
+  features, 
+  isPopular, 
+  isSelected,
+  onSelect 
+}: PricingCardProps) => {
   const [showPayPal, setShowPayPal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = () => {
     try {
+      console.log(`Selecting pricing plan: ${title}`);
       setIsLoading(true);
-      setIsSelected(!isSelected);
+      onSelect();
       setShowPayPal(true);
     } catch (error) {
       console.error('Error selecting plan:', error);
@@ -34,24 +43,30 @@ export const PricingCard = ({ title, price, features, isPopular }: PricingCardPr
 
   return (
     <div 
-      className={`relative rounded-2xl p-6 md:p-8 cursor-pointer transition-colors duration-300 ${
+      className={`relative rounded-2xl p-6 md:p-8 cursor-pointer transition-all duration-300 transform hover:scale-105 ${
         isSelected 
-          ? 'bg-primary text-white'
+          ? 'bg-[#0EA5E9] text-white shadow-xl scale-105'
           : isPopular 
-            ? 'bg-primary text-white shadow-xl md:scale-105 border-2 border-primary-foreground' 
-            : 'bg-card text-card-foreground shadow-lg border border-border'
+            ? 'bg-white text-gray-900 shadow-xl border-2 border-[#0EA5E9]' 
+            : 'bg-white text-gray-900 shadow-lg border border-gray-200 hover:border-[#0EA5E9]'
       }`}
       onClick={handleClick}
     >
-      {isPopular && (
-        <span className="absolute -top-3 md:-top-4 left-1/2 transform -translate-x-1/2 bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-xs md:text-sm font-medium whitespace-nowrap">
+      {isPopular && !isSelected && (
+        <span className="absolute -top-3 md:-top-4 left-1/2 transform -translate-x-1/2 bg-[#D946EF] text-white px-3 py-1 rounded-full text-xs md:text-sm font-medium whitespace-nowrap">
           最受歡迎
         </span>
       )}
-      <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">{title}</h3>
+      <h3 className={`text-xl md:text-2xl font-bold mb-3 md:mb-4 ${
+        isSelected ? 'text-white' : 'text-[#0EA5E9]'
+      }`}>{title}</h3>
       <div className="mb-4 md:mb-6">
-        <span className="text-3xl md:text-4xl font-bold">${price}</span>
-        <span className="text-sm opacity-80">/月</span>
+        <span className={`text-3xl md:text-4xl font-bold ${
+          isSelected ? 'text-white' : 'text-gray-900'
+        }`}>${price}</span>
+        <span className={`text-sm ${
+          isSelected ? 'text-white/80' : 'text-gray-600'
+        }`}>/月</span>
       </div>
       <ul className="space-y-3 md:space-y-4 mb-6 md:mb-8">
         {features.map((feature, index) => (
@@ -59,11 +74,11 @@ export const PricingCard = ({ title, price, features, isPopular }: PricingCardPr
             <Check className={`h-5 w-5 flex-shrink-0 mt-0.5 ${
               isSelected 
                 ? 'text-white' 
-                : isPopular 
-                  ? 'text-secondary' 
-                  : 'text-primary'
+                : 'text-[#0EA5E9]'
             }`} />
-            <span className="text-sm md:text-base">{feature}</span>
+            <span className={`text-sm md:text-base ${
+              isSelected ? 'text-white' : 'text-gray-700'
+            }`}>{feature}</span>
           </li>
         ))}
       </ul>
