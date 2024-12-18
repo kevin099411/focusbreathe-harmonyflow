@@ -1,12 +1,28 @@
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { AudioPlayer } from "./AudioPlayer";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const BREATH_PHASES = {
-  INHALE: { text: "吸氣", duration: 4000 },
-  HOLD1: { text: "屏息", duration: 4000 },
-  EXHALE: { text: "呼氣", duration: 4000 },
-  HOLD2: { text: "屏息", duration: 4000 },
+  INHALE: { 
+    en: { text: "Inhale" },
+    zh: { text: "吸氣" },
+    duration: 4000 
+  },
+  HOLD1: { 
+    en: { text: "Hold" },
+    zh: { text: "屏息" },
+    duration: 4000 
+  },
+  EXHALE: { 
+    en: { text: "Exhale" },
+    zh: { text: "呼氣" },
+    duration: 4000 
+  },
+  HOLD2: { 
+    en: { text: "Hold" },
+    zh: { text: "屏息" },
+    duration: 4000 
+  },
 };
 
 type Phase = keyof typeof BREATH_PHASES;
@@ -16,6 +32,7 @@ export const BoxBreathing = () => {
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { language } = useLanguage();
 
   const audioUrl = "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3";
 
@@ -64,6 +81,11 @@ export const BoxBreathing = () => {
     setIsActive(!isActive);
   };
 
+  const buttonText = {
+    en: { start: "Start", pause: "Pause" },
+    zh: { start: "開始", pause: "暫停" }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center p-8 space-y-8">
       <div className="relative w-64 h-64">
@@ -79,7 +101,7 @@ export const BoxBreathing = () => {
         )}>
           <div className="text-center">
             <p className="text-2xl font-semibold text-[#7E69AB]">
-              {BREATH_PHASES[currentPhase].text}
+              {BREATH_PHASES[currentPhase][language].text}
             </p>
             <p className="text-lg text-[#8E9196]">
               {Math.ceil((1 - progress) * 4)}
@@ -126,7 +148,7 @@ export const BoxBreathing = () => {
             "active:scale-95"
           )}
         >
-          {isActive ? "暫停" : "開始"}
+          {isActive ? buttonText[language].pause : buttonText[language].start}
         </button>
 
         <audio ref={audioRef} src={audioUrl} loop />
