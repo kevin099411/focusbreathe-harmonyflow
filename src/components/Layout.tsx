@@ -61,11 +61,11 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen relative flex flex-col">
       <Navigation />
 
-      <main className="pt-14 flex-grow pb-24">
+      <main className="pt-14 flex-grow pb-16">
         {children}
       </main>
 
-      <footer className="bg-white py-6 mt-auto">
+      <footer className="bg-white py-4 mt-auto">
         <div className="container mx-auto px-4">
           <div className="flex justify-center space-x-6">
             <a 
@@ -92,7 +92,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <Button
           variant="secondary"
           size="icon"
-          className="fixed bottom-8 right-4 w-8 h-8 rounded-full shadow-lg hover:shadow-xl z-50"
+          className="fixed bottom-4 right-4 w-8 h-8 rounded-full shadow-lg hover:shadow-xl z-50"
           onClick={scrollToTop}
         >
           <ArrowUp className="h-4 w-4" />
