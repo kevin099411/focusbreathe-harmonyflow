@@ -20,25 +20,35 @@ export const GroupChat = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Fetch initial messages
     const fetchMessages = async () => {
-      const { data, error } = await supabase
-        .from("messages")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(50);
+      try {
+        console.log("Fetching messages...");
+        const { data, error } = await supabase
+          .from("messages")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(50);
 
-      if (error) {
-        console.error("Error fetching messages:", error);
+        if (error) {
+          console.error("Error fetching messages:", error);
+          toast({
+            title: "錯誤",
+            description: "無法載入訊息",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        console.log("Messages fetched successfully:", data);
+        setMessages(data.reverse());
+      } catch (error) {
+        console.error("Error in fetchMessages:", error);
         toast({
           title: "錯誤",
           description: "無法載入訊息",
           variant: "destructive",
         });
-        return;
       }
-
-      setMessages(data.reverse());
     };
 
     fetchMessages();
@@ -54,12 +64,14 @@ export const GroupChat = () => {
           table: "messages",
         },
         (payload) => {
+          console.log("New message received:", payload);
           setMessages((prev) => [...prev, payload.new as Message]);
         }
       )
       .subscribe();
 
     return () => {
+      console.log("Cleaning up subscription");
       supabase.removeChannel(channel);
     };
   }, []);
@@ -78,24 +90,36 @@ export const GroupChat = () => {
     if (!newMessage.trim()) return;
 
     setIsLoading(true);
-    const { error } = await supabase.from("messages").insert([
-      {
-        content: newMessage.trim(),
-        user_id: session.user.id,
-      },
-    ]);
+    try {
+      console.log("Sending message...");
+      const { error } = await supabase.from("messages").insert([
+        {
+          content: newMessage.trim(),
+          user_id: session.user.id,
+        },
+      ]);
 
-    if (error) {
-      console.error("Error sending message:", error);
+      if (error) {
+        console.error("Error sending message:", error);
+        toast({
+          title: "錯誤",
+          description: "無法發送訊息",
+          variant: "destructive",
+        });
+      } else {
+        console.log("Message sent successfully");
+        setNewMessage("");
+      }
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
       toast({
         title: "錯誤",
         description: "無法發送訊息",
         variant: "destructive",
       });
-    } else {
-      setNewMessage("");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
