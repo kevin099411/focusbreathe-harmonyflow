@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { BreathingBackground } from "./breathing/BreathingBackground";
+import { BreathingTimer } from "./breathing/BreathingTimer";
+import { BreathingProgressCircle } from "./breathing/BreathingProgressCircle";
+import { BreathingControlButton } from "./breathing/BreathingControlButton";
 
 const BREATH_PHASES = {
   INHALE: { 
@@ -71,6 +75,28 @@ export const BreathingFourSevenEight = () => {
     };
   }, [isActive, currentPhase]);
 
+  const getGradientColors = () => {
+    switch (currentPhase) {
+      case "INHALE":
+        return { from: "[#87f5b1]", to: "[#46ef8d]" };
+      case "HOLD":
+        return { from: "[#9b87f5]", to: "[#D946EF]" };
+      case "EXHALE":
+        return { from: "[#0EA5E9]", to: "[#46ef8d]" };
+    }
+  };
+
+  const getTextColor = () => {
+    switch (currentPhase) {
+      case "INHALE":
+        return "text-[#87f5b1]";
+      case "HOLD":
+        return "text-[#9b87f5]";
+      case "EXHALE":
+        return "text-[#0EA5E9]";
+    }
+  };
+
   const handleStartPause = () => {
     setIsActive(!isActive);
   };
@@ -83,85 +109,37 @@ export const BreathingFourSevenEight = () => {
   return (
     <div className="flex flex-col items-center justify-center p-8 space-y-8">
       <div className="relative w-64 h-64">
-        {/* Background gradients with phase-specific animations */}
-        <div className={cn(
-          "absolute inset-0 rounded-full transition-all duration-500",
-          currentPhase === "INHALE" && "bg-gradient-to-br from-[#87f5b1]/30 to-[#46ef8d]/30 animate-wind",
-          currentPhase === "HOLD" && "bg-gradient-to-br from-[#9b87f5]/30 to-[#D946EF]/30 animate-pulse",
-          currentPhase === "EXHALE" && "bg-gradient-to-br from-[#0EA5E9]/30 to-[#46ef8d]/30 animate-wind"
-        )} />
+        <BreathingBackground 
+          phase={currentPhase}
+          gradientColors={getGradientColors()}
+        />
         
-        {/* Main breathing circle with dynamic styling */}
         <div className={cn(
           "absolute inset-4 rounded-full transition-all duration-500",
           "flex items-center justify-center backdrop-blur-sm",
           "bg-white/90 shadow-lg border-2",
           currentPhase === "INHALE" && "scale-110 border-[#87f5b1]",
-          currentPhase === "HOLD" && "scale-105 border-[#9b87f5] animate-glow",
+          currentPhase === "HOLD" && "scale-105 border-[#9b87f5]",
           currentPhase === "EXHALE" && "scale-90 border-[#0EA5E9]"
         )}>
-          <div className="text-center">
-            <p className={cn(
-              "text-2xl font-semibold transition-colors duration-300",
-              currentPhase === "INHALE" && "text-[#87f5b1]",
-              currentPhase === "HOLD" && "text-[#9b87f5]",
-              currentPhase === "EXHALE" && "text-[#0EA5E9]"
-            )}>
-              {BREATH_PHASES[currentPhase][language].text}
-            </p>
-            <p className="text-lg text-[#8E9196]">
-              {Math.ceil((1 - progress) * BREATH_PHASES[currentPhase].duration / 1000)}
-            </p>
-          </div>
+          <BreathingTimer
+            timeRemaining={Math.ceil((1 - progress) * BREATH_PHASES[currentPhase].duration / 1000)}
+            textColor={getTextColor()}
+            phaseText={BREATH_PHASES[currentPhase][language].text}
+          />
         </div>
 
-        {/* Progress circle with phase-specific colors */}
-        <svg
-          className="absolute inset-0 w-full h-full -rotate-90"
-          viewBox="0 0 100 100"
-        >
-          <circle
-            className="text-gray-200/50"
-            strokeWidth="4"
-            stroke="currentColor"
-            fill="transparent"
-            r="45"
-            cx="50"
-            cy="50"
-          />
-          <circle
-            className={cn(
-              "transition-all duration-300",
-              currentPhase === "INHALE" && "text-[#87f5b1]",
-              currentPhase === "HOLD" && "text-[#9b87f5]",
-              currentPhase === "EXHALE" && "text-[#0EA5E9]"
-            )}
-            strokeWidth="4"
-            strokeDasharray={283}
-            strokeDashoffset={283 * (1 - progress)}
-            strokeLinecap="round"
-            stroke="currentColor"
-            fill="transparent"
-            r="45"
-            cx="50"
-            cy="50"
-          />
-        </svg>
+        <BreathingProgressCircle
+          progress={progress}
+          strokeColor={getTextColor()}
+        />
       </div>
 
-      <button
+      <BreathingControlButton
+        isActive={isActive}
         onClick={handleStartPause}
-        className={cn(
-          "px-6 py-2 rounded-full text-white font-medium",
-          "transition-all duration-300 transform hover:scale-105",
-          "shadow-lg hover:shadow-xl active:scale-95",
-          "bg-gradient-to-r from-[#87f5b1] to-[#46ef8d]",
-          "hover:from-[#5cf68b] hover:to-[#46ef8d]",
-          "animate-glow"
-        )}
-      >
-        {isActive ? buttonText[language].pause : buttonText[language].start}
-      </button>
+        text={isActive ? buttonText[language].pause : buttonText[language].start}
+      />
 
       <audio ref={audioRef} src={audioUrl} loop />
     </div>
