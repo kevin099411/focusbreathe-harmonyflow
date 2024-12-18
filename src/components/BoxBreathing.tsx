@@ -4,6 +4,7 @@ import { BreathingBackground } from "./breathing/BreathingBackground";
 import { BreathingTimer } from "./breathing/BreathingTimer";
 import { BreathingProgressCircle } from "./breathing/BreathingProgressCircle";
 import { BreathingControlButton } from "./breathing/BreathingControlButton";
+import { BoxBreathingVisual } from "./breathing/BoxBreathingVisual";
 
 const BREATH_PHASES = {
   INHALE: { 
@@ -118,18 +119,13 @@ export const BoxBreathing = () => {
         />
         
         <div className={cn(
-          "absolute inset-4 rounded-full transition-all duration-500",
+          "absolute inset-4 rounded-xl transition-all duration-500",
           "flex items-center justify-center backdrop-blur-sm",
-          "bg-white/90 shadow-lg border-2",
-          currentPhase === "INHALE" && "scale-110 border-[#9b87f5]",
-          currentPhase === "HOLD1" && "scale-105 border-[#87f5b1]",
-          currentPhase === "EXHALE" && "scale-90 border-[#0EA5E9]",
-          currentPhase === "HOLD2" && "scale-95 border-[#D946EF]"
+          "bg-white/90 shadow-lg"
         )}>
-          <BreathingTimer
-            timeRemaining={Math.ceil((1 - progress) * 4)}
-            textColor={getTextColor()}
-            phaseText={BREATH_PHASES[currentPhase].text}
+          <BoxBreathingVisual
+            phase={currentPhase}
+            progress={progress}
           />
         </div>
 
