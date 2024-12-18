@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { Award, Check, Trophy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -12,11 +11,10 @@ import {
 } from "@/components/ui/card";
 
 export const DailyProgress = () => {
-  const { language } = useLanguage();
   const { toast } = useToast();
   const [completions, setCompletions] = useState<number>(0);
   const [todayCompleted, setTodayCompleted] = useState(false);
-  const goalCount = 7; // Weekly goal
+  const goalCount = 7;
 
   useEffect(() => {
     fetchCompletions();
@@ -27,7 +25,6 @@ export const DailyProgress = () => {
       const { data: user } = await supabase.auth.getUser();
       if (!user.user) return;
 
-      // Get completions for the current week
       const startOfWeek = new Date();
       startOfWeek.setHours(0, 0, 0, 0);
       startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
@@ -42,7 +39,6 @@ export const DailyProgress = () => {
 
       setCompletions(data.length);
 
-      // Check if completed today
       const today = new Date().toISOString().split('T')[0];
       const completedToday = data.some(
         completion => completion.completed_at.split('T')[0] === today
@@ -58,20 +54,16 @@ export const DailyProgress = () => {
       const { data: user } = await supabase.auth.getUser();
       if (!user.user) {
         toast({
-          title: language === 'zh' ? "請先登入" : "Please sign in first",
-          description: language === 'zh' 
-            ? "需要登入才能記錄進度" 
-            : "You need to be signed in to track progress",
+          title: "請先登入",
+          description: "需要登入才能記錄進度",
         });
         return;
       }
 
       if (todayCompleted) {
         toast({
-          title: language === 'zh' ? "今天已完成" : "Already completed today",
-          description: language === 'zh' 
-            ? "明天繼續保持！" 
-            : "Keep it up tomorrow!",
+          title: "今天已完成",
+          description: "明天繼續保持！",
         });
         return;
       }
@@ -91,27 +83,21 @@ export const DailyProgress = () => {
       setTodayCompleted(true);
 
       toast({
-        title: language === 'zh' ? "太棒了！" : "Well done!",
-        description: language === 'zh' 
-          ? `本週已完成 ${completions + 1} 次呼吸練習` 
-          : `You've completed ${completions + 1} breathing exercises this week`,
+        title: "太棒了！",
+        description: `本週已完成 ${completions + 1} 次呼吸練習`,
       });
 
       if (completions + 1 >= goalCount) {
         toast({
-          title: language === 'zh' ? "週目標達成！" : "Weekly Goal Achieved!",
-          description: language === 'zh' 
-            ? "恭喜你完成本週目標！" 
-            : "Congratulations on reaching your weekly goal!",
+          title: "週目標達成！",
+          description: "恭喜你完成本週目標！",
         });
       }
     } catch (error) {
       console.error('Error recording completion:', error);
       toast({
-        title: language === 'zh' ? "記錄失敗" : "Error recording completion",
-        description: language === 'zh' 
-          ? "請稍後再試" 
-          : "Please try again later",
+        title: "記錄失敗",
+        description: "請稍後再試",
       });
     }
   };
@@ -119,13 +105,9 @@ export const DailyProgress = () => {
   return (
     <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl text-pink-500">
-          {language === 'zh' ? '每週進度' : 'Weekly Progress'}
-        </CardTitle>
+        <CardTitle className="text-2xl text-pink-500">每週進度</CardTitle>
         <CardDescription className="text-gray-600">
-          {language === 'zh' 
-            ? `目標: 每週完成 ${goalCount} 次呼吸練習` 
-            : `Goal: Complete ${goalCount} breathing exercises per week`}
+          目標: 每週完成 {goalCount} 次呼吸練習
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -140,9 +122,7 @@ export const DailyProgress = () => {
                 <Award className="w-6 h-6 text-blue-400" />
               )}
               <span className="text-gray-700">
-                {language === 'zh' 
-                  ? `本週完成: ${completions}/${goalCount}` 
-                  : `Completed this week: ${completions}/${goalCount}`}
+                本週完成: {completions}/{goalCount}
               </span>
             </div>
           </div>
@@ -156,9 +136,7 @@ export const DailyProgress = () => {
                 : 'bg-gradient-to-r from-pink-400 to-blue-400 hover:from-pink-500 hover:to-blue-500 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
             }`}
           >
-            {todayCompleted
-              ? (language === 'zh' ? '今天已完成' : 'Completed Today')
-              : (language === 'zh' ? '記錄完成' : 'Mark Complete')}
+            {todayCompleted ? '今天已完成' : '記錄完成'}
           </button>
         </div>
       </CardContent>

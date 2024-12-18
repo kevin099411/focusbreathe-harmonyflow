@@ -1,5 +1,4 @@
 import { PricingCard } from "@/components/PricingCard";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const Pricing = () => {
   const pricingPlans = [
@@ -44,7 +43,6 @@ const Pricing = () => {
       <div className="container mx-auto px-4 py-6 md:py-12">
         <div className="flex justify-between items-center mb-6 md:mb-12">
           <h1 className="text-2xl md:text-4xl font-bold text-gray-900">選擇方案</h1>
-          <LanguageSwitcher />
         </div>
         <div className="grid grid-cols-1 gap-6 md:gap-8 max-w-6xl mx-auto px-2 md:px-8">
           {pricingPlans.map((plan, index) => (

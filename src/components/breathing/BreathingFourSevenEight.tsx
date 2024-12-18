@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { BreathingCircle } from "./BreathingCircle";
 import { BreathingControlButton } from "./BreathingControlButton";
 import { ProgressCircle } from "./ProgressCircle";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/hooks/use-toast";
 
 export const BreathingFourSevenEight = () => {
@@ -10,7 +9,6 @@ export const BreathingFourSevenEight = () => {
   const [phase, setPhase] = useState<"INHALE" | "HOLD" | "EXHALE">("INHALE");
   const [timeRemaining, setTimeRemaining] = useState(4);
   const [cycles, setCycles] = useState(0);
-  const { language } = useLanguage();
 
   const totalCycles = 3;
   const phaseDurations = {
@@ -27,7 +25,6 @@ export const BreathingFourSevenEight = () => {
         setTimeRemaining((prev) => {
           if (prev > 1) return prev - 1;
           
-          // Phase transition logic
           switch (phase) {
             case "INHALE":
               setPhase("HOLD");
@@ -43,10 +40,8 @@ export const BreathingFourSevenEight = () => {
               } else {
                 setIsActive(false);
                 toast({
-                  title: language === 'zh' ? "練習完成" : "Exercise Complete",
-                  description: language === 'zh' 
-                    ? "太棒了！您已完成呼吸練習。" 
-                    : "Great job! You've completed the breathing exercise.",
+                  title: "練習完成",
+                  description: "太棒了！您已完成呼吸練習。",
                 });
                 return 0;
               }
@@ -58,16 +53,16 @@ export const BreathingFourSevenEight = () => {
     }
 
     return () => clearInterval(timer);
-  }, [isActive, phase, cycles, language]);
+  }, [isActive, phase, cycles]);
 
   const getPhaseText = () => {
     switch (phase) {
       case "INHALE":
-        return language === 'zh' ? "吸氣" : "Inhale";
+        return "吸氣";
       case "HOLD":
-        return language === 'zh' ? "屏息" : "Hold";
+        return "屏息";
       case "EXHALE":
-        return language === 'zh' ? "呼氣" : "Exhale";
+        return "呼氣";
     }
   };
 
@@ -136,16 +131,11 @@ export const BreathingFourSevenEight = () => {
       <BreathingControlButton
         isActive={isActive}
         onClick={() => setIsActive(!isActive)}
-        text={isActive ? 
-          (language === 'zh' ? "暫停" : "Pause") : 
-          (language === 'zh' ? "開始" : "Start")
-        }
+        text={isActive ? "暫停" : "開始"}
       />
 
       <div className="text-center text-gray-400">
-        <p>
-          {language === 'zh' ? '循環' : 'Cycle'}: {cycles + 1}/{totalCycles}
-        </p>
+        <p>循環: {cycles + 1}/{totalCycles}</p>
       </div>
     </div>
   );
