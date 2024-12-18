@@ -33,53 +33,36 @@ const Index = () => {
     },
   ];
 
-  const sriSriBreathingTechniques = [
-    {
-      name: "火神呼吸法",
-      description: "增強體內生命能量的活力呼吸技巧",
-      steps: ["舒適坐姿", "深呼吸", "用力呼氣", "重複20次"],
-    },
-    {
-      name: "交替鼻孔呼吸法",
-      description: "交替鼻孔呼吸，提升心智清晰度和平衡",
-      steps: ["關閉右鼻孔", "左鼻吸氣", "關閉左鼻孔", "右鼻呼氣"],
-    },
-    {
-      name: "勝利呼吸法",
-      description: "能夠平靜神經系統的海洋呼吸法",
-      steps: ["收緊喉嚨", "深呼吸", "製造海浪聲", "保持節奏"],
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-b from-primary/10 to-secondary/10">
       <div 
         className="fixed inset-0 -z-10 bg-cover bg-center opacity-10 animate-wind scale-110 origin-center"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80')`
         }}
       />
-      <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4 relative">
-        <div className="container mx-auto">
+      <section className="pt-24 pb-12 px-4 relative overflow-hidden">
+        <div className="container mx-auto relative z-10">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl md:text-5xl font-bold text-secondary">
-              體驗Sri Sri Ravi Shankar呼吸的力量
+            <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary animate-fade-in">
+              『強大的呼吸法』為自己細胞充電！
             </h1>
             <LanguageSwitcher />
           </div>
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-            通過古老的呼吸技巧、引導式冥想和治癒頻率，轉變您的生活。
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl animate-fade-in delay-100">
+            對生命至關重要！跟隨 Sri Sri Ravi Shankar 的呼吸技巧，轉變您的生活。
           </p>
           <Link 
             to="/breathwork"
-            className="inline-block bg-primary text-white px-6 md:px-8 py-3 rounded-lg text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl"
+            className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full text-lg font-medium hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in delay-200"
           >
             開始您的旅程
           </Link>
         </div>
+        <div className="absolute -right-40 top-20 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl animate-pulse" />
+        <div className="absolute -left-40 bottom-20 w-96 h-96 bg-secondary/20 rounded-full filter blur-3xl animate-pulse delay-1000" />
       </section>
 
       {/* Audio Upload Section */}
@@ -103,28 +86,8 @@ const Index = () => {
             Sri Sri Ravi Shankar呼吸技巧
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {sriSriBreathingTechniques.map((technique, index) => (
-              <div 
-                key={index}
-                className="p-6 rounded-lg bg-white shadow-lg hover:shadow-xl transition-shadow border border-orange-100"
-              >
-                <h3 className="text-xl font-semibold text-primary mb-3">
-                  {technique.name}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {technique.description}
-                </p>
-                <ul className="space-y-2">
-                  {technique.steps.map((step, stepIndex) => (
-                    <li key={stepIndex} className="flex items-center text-gray-700">
-                      <span className="w-6 h-6 rounded-full bg-orange-100 text-primary flex items-center justify-center mr-2 text-sm">
-                        {stepIndex + 1}
-                      </span>
-                      {step}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {featuredMeditations.map((meditation, index) => (
+              <MeditationCard key={index} {...meditation} />
             ))}
           </div>
         </div>
