@@ -12,32 +12,33 @@ export const uploadAudioFile = async (
   try {
     console.log('Starting audio upload:', { title, fileName: file.name });
 
-    // Validate file type
-    if (!file.type.startsWith('audio/')) {
-      throw new Error('Invalid file type. Please upload an audio file.');
-    }
-
     // Generate a unique file path
     const fileExt = file.name.split('.').pop();
-    const filePath = `${crypto.randomUUID()}.${fileExt}`;
+    const fileName = `${title.replace(/\s+/g, '_')}_${Date.now()}.${fileExt}`;
 
     // Upload file to Supabase Storage
-    const { error: uploadError } = await supabase.storage
+    const { data: uploadData, error: uploadError } = await supabase.storage
       .from('audio')
-      .upload(filePath, file, {
+      .upload(fileName, file, {
         cacheControl: '3600',
         upsert: false
       });
 
     if (uploadError) {
       console.error('Error uploading file:', uploadError);
-      throw uploadError;
+      throw new Error('Failed to upload file to storage');
+    }
+
+    if (!uploadData?.path) {
+      throw new Error('No file path returned from upload');
     }
 
     // Get the public URL
     const { data: { publicUrl } } = supabase.storage
       .from('audio')
-      .getPublicUrl(filePath);
+      .getPublicUrl(uploadData.path);
+
+    console.log('File uploaded successfully, getting public URL:', publicUrl);
 
     // Insert metadata into the database
     const { error: dbError } = await supabase
@@ -50,10 +51,12 @@ export const uploadAudioFile = async (
 
     if (dbError) {
       console.error('Error saving to database:', dbError);
-      throw dbError;
+      // If database insert fails, try to delete the uploaded file
+      await supabase.storage.from('audio').remove([uploadData.path]);
+      throw new Error('Failed to save audio track information');
     }
 
-    console.log('Audio upload successful:', { filePath, publicUrl });
+    console.log('Audio upload successful:', { filePath: publicUrl });
     return { filePath: publicUrl };
 
   } catch (error) {

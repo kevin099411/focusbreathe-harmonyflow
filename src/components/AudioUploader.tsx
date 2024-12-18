@@ -16,6 +16,27 @@ export const AudioUploader = () => {
     const file = event.target.files?.[0];
     if (!file) return;
 
+    // Validate file type
+    if (!file.type.startsWith('audio/')) {
+      toast({
+        title: "無效的文件類型",
+        description: "請上傳音頻文件（MP3、WAV等）。",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate file size (max 50MB)
+    const maxSize = 50 * 1024 * 1024; // 50MB in bytes
+    if (file.size > maxSize) {
+      toast({
+        title: "文件太大",
+        description: "請上傳小於50MB的文件。",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!session) {
       toast({
         title: "請先登入",
@@ -25,14 +46,32 @@ export const AudioUploader = () => {
       return;
     }
 
+    if (!title.trim()) {
+      toast({
+        title: "請輸入標題",
+        description: "音頻標題不能為空。",
+        variant: "destructive",
+      });
+      return;
+    }
+
     try {
       setIsUploading(true);
+      console.log('Starting upload for file:', file.name);
+      
       const { filePath, error } = await uploadAudioFile(file, title);
       
       if (error) {
+        console.error('Upload error:', error);
         throw new Error(error);
       }
 
+      if (!filePath) {
+        throw new Error('No file path returned from upload');
+      }
+
+      console.log('Upload successful:', filePath);
+      
       toast({
         title: "上傳成功",
         description: "音頻已成功上傳。",
@@ -77,6 +116,7 @@ export const AudioUploader = () => {
           disabled={isUploading}
           className="file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
         />
+        <p className="text-xs text-gray-400">支持的格式：MP3、WAV等音頻文件（最大50MB）</p>
       </div>
 
       {isUploading && (
