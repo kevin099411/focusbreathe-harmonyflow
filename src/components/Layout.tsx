@@ -68,7 +68,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
       <footer className="bg-white py-6 mt-auto">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
+          <div className="flex items-center justify-center space-x-4">
             <a 
               href="https://www.facebook.com/profile.php?id=100063621081761" 
               target="_blank" 
