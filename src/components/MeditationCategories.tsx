@@ -7,6 +7,7 @@ import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { AudioPlayer } from "./AudioPlayer";
 import { ScrollArea } from "./ui/scroll-area";
+import { TimeSelection } from "./TimeSelection";
 
 interface Category {
   id: string;
@@ -22,7 +23,7 @@ const categories: Category[] = [
     title: "ADHD 852hz 改善",
     description: "閱讀時的背景聲音",
     icon: "🧠",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
+    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
   },
   {
     id: "autoplay",
@@ -63,6 +64,7 @@ const categories: Category[] = [
 
 export const MeditationCategories = ({ onSelect }: { onSelect?: (category: string) => void }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedDuration, setSelectedDuration] = useState<number>(20);
   const session = useSession();
   const navigate = useNavigate();
 
@@ -76,6 +78,14 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const handleSelect = (category: Category) => {
     setSelectedCategory(category.id);
     onSelect?.(category.id);
+  };
+
+  const handleTimerEnd = () => {
+    toast({
+      title: "冥想結束",
+      description: "您的冥想時間已結束。",
+    });
+    setSelectedCategory(null);
   };
 
   const selectedCategoryData = categories.find(cat => cat.id === selectedCategory);
@@ -110,9 +120,21 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
           ))}
         </div>
       </ScrollArea>
+      
+      {selectedCategory && (
+        <TimeSelection 
+          onDurationChange={setSelectedDuration}
+          defaultDuration={selectedDuration}
+        />
+      )}
+      
       <div className="fixed bottom-0 left-0 right-0 bg-[#1a1a1a] p-4 border-t border-gray-800">
         <div className="max-w-4xl mx-auto">
-          <AudioPlayer audioUrl={selectedCategoryData?.audioUrl} />
+          <AudioPlayer 
+            audioUrl={selectedCategoryData?.audioUrl}
+            duration={selectedDuration}
+            onTimerEnd={handleTimerEnd}
+          />
         </div>
       </div>
     </div>

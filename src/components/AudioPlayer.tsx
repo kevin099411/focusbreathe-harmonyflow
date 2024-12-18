@@ -7,13 +7,17 @@ import { LoopButton } from "./LoopButton";
 
 interface AudioPlayerProps {
   audioUrl?: string;
+  duration?: number; // Duration in minutes
+  onTimerEnd?: () => void;
 }
 
-export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
+export const AudioPlayer = ({ audioUrl, duration, onTimerEnd }: AudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [remainingTime, setRemainingTime] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     console.log('AudioPlayer: URL changed:', audioUrl);
@@ -21,6 +25,7 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
     // Reset states when URL changes
     setIsPlaying(false);
     setIsLoaded(false);
+    setRemainingTime(duration ? duration * 60 : null);
 
     // Cleanup previous audio instance
     if (audioRef.current) {
@@ -56,14 +61,14 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
 
     const handleEnded = () => {
       console.log('Audio playback ended');
-      if (isLooping) {
+      if (isLooping && remainingTime && remainingTime > 0) {
         console.log('Restarting audio (loop)');
         audio.currentTime = 0;
         audio.play().catch(error => {
           console.error('Error restarting audio:', error);
           handlePlayError(error);
         });
-      } else {
+      } else if (!remainingTime) {
         setIsPlaying(false);
       }
     };
@@ -72,12 +77,14 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
     audio.addEventListener('error', handleLoadError);
     audio.addEventListener('ended', handleEnded);
     
-    // Set the source after adding event listeners
     audio.src = audioUrl;
     audio.load();
 
     return () => {
       console.log('Cleaning up audio element');
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
       if (audio) {
         audio.removeEventListener('canplay', handleCanPlay);
         audio.removeEventListener('error', handleLoadError);
@@ -86,7 +93,32 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
         audio.src = '';
       }
     };
-  }, [audioUrl, isLooping]);
+  }, [audioUrl, isLooping, remainingTime]);
+
+  useEffect(() => {
+    if (isPlaying && remainingTime !== null) {
+      timerRef.current = setInterval(() => {
+        setRemainingTime(prev => {
+          if (prev === null || prev <= 0) {
+            clearInterval(timerRef.current!);
+            setIsPlaying(false);
+            if (audioRef.current) {
+              audioRef.current.pause();
+            }
+            onTimerEnd?.();
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
+      };
+    }
+  }, [isPlaying, onTimerEnd]);
 
   const handlePlayError = (error: any) => {
     console.error('Playback error:', error);
@@ -140,6 +172,12 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
     }
   };
 
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
   return (
     <div className="flex items-center justify-center gap-6 p-4 bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-lg">
       <PlayButton 
@@ -152,13 +190,14 @@ export const AudioPlayer = ({ audioUrl }: AudioPlayerProps) => {
           isLooping={isLooping}
           onClick={toggleLoop}
         />
-        <Button
-          variant="ghost"
-          size="icon"
-          className="w-10 h-10 rounded-full text-gray-400 hover:text-white hover:scale-105 transition-all duration-200"
-        >
-          <Timer className="h-5 w-5" />
-        </Button>
+        {remainingTime !== null && (
+          <div className="flex items-center gap-2">
+            <Timer className="h-5 w-5 text-gray-400" />
+            <span className="text-sm font-medium text-gray-300">
+              {formatTime(remainingTime)}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

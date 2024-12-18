@@ -1,6 +1,11 @@
 import { Card } from "./ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ScrollArea } from "./ui/scroll-area";
+
+interface TimeSelectionProps {
+  onDurationChange: (duration: number) => void;
+  defaultDuration?: number;
+}
 
 const timeOptions = [
   { value: 20, label: "20 分鐘" },
@@ -9,17 +14,22 @@ const timeOptions = [
   { value: 120, label: "2 小時" }
 ];
 
-export const TimeSelection = () => {
-  const [selectedTime, setSelectedTime] = useState<number>(20);
+export const TimeSelection = ({ onDurationChange, defaultDuration = 20 }: TimeSelectionProps) => {
+  const [selectedTime, setSelectedTime] = useState<number>(defaultDuration);
+
+  useEffect(() => {
+    setSelectedTime(defaultDuration);
+  }, [defaultDuration]);
 
   const handleTimeSelect = (value: number) => {
     setSelectedTime(value);
+    onDurationChange(value);
   };
 
   return (
     <div className="space-y-2 mt-8">
       <h2 className="text-lg font-medium text-white mb-4">選擇時長</h2>
-      <ScrollArea className="h-[200px] rounded-md">
+      <ScrollArea className="h-[100px] rounded-md">
         <div className="grid grid-cols-4 gap-2 p-1">
           {timeOptions.map((option) => (
             <Card
