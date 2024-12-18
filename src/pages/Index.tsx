@@ -37,12 +37,6 @@ const Index = () => {
               >
                 開始靜坐
               </Link>
-              <Link
-                to="/breathwork"
-                className="inline-flex items-center px-6 py-3 rounded-full bg-white/80 text-[#333333] hover:bg-white/90 transition-colors duration-200"
-              >
-                呼吸練習
-              </Link>
             </div>
           </div>
         </section>
