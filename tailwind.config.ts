@@ -25,11 +25,11 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#0EA5E9", // Ocean blue for better contrast
+          DEFAULT: "#0EA5E9",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#FFDEE2", // Soft pink
+          DEFAULT: "#FFDEE2",
           foreground: "#1A1A1A",
         },
         destructive: {
@@ -37,11 +37,11 @@ export default {
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "#D3E4FD", // Soft blue
-          foreground: "#334155", // Slate-700 for better readability
+          DEFAULT: "#D3E4FD",
+          foreground: "#334155",
         },
         accent: {
-          DEFAULT: "#D946EF", // Vibrant magenta for accents
+          DEFAULT: "#D946EF",
           foreground: "#FFFFFF",
         },
         popover: {
@@ -66,10 +66,21 @@ export default {
             transform: "translate(-1%, 1%) scale(1.15)",
           },
         },
+        glow: {
+          "0%, 100%": {
+            boxShadow: "0 0 15px #0EA5E9, 0 0 30px #0EA5E9, 0 0 45px #0EA5E9",
+            transform: "scale(1)",
+          },
+          "50%": {
+            boxShadow: "0 0 20px #0EA5E9, 0 0 40px #0EA5E9, 0 0 60px #0EA5E9",
+            transform: "scale(1.05)",
+          },
+        },
       },
       animation: {
         breathe: "breathe 4s ease-in-out infinite",
         wind: "wind 15s ease-in-out infinite",
+        glow: "glow 2s ease-in-out infinite",
       },
     },
   },
