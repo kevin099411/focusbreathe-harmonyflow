@@ -3,12 +3,24 @@ import { BoxBreathing } from "@/components/BoxBreathing";
 import { BreathingFourSevenEight } from "@/components/BreathingFourSevenEight";
 import { DailyProgress } from "@/components/breathing/DailyProgress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MeditationVideo } from "@/components/MeditationVideo";
 
 const Meditate = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-blue-50">
       <div className="container mx-auto px-4 py-6 md:py-12 max-w-6xl">
         <h1 className="text-2xl md:text-4xl font-bold text-pink-500 mb-6">靜坐</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <MeditationVideo 
+            src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7256086520346496282.mp4?t=2024-12-18T07%3A14%3A25.545Z"
+            title="Peaceful Meditation"
+          />
+          <MeditationVideo 
+            src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7327725062625266976.mp4"
+            title="Nature Meditation"
+          />
+        </div>
         
         <Tabs defaultValue="meditation" className="space-y-8">
           <TabsList className="bg-white/70 backdrop-blur-sm border border-pink-100 rounded-full p-1">
