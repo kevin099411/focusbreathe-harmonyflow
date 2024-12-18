@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { AudioPlayer } from "./AudioPlayer";
 
@@ -15,16 +15,27 @@ export const BoxBreathing = () => {
   const [currentPhase, setCurrentPhase] = useState<Phase>("INHALE");
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const audioUrl = "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3";
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      return;
+    }
 
     const phases: Phase[] = ["INHALE", "HOLD1", "EXHALE", "HOLD2"];
     let currentPhaseIndex = phases.indexOf(currentPhase);
     let startTime = Date.now();
     const phaseDuration = BREATH_PHASES[currentPhase].duration;
+
+    // Start audio when breathing exercise starts
+    if (audioRef.current) {
+      audioRef.current.play().catch(console.error);
+    }
 
     const animationFrame = requestAnimationFrame(function animate() {
       const elapsed = Date.now() - startTime;
@@ -41,8 +52,17 @@ export const BoxBreathing = () => {
       }
     });
 
-    return () => cancelAnimationFrame(animationFrame);
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      if (!isActive && audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, [isActive, currentPhase]);
+
+  const handleStartPause = () => {
+    setIsActive(!isActive);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center p-8 space-y-8">
@@ -97,7 +117,7 @@ export const BoxBreathing = () => {
 
       <div className="flex flex-col items-center gap-4">
         <button
-          onClick={() => setIsActive(!isActive)}
+          onClick={handleStartPause}
           className={cn(
             "px-6 py-2 rounded-full text-white font-medium transition-all",
             "shadow-lg hover:shadow-xl",
@@ -109,7 +129,7 @@ export const BoxBreathing = () => {
           {isActive ? "暫停" : "開始"}
         </button>
 
-        <AudioPlayer audioUrl={audioUrl} />
+        <audio ref={audioRef} src={audioUrl} loop />
       </div>
     </div>
   );
