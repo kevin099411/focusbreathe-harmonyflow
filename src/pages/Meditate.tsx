@@ -37,30 +37,30 @@ const Meditate = () => {
   const t = translations[language];
 
   return (
-    <div className="min-h-screen bg-[#222222] text-white pt-16">
-      <div className="container mx-auto px-4 py-6 md:py-12">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-blue-50">
+      <div className="container mx-auto px-4 py-6 md:py-12 max-w-6xl">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl md:text-4xl font-bold text-primary">{t.title}</h1>
+          <h1 className="text-2xl md:text-4xl font-bold text-pink-500">{t.title}</h1>
           <LanguageSwitcher />
         </div>
         
         <Tabs defaultValue="meditation" className="space-y-8">
-          <TabsList className="bg-[#1a1a1a] border-gray-800">
+          <TabsList className="bg-white/70 backdrop-blur-sm border border-pink-100 rounded-full p-1">
             <TabsTrigger 
               value="meditation"
-              className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-primary"
+              className="rounded-full px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-400 data-[state=active]:to-blue-400 data-[state=active]:text-white"
             >
               {t.meditation}
             </TabsTrigger>
             <TabsTrigger 
               value="breathing"
-              className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-primary"
+              className="rounded-full px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-400 data-[state=active]:to-blue-400 data-[state=active]:text-white"
             >
               {t.breathing}
             </TabsTrigger>
             <TabsTrigger 
               value="sleep"
-              className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-primary"
+              className="rounded-full px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-400 data-[state=active]:to-blue-400 data-[state=active]:text-white"
             >
               {t.sleep}
             </TabsTrigger>
@@ -71,30 +71,30 @@ const Meditate = () => {
           </TabsContent>
           
           <TabsContent value="breathing" className="mt-6">
-            <div className="bg-[#1a1a1a] rounded-lg p-6 space-y-8">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-pink-100 space-y-8">
               <div>
-                <h2 className="text-xl font-semibold text-primary mb-4 text-center">
+                <h2 className="text-2xl font-semibold text-pink-500 mb-4 text-center">
                   {t.boxBreathingTitle}
                 </h2>
-                <p className="text-gray-400 text-center mb-8">
+                <p className="text-gray-600 text-center mb-8">
                   {t.boxBreathingDesc}
                 </p>
                 <BoxBreathing />
               </div>
               
-              <div className="pt-8 border-t border-gray-800">
+              <div className="pt-8 border-t border-pink-100">
                 <DailyProgress />
               </div>
             </div>
           </TabsContent>
 
           <TabsContent value="sleep" className="mt-6">
-            <div className="bg-[#1a1a1a] rounded-lg p-6">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-pink-100">
               <div>
-                <h2 className="text-xl font-semibold text-primary mb-4 text-center">
+                <h2 className="text-2xl font-semibold text-pink-500 mb-4 text-center">
                   {t.sleepBreathingTitle}
                 </h2>
-                <p className="text-gray-400 text-center mb-8">
+                <p className="text-gray-600 text-center mb-8">
                   {t.sleepBreathingDesc}
                 </p>
                 <BreathingFourSevenEight />

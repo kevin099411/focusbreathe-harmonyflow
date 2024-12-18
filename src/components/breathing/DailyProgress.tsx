@@ -90,7 +90,6 @@ export const DailyProgress = () => {
       setCompletions(prev => prev + 1);
       setTodayCompleted(true);
 
-      // Show completion message
       toast({
         title: language === 'zh' ? "太棒了！" : "Well done!",
         description: language === 'zh' 
@@ -98,7 +97,6 @@ export const DailyProgress = () => {
           : `You've completed ${completions + 1} breathing exercises this week`,
       });
 
-      // Show special message if goal is reached
       if (completions + 1 >= goalCount) {
         toast({
           title: language === 'zh' ? "週目標達成！" : "Weekly Goal Achieved!",
@@ -119,12 +117,12 @@ export const DailyProgress = () => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-white/10 backdrop-blur-sm border-none text-white">
+    <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">
+        <CardTitle className="text-2xl text-pink-500">
           {language === 'zh' ? '每週進度' : 'Weekly Progress'}
         </CardTitle>
-        <CardDescription className="text-gray-300">
+        <CardDescription className="text-gray-600">
           {language === 'zh' 
             ? `目標: 每週完成 ${goalCount} 次呼吸練習` 
             : `Goal: Complete ${goalCount} breathing exercises per week`}
@@ -141,7 +139,7 @@ export const DailyProgress = () => {
               ) : (
                 <Award className="w-6 h-6 text-blue-400" />
               )}
-              <span>
+              <span className="text-gray-700">
                 {language === 'zh' 
                   ? `本週完成: ${completions}/${goalCount}` 
                   : `Completed this week: ${completions}/${goalCount}`}
@@ -152,10 +150,10 @@ export const DailyProgress = () => {
           <button
             onClick={recordCompletion}
             disabled={todayCompleted}
-            className={`w-full py-2 px-4 rounded-lg transition-all duration-300 ${
+            className={`w-full py-3 px-4 rounded-full transition-all duration-300 ${
               todayCompleted
-                ? 'bg-gray-600 cursor-not-allowed'
-                : 'bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600'
+                ? 'bg-gray-200 cursor-not-allowed'
+                : 'bg-gradient-to-r from-pink-400 to-blue-400 hover:from-pink-500 hover:to-blue-500 text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
             }`}
           >
             {todayCompleted
