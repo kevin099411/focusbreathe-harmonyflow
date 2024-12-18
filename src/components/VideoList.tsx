@@ -16,101 +16,64 @@ interface Video {
   youtubeId: string;
 }
 
-// Two sets of videos that will alternate daily
+// Two sets of videos that will alternate every 12 hours
 const VIDEO_SETS = [
   [
     {
       id: "video1",
       title: {
-        en: "Sudarshan Kriya | Art of Living Breathing Technique",
-        zh: "苏达扬克里亚 | 生活的艺术呼吸技巧"
+        en: "Breathing Techniques for Stress Relief | Art of Living",
+        zh: "緩解壓力的呼吸技巧 | 生活的藝術"
       },
-      thumbnail: "https://img.youtube.com/vi/xrnwWznRcHE/maxresdefault.jpg",
-      youtubeId: "xrnwWznRcHE"
+      thumbnail: "https://img.youtube.com/vi/CQjGqtH-2YI/maxresdefault.jpg",
+      youtubeId: "CQjGqtH-2YI"
     },
     {
       id: "video2",
       title: {
-        en: "Guided Meditation for Stress Relief | Art of Living",
-        zh: "缓解压力的引导冥想 | 生活的艺术"
+        en: "Guided Meditation for Inner Peace | Art of Living",
+        zh: "內在平靜引導冥想 | 生活的藝術"
       },
-      thumbnail: "https://img.youtube.com/vi/sWUmAAwbZ3s/maxresdefault.jpg",
-      youtubeId: "sWUmAAwbZ3s"
+      thumbnail: "https://img.youtube.com/vi/y1p1YCeHSiY/maxresdefault.jpg",
+      youtubeId: "y1p1YCeHSiY"
     },
     {
       id: "video3",
       title: {
-        en: "Breathing Exercises for Anxiety | Art of Living",
-        zh: "焦虑缓解呼吸练习 | 生活的艺术"
+        en: "Morning Yoga Routine | Art of Living",
+        zh: "晨間瑜伽練習 | 生活的藝術"
       },
-      thumbnail: "https://img.youtube.com/vi/jbhdhwSZBBQ/maxresdefault.jpg",
-      youtubeId: "jbhdhwSZBBQ"
-    },
+      thumbnail: "https://img.youtube.com/vi/8TuRYV71Rgo/maxresdefault.jpg",
+      youtubeId: "8TuRYV71Rgo"
+    }
+  ],
+  [
     {
       id: "video4",
       title: {
-        en: "Guided Meditation for Deep Sleep | Art of Living",
-        zh: "深度睡眠引导冥想 | 生活的艺术"
+        en: "Meditation for Better Sleep | Art of Living",
+        zh: "改善睡眠的冥想練習 | 生活的藝術"
       },
-      thumbnail: "https://img.youtube.com/vi/Jyy0ra2WcQQ/maxresdefault.jpg",
-      youtubeId: "Jyy0ra2WcQQ"
+      thumbnail: "https://img.youtube.com/vi/aEqlQvczMJQ/maxresdefault.jpg",
+      youtubeId: "aEqlQvczMJQ"
     },
     {
       id: "video5",
       title: {
-        en: "Morning Meditation for Positive Energy | Art of Living",
-        zh: "晨间正能量冥想 | 生活的艺术"
+        en: "Breathing Exercise for Energy | Art of Living",
+        zh: "提升能量的呼吸練習 | 生活的藝術"
       },
-      thumbnail: "https://img.youtube.com/vi/d4S4twjeWTs/maxresdefault.jpg",
-      youtubeId: "d4S4twjeWTs"
-    }
-  ],
-  // Alternative set of videos for the next day
-  [
-    {
-      id: "video1_alt",
-      title: {
-        en: "Yoga for Beginners | Art of Living",
-        zh: "瑜伽初学者指南 | 生活的艺术"
-      },
-      thumbnail: "https://img.youtube.com/vi/VaoV1PrYft4/maxresdefault.jpg",
-      youtubeId: "VaoV1PrYft4"
+      thumbnail: "https://img.youtube.com/vi/v3yBqz5HF8w/maxresdefault.jpg",
+      youtubeId: "v3yBqz5HF8w"
     },
     {
-      id: "video2_alt",
+      id: "video6",
       title: {
-        en: "Evening Relaxation Meditation | Art of Living",
-        zh: "傍晚放松冥想 | 生活的艺术"
+        en: "5-Minute Meditation for Focus | Art of Living",
+        zh: "5分鐘專注力冥想 | 生活的藝術"
       },
-      thumbnail: "https://img.youtube.com/vi/4Gf7z7rDVXE/maxresdefault.jpg",
-      youtubeId: "4Gf7z7rDVXE"
-    },
-    {
-      id: "video3_alt",
-      title: {
-        en: "Mindfulness Practice | Art of Living",
-        zh: "正念练习 | 生活的艺术"
-      },
-      thumbnail: "https://img.youtube.com/vi/6p_yaNFSYao/maxresdefault.jpg",
-      youtubeId: "6p_yaNFSYao"
-    },
-    {
-      id: "video4_alt",
-      title: {
-        en: "Stress Management Techniques | Art of Living",
-        zh: "压力管理技巧 | 生活的艺术"
-      },
-      thumbnail: "https://img.youtube.com/vi/sTANio_2E0Q/maxresdefault.jpg",
-      youtubeId: "sTANio_2E0Q"
-    },
-    {
-      id: "video5_alt",
-      title: {
-        en: "Breathing for Energy | Art of Living",
-        zh: "能量呼吸法 | 生活的艺术"
-      },
-      thumbnail: "https://img.youtube.com/vi/K-0mB8YnNIg/maxresdefault.jpg",
-      youtubeId: "K-0mB8YnNIg"
+      thumbnail: "https://img.youtube.com/vi/inpok4MKVLM/maxresdefault.jpg",
+      youtubeId: "inpok4MKVLM"
     }
   ]
 ];
@@ -122,10 +85,19 @@ export const VideoList = () => {
   const [currentVideos, setCurrentVideos] = useState(VIDEO_SETS[0]);
 
   useEffect(() => {
-    // Determine which video set to show based on the day
-    const dayOfYear = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / (24 * 60 * 60 * 1000));
-    const videoSetIndex = dayOfYear % 2;
+    // Determine which video set to show based on 12-hour periods
+    const hours = new Date().getHours();
+    const videoSetIndex = Math.floor(hours / 12) % 2;
     setCurrentVideos(VIDEO_SETS[videoSetIndex]);
+
+    // Update videos every 12 hours
+    const interval = setInterval(() => {
+      const currentHours = new Date().getHours();
+      const newVideoSetIndex = Math.floor(currentHours / 12) % 2;
+      setCurrentVideos(VIDEO_SETS[newVideoSetIndex]);
+    }, 1000 * 60 * 60); // Check every hour
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleVideoClick = (video: Video) => {
