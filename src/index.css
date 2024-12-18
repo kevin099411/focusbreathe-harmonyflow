@@ -76,7 +76,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-primary;
+    @apply font-bold tracking-tight text-[#0EA5E9];
   }
 
   p {
@@ -84,7 +84,7 @@
   }
 
   .text-primary {
-    @apply text-primary;
+    @apply text-[#0EA5E9];
   }
 
   .text-secondary {
@@ -96,7 +96,7 @@
   }
 
   .text-accent {
-    @apply text-accent;
+    @apply text-[#D946EF];
   }
 
   .text-gray-600 {
