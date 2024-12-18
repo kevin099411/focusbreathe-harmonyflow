@@ -111,7 +111,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const selectedAudioUrl = selectedCategoryData?.audioUrls[selectedDuration.toString()];
 
   return (
-    <div className="space-y-3 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-3 rounded-3xl backdrop-blur-sm">
+    <div className="space-y-3 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-3 rounded-3xl backdrop-blur-sm pb-24">
       <div className="flex flex-col space-y-2">
         <div className="flex justify-between items-center">
           <h2 className="text-xl md:text-2xl font-medium text-[#333333] tracking-wide">選擇您的練習</h2>
@@ -156,7 +156,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
       </div>
       
       {selectedAudioUrl && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-t border-gray-200/20 py-2">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-t border-gray-200/20 py-2 mb-0">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-end gap-2 max-w-6xl mx-auto">
               <DurationSelector
