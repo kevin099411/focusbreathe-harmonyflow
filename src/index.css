@@ -82,4 +82,28 @@
   p {
     @apply text-gray-800 leading-relaxed;
   }
+
+  .text-primary {
+    @apply text-gray-900;
+  }
+
+  .text-secondary {
+    @apply text-gray-800;
+  }
+
+  .text-muted {
+    @apply text-gray-700;
+  }
+
+  .text-accent {
+    @apply text-gray-900;
+  }
+
+  .text-gray-600 {
+    @apply text-gray-700;
+  }
+
+  .text-gray-500 {
+    @apply text-gray-600;
+  }
 }
