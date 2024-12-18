@@ -48,6 +48,25 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Video Section */}
+        <section className="py-8 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
+              <video 
+                className="w-full h-auto rounded-t-3xl"
+                src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </section>
+
         {/* Meditation Introduction Section */}
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl">
