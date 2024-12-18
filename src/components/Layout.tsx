@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUp } from "lucide-react";
-import { Wind } from "lucide-react";
+import { ArrowUp, Wind, Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -75,7 +74,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative flex flex-col">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
         <div className="container mx-auto px-4">
@@ -100,9 +99,33 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       </header>
 
       {/* Main content */}
-      <main className="pt-14">
+      <main className="pt-14 flex-grow">
         {children}
       </main>
+
+      {/* Footer */}
+      <footer className="bg-white py-6 mt-auto">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center space-x-6">
+            <a 
+              href="https://www.facebook.com/profile.php?id=100063621081761" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              <Facebook className="h-6 w-6" />
+            </a>
+            <a 
+              href="https://www.instagram.com/maggievirgin?igsh=MTQyZ2UwNnF1YXY0NQ==" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-primary transition-colors"
+            >
+              <Instagram className="h-6 w-6" />
+            </a>
+          </div>
+        </div>
+      </footer>
 
       {/* Back to top button */}
       {showBackToTop && (
