@@ -2,7 +2,6 @@ import { Navigation } from "@/components/Navigation";
 import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
 import { Link } from "react-router-dom";
-import { AudioUploader } from "@/components/AudioUploader";
 import { useSession } from "@supabase/auth-helpers-react";
 import { RandomPricingPopup } from "@/components/RandomPricingPopup";
 
@@ -62,20 +61,6 @@ const Index = () => {
         <div className="absolute -right-40 top-20 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl animate-pulse" />
         <div className="absolute -left-40 bottom-20 w-96 h-96 bg-secondary/20 rounded-full filter blur-3xl animate-pulse delay-1000" />
       </section>
-
-      {/* Audio Upload Section */}
-      {session && (
-        <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
-          <div className="container mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
-              上傳音頻
-            </h2>
-            <div className="max-w-xl mx-auto">
-              <AudioUploader />
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Featured Sections */}
       {/* 呼吸的奇蹟 Breathing Techniques */}
