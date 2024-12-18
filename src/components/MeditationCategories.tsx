@@ -50,10 +50,10 @@ const categories: Category[] = [
     description: "增強集中力和清晰度",
     icon: "🎯",
     audioUrls: {
-      "5": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3",
-      "10": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3",
-      "20": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3",
-      "30": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3"
+      "5": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3",
+      "10": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3",
+      "20": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3",
+      "30": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3"
     }
   },
   {
