@@ -20,7 +20,7 @@ const Login = () => {
         navigate("/");
       }
       
-      if (event === "SIGNED_UP") {
+      if (event === "USER_UPDATED") {
         console.log("User signed up");
         setShowConfirmation(true);
       }
