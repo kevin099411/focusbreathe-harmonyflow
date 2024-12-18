@@ -44,7 +44,7 @@ const categories: Category[] = [
     title: "放鬆",
     description: "深度放鬆和緩解壓力",
     icon: "🧘",
-    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
+    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
   },
   {
     id: "deep-work",

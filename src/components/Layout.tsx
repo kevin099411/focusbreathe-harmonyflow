@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import { ArrowUp, Wind, Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { toast } from "@/hooks/use-toast";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const { language } = useLanguage();
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
@@ -15,15 +13,15 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       console.error('Global error caught:', event.error);
       setError(event.error);
       toast({
-        title: language === 'zh' ? "發生錯誤" : "Error Occurred",
-        description: language === 'zh' ? "很抱歉，發生了意外錯誤。請重新整理頁面或稍後再試。" : "Sorry, an unexpected error occurred. Please refresh the page or try again later.",
+        title: "發生錯誤",
+        description: "很抱歉，發生了意外錯誤。請重新整理頁面或稍後再試。",
         variant: "destructive",
       });
     };
 
     window.addEventListener('error', handleError);
     return () => window.removeEventListener('error', handleError);
-  }, [language]);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,39 +36,21 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const getNavText = (key: string) => {
-    const translations: Record<string, { en: string; zh: string }> = {
-      meditate: {
-        en: "Meditate",
-        zh: "靜坐"
-      },
-      breathwork: {
-        en: "Daily Knowledge",
-        zh: "每日知識"
-      },
-      pricing: {
-        en: "Pricing",
-        zh: "價格"
-      }
-    };
-    return translations[key][language];
-  };
-
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-secondary/20">
         <div className="text-center p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            {language === 'zh' ? "很抱歉，發生了錯誤" : "Sorry, an error occurred"}
+            很抱歉，發生了錯誤
           </h2>
           <p className="text-gray-600 mb-6">
-            {language === 'zh' ? "請重新整理頁面或稍後再試" : "Please refresh the page or try again later"}
+            請重新整理頁面或稍後再試
           </p>
           <Button 
             onClick={() => window.location.reload()}
             variant="outline"
           >
-            {language === 'zh' ? "重新整理頁面" : "Refresh Page"}
+            重新整理頁面
           </Button>
         </div>
       </div>
@@ -88,13 +68,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             </Link>
             <nav className="flex items-center space-x-6">
               <Link to="/meditate" className="text-gray-600 hover:text-primary">
-                {getNavText("meditate")}
+                靜坐
               </Link>
               <Link to="/breathwork" className="text-gray-600 hover:text-primary">
-                {getNavText("breathwork")}
+                每日知識
               </Link>
               <Link to="/pricing" className="text-gray-600 hover:text-primary">
-                {getNavText("pricing")}
+                價格
               </Link>
             </nav>
           </div>
