@@ -4,6 +4,7 @@ import { BreathingCircle } from "@/components/BreathingCircle";
 import { Link } from "react-router-dom";
 import { useSession } from "@supabase/auth-helpers-react";
 import { DailyPricingPopup } from "@/components/DailyPricingPopup";
+import { GroupChat } from "@/components/GroupChat";
 
 const Index = () => {
   const session = useSession();
@@ -60,6 +61,13 @@ const Index = () => {
         </div>
         <div className="absolute -right-40 top-20 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl animate-pulse" />
         <div className="absolute -left-40 bottom-20 w-96 h-96 bg-secondary/20 rounded-full filter blur-3xl animate-pulse delay-1000" />
+      </section>
+
+      {/* Group Chat Section */}
+      <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <GroupChat />
+        </div>
       </section>
 
       {/* Featured Sections */}

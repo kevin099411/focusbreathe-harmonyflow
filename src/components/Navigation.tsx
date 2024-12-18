@@ -34,13 +34,7 @@ export const Navigation = () => {
                   登入
                 </Button>
               </Link>
-            ) : (
-              <Link to="/dashboard">
-                <Button variant="outline" size="sm" className="text-sm">
-                  我的帳戶
-                </Button>
-              </Link>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
