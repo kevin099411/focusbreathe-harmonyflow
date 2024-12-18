@@ -11,25 +11,25 @@ const Index = () => {
   
   const featuredMeditations = [
     {
-      title: "五分鐘專注重置",
-      duration: "1 分鐘",
+      title: "一分鐘專注重置",
+      duration: "30 秒",
       description: "使用852赫茲頻率進行快速冥想，提升心智清晰度",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
-      audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/relax%20forrest%20music.mp3",
+      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3?t=2024-12-18T03%3A12%3A19.823Z",
     },
     {
       title: "平靜紛亂思緒",
-      duration: "1 分鐘",
+      duration: "30 秒",
       description: "引導式冥想，幫助平靜過度活躍的思維",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
-      audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/relax%20forrest%20music.mp3",
+      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a",
     },
     {
       title: "852赫茲能量提升",
-      duration: "1 分鐘",
+      duration: "30 秒",
       description: "使用治癒頻率的能量提升冥想",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
-      audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/852hz.mp3",
+      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
     },
   ];
 
