@@ -1,0 +1,22 @@
+import { MeditationVideo } from "@/components/MeditationVideo";
+
+export const MeditationVideoGrid = () => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div className="animate-fade-in [animation-delay:200ms]">
+        <MeditationVideo 
+          src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7256086520346496282.mp4"
+          title="寧靜靜坐"
+          audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7256086520346496282%20(1).mp3"
+        />
+      </div>
+      <div className="animate-fade-in [animation-delay:400ms]">
+        <MeditationVideo 
+          src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7327725062625266976.mp4"
+          title="自然靜坐"
+          audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7327725062625266976%20(1).mp3"
+        />
+      </div>
+    </div>
+  );
+};
