@@ -25,7 +25,6 @@ const Index = () => {
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#9b87f5]/5 to-[#D946EF]/5">
       <DailyPricingPopup />
       
-      {/* Animated Background Elements */}
       <div className="fixed inset-0 -z-10">
         {/* Wave Gradients */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(155,135,245,0.1),rgba(217,70,239,0.05))] animate-wind" />
@@ -49,7 +48,6 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Main Content */}
       <main className="relative z-10">
         {/* Hero Section */}
         <section className="pt-24 pb-12 px-4">
@@ -89,6 +87,26 @@ const Index = () => {
                     <BookOpen className="w-5 h-5" />
                   </Link>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Meditation Videos Section */}
+        <section className="py-16 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
+                <MeditationVideo
+                  src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7256086520346496282.mp4?t=2024-12-18T07%3A14%3A25.545Z"
+                  title="寧靜冥想"
+                />
+              </div>
+              <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
+                <MeditationVideo
+                  src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7327725062625266976.mp4"
+                  title="自然冥想"
+                />
               </div>
             </div>
           </div>
@@ -158,10 +176,7 @@ const Index = () => {
         <section className="py-16 relative overflow-hidden">
           <div className="container mx-auto max-w-6xl px-4">
             <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-xl">
-              {/* Background gradient */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl" />
-              
-              {/* Content */}
               <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="flex-1">
                   <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
@@ -177,9 +192,7 @@ const Index = () => {
                     開始練習 →
                   </Link>
                 </div>
-                
                 <div className="relative">
-                  {/* Glowing background for breathing circle */}
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-2xl animate-pulse" />
                   <BreathingCircle />
                 </div>
