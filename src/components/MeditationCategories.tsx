@@ -112,7 +112,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const selectedAudioUrl = selectedCategoryData?.audioUrls[selectedDuration.toString()];
 
   return (
-    <div className="space-y-6 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-4 md:p-8 rounded-3xl backdrop-blur-sm mb-24">
+    <div className="space-y-6 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-4 md:p-8 rounded-3xl backdrop-blur-sm">
       <div className="flex flex-col space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-xl md:text-2xl font-medium text-[#333333] tracking-wide">選擇您的練習</h2>
@@ -136,7 +136,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100vh-24rem)] md:h-[400px] rounded-xl">
+      <ScrollArea className="h-[calc(100vh-24rem)] md:h-[400px] rounded-xl pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
           {categories.map((category) => (
             <Card
@@ -158,19 +158,21 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
         </div>
       </ScrollArea>
       
-      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#E7F0FD]/95 to-[#FFDEE2]/95 backdrop-blur-md border-t border-[#FFDEE2]/20">
-        <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 px-4 py-3">
-          <DurationSelector
-            duration={selectedDuration}
-            onDurationChange={setSelectedDuration}
-          />
-          <AudioPlayer 
-            audioUrl={selectedAudioUrl}
-            duration={selectedDuration}
-            onTimerEnd={handleTimerEnd}
-          />
+      {selectedAudioUrl && (
+        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#E7F0FD]/95 to-[#FFDEE2]/95 backdrop-blur-md border-t border-[#FFDEE2]/20">
+          <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 px-4 py-3">
+            <DurationSelector
+              duration={selectedDuration}
+              onDurationChange={setSelectedDuration}
+            />
+            <AudioPlayer 
+              audioUrl={selectedAudioUrl}
+              duration={selectedDuration}
+              onTimerEnd={handleTimerEnd}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
