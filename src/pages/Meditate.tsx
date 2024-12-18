@@ -2,6 +2,7 @@ import { MeditationCategories } from "@/components/MeditationCategories";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { BoxBreathing } from "@/components/BoxBreathing";
 import { BreathingFourSevenEight } from "@/components/BreathingFourSevenEight";
+import { DailyProgress } from "@/components/breathing/DailyProgress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -17,7 +18,8 @@ const Meditate = () => {
       boxBreathingTitle: "Box Breathing Exercise",
       boxBreathingDesc: "Follow the animation for 4-4-4-4 breathing technique",
       sleepBreathingTitle: "Sleep Aid Breathing",
-      sleepBreathingDesc: "Follow the animation for 4-7-8 breathing technique"
+      sleepBreathingDesc: "Follow the animation for 4-7-8 breathing technique",
+      dailyProgress: "Daily Progress"
     },
     zh: {
       title: "靜坐",
@@ -27,7 +29,8 @@ const Meditate = () => {
       boxBreathingTitle: "方箱呼吸練習",
       boxBreathingDesc: "跟隨動畫指示，進行4-4-4-4呼吸法",
       sleepBreathingTitle: "幫助睡眠呼吸法",
-      sleepBreathingDesc: "跟隨動畫指示，進行4-7-8呼吸法"
+      sleepBreathingDesc: "跟隨動畫指示，進行4-7-8呼吸法",
+      dailyProgress: "每日進度"
     }
   };
 
@@ -68,7 +71,7 @@ const Meditate = () => {
           </TabsContent>
           
           <TabsContent value="breathing" className="mt-6">
-            <div className="bg-[#1a1a1a] rounded-lg p-6">
+            <div className="bg-[#1a1a1a] rounded-lg p-6 space-y-8">
               <div>
                 <h2 className="text-xl font-semibold text-primary mb-4 text-center">
                   {t.boxBreathingTitle}
@@ -77,6 +80,10 @@ const Meditate = () => {
                   {t.boxBreathingDesc}
                 </p>
                 <BoxBreathing />
+              </div>
+              
+              <div className="pt-8 border-t border-gray-800">
+                <DailyProgress />
               </div>
             </div>
           </TabsContent>
