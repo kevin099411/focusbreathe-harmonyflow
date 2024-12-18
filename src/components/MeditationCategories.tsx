@@ -7,7 +7,6 @@ import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { AudioPlayer } from "./AudioPlayer";
 import { ScrollArea } from "./ui/scroll-area";
-import { TimeSelection } from "./TimeSelection";
 
 interface Category {
   id: string;
@@ -58,7 +57,7 @@ const categories: Category[] = [
     title: "深度工作",
     description: "延長專注時段",
     icon: "💪",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
+    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3"
   }
 ];
 
@@ -120,13 +119,6 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
           ))}
         </div>
       </ScrollArea>
-      
-      {selectedCategory && (
-        <TimeSelection 
-          onDurationChange={setSelectedDuration}
-          defaultDuration={selectedDuration}
-        />
-      )}
       
       <div className="fixed bottom-0 left-0 right-0 bg-[#1a1a1a] p-4 border-t border-gray-800">
         <div className="max-w-4xl mx-auto">
