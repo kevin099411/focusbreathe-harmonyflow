@@ -84,6 +84,7 @@ const categories: Category[] = [
 export const MeditationCategories = ({ onSelect }: { onSelect?: (category: string) => void }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedDuration, setSelectedDuration] = useState<number>(5);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
   const session = useSession();
   const navigate = useNavigate();
 
@@ -96,6 +97,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
 
   const handleSelect = (category: Category) => {
     setSelectedCategory(category.id);
+    setActiveCard(category.id);
     onSelect?.(category.id);
   };
 
@@ -105,6 +107,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
       description: "您的靜坐時間已結束。",
     });
     setSelectedCategory(null);
+    setActiveCard(null);
   };
 
   const selectedCategoryData = categories.find(cat => cat.id === selectedCategory);
@@ -140,16 +143,24 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
           <Card
             key={category.id}
             className={`p-4 cursor-pointer transition-all duration-300 hover:scale-105 
-              ${selectedCategory === category.id 
-                ? 'bg-gradient-to-br from-[#FFDEE2]/30 to-[#E7F0FD]/30 border-[#FFDEE2]' 
+              ${activeCard === category.id 
+                ? 'bg-[#1A1F2C] text-white' 
                 : 'bg-white/70 hover:bg-gradient-to-br hover:from-[#FFDEE2]/20 hover:to-[#E7F0FD]/20'} 
               backdrop-blur-md shadow-lg hover:shadow-xl rounded-xl border border-transparent hover:border-[#FFDEE2]/50`}
             onClick={() => handleSelect(category)}
           >
             <div className="flex flex-col items-center text-center space-y-2">
               <span className="text-2xl md:text-3xl">{category.icon}</span>
-              <h3 className="text-base md:text-lg font-medium text-[#333333]">{category.title}</h3>
-              <p className="text-xs md:text-sm text-gray-600">{category.description}</p>
+              <h3 className={`text-base md:text-lg font-medium ${
+                activeCard === category.id ? 'text-white' : 'text-[#333333]'
+              }`}>
+                {category.title}
+              </h3>
+              <p className={`text-xs md:text-sm ${
+                activeCard === category.id ? 'text-gray-200' : 'text-gray-600'
+              }`}>
+                {category.description}
+              </p>
             </div>
           </Card>
         ))}
