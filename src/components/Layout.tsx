@@ -88,18 +88,16 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </footer>
 
-      <div className="fixed bottom-8 right-8 flex items-center gap-4 z-50">
-        {showBackToTop && (
-          <Button
-            variant="secondary"
-            size="icon"
-            className="rounded-full shadow-lg hover:shadow-xl"
-            onClick={scrollToTop}
-          >
-            <ArrowUp className="h-5 w-5" />
-          </Button>
-        )}
-      </div>
+      {showBackToTop && (
+        <Button
+          variant="secondary"
+          size="icon"
+          className="fixed bottom-20 right-4 w-8 h-8 rounded-full shadow-lg hover:shadow-xl z-50"
+          onClick={scrollToTop}
+        >
+          <ArrowUp className="h-4 w-4" />
+        </Button>
+      )}
     </div>
   );
 };
