@@ -25,24 +25,24 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#fec6a1",
-          foreground: "#1A1A1A",
+          DEFAULT: "#9b87f5",
+          foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#FFDEE2",
-          foreground: "#1A1A1A",
+          DEFAULT: "#7E69AB",
+          foreground: "#FFFFFF",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "#fec6a1",
-          foreground: "#334155",
+          DEFAULT: "#6E59A5",
+          foreground: "#D6BCFA",
         },
         accent: {
-          DEFAULT: "#FFDEE2",
-          foreground: "#1A1A1A",
+          DEFAULT: "#8B5CF6",
+          foreground: "#FFFFFF",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -56,10 +56,10 @@ export default {
       keyframes: {
         glow: {
           "0%, 100%": { 
-            boxShadow: "0 0 15px rgba(254, 198, 161, 0.5), 0 0 30px rgba(255, 222, 226, 0.3)" 
+            boxShadow: "0 0 15px rgba(155, 135, 245, 0.5), 0 0 30px rgba(126, 105, 171, 0.3)" 
           },
           "50%": { 
-            boxShadow: "0 0 25px rgba(254, 198, 161, 0.8), 0 0 40px rgba(255, 222, 226, 0.5)" 
+            boxShadow: "0 0 25px rgba(155, 135, 245, 0.8), 0 0 40px rgba(126, 105, 171, 0.5)" 
           },
         },
         wind: {
