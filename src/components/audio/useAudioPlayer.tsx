@@ -48,14 +48,14 @@ export const useAudioPlayer = (audioUrl?: string, duration?: number, onTimerEnd?
 
     const handleEnded = () => {
       console.log('Audio playback ended');
-      if (isLooping && remainingTime && remainingTime > 0) {
+      if (isLooping) {
         console.log('Restarting audio (loop)');
         audio.currentTime = 0;
         audio.play().catch(error => {
           console.error('Error restarting audio:', error);
           handlePlayError(error);
         });
-      } else if (!remainingTime) {
+      } else {
         setIsPlaying(false);
       }
     };
@@ -79,18 +79,15 @@ export const useAudioPlayer = (audioUrl?: string, duration?: number, onTimerEnd?
         audio.src = '';
       }
     };
-  }, [audioUrl, isLooping, remainingTime]);
+  }, [audioUrl, isLooping]);
 
+  // Timer effect - only for display purposes now
   useEffect(() => {
     if (isPlaying && remainingTime !== null) {
       timerRef.current = setInterval(() => {
         setRemainingTime(prev => {
           if (prev === null || prev <= 0) {
             clearInterval(timerRef.current!);
-            setIsPlaying(false);
-            if (audioRef.current) {
-              audioRef.current.pause();
-            }
             onTimerEnd?.();
             return 0;
           }
