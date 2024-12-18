@@ -2,7 +2,7 @@ import { MeditationVideo } from "@/components/MeditationVideo";
 
 export const MeditationVideoGrid = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-3 px-2 md:px-0">
       <div className="animate-fade-in [animation-delay:200ms] animate-glow">
         <MeditationVideo 
           src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7327725062625266976.mp4"

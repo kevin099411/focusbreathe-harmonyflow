@@ -38,9 +38,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-secondary/20">
-        <div className="text-center p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+      <div className="min-h-screen flex items-center justify-center bg-secondary/20 px-4">
+        <div className="text-center p-8 w-full max-w-md">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">
             很抱歉，發生了錯誤
           </h2>
           <p className="text-gray-600 mb-6">
@@ -49,6 +49,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           <Button 
             onClick={() => window.location.reload()}
             variant="outline"
+            className="w-full md:w-auto"
           >
             重新整理頁面
           </Button>
@@ -61,18 +62,18 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="min-h-screen relative flex flex-col">
       <Navigation />
 
-      <main className="pt-14 flex-grow pb-16">
+      <main className="pt-16 md:pt-20 flex-grow pb-16 px-4 md:px-6">
         {children}
       </main>
 
-      <footer className="bg-white py-4 mt-auto">
+      <footer className="bg-white py-6 mt-auto">
         <div className="container mx-auto px-4">
-          <div className="flex justify-center space-x-6">
+          <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
             <a 
               href="https://www.facebook.com/profile.php?id=100063621081761" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary transition-colors"
+              className="text-gray-600 hover:text-primary transition-colors p-2"
             >
               <Facebook className="h-6 w-6" />
             </a>
@@ -80,7 +81,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               href="https://www.instagram.com/maggievirgin?igsh=MTQyZ2UwNnF1YXY0NQ==" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-primary transition-colors"
+              className="text-gray-600 hover:text-primary transition-colors p-2"
             >
               <Instagram className="h-6 w-6" />
             </a>
@@ -92,10 +93,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <Button
           variant="secondary"
           size="icon"
-          className="fixed bottom-4 right-4 w-8 h-8 rounded-full shadow-lg hover:shadow-xl z-50"
+          className="fixed bottom-20 right-4 w-10 h-10 rounded-full shadow-lg hover:shadow-xl z-50"
           onClick={scrollToTop}
         >
-          <ArrowUp className="h-4 w-4" />
+          <ArrowUp className="h-5 w-5" />
         </Button>
       )}
     </div>
