@@ -43,9 +43,9 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Video Section */}
-        <section className="py-12 px-4">
-          <div className="container mx-auto max-w-[520px]">
+        {/* Video Section - Now Much Larger */}
+        <section className="py-12">
+          <div className="container mx-auto max-w-[800px]">
             <div className="w-full" style={{ aspectRatio: '9/16' }}>
               <MeditationVideo 
                 src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
