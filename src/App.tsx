@@ -42,9 +42,9 @@ const App = () => {
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <LanguageSwitcher />
             <BrowserRouter>
               <Layout>
+                <LanguageSwitcher />
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/meditate" element={<Meditate />} />
