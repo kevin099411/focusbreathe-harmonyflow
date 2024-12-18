@@ -9,6 +9,7 @@ import { PricingCard } from "./PricingCard";
 
 export const DailyPricingPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   useEffect(() => {
     const checkAndShowPopup = () => {
@@ -83,7 +84,7 @@ export const DailyPricingPopup = () => {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center mb-4">
+          <DialogTitle className="text-2xl font-bold text-center mb-4 text-[#0EA5E9]">
             開始您的冥想之旅
           </DialogTitle>
         </DialogHeader>
@@ -95,6 +96,8 @@ export const DailyPricingPopup = () => {
               price={plan.price}
               features={plan.features}
               isPopular={plan.isPopular}
+              isSelected={selectedPlan === plan.title}
+              onSelect={() => setSelectedPlan(plan.title)}
             />
           ))}
         </div>

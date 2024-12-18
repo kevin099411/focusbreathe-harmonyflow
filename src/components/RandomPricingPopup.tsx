@@ -6,11 +6,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { PricingCard } from "./PricingCard";
-import { useNavigate } from "react-router-dom";
 
 export const RandomPricingPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   useEffect(() => {
     // Show popup randomly between 30-60 seconds
@@ -25,6 +24,11 @@ export const RandomPricingPopup = () => {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  const handleClose = () => {
+    console.log("Closing pricing popup");
+    setIsOpen(false);
+  };
 
   const pricingPlans = [
     {
@@ -63,16 +67,11 @@ export const RandomPricingPopup = () => {
     }
   ];
 
-  const handleClose = () => {
-    console.log("Closing pricing popup");
-    setIsOpen(false);
-  };
-
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center mb-4">
+          <DialogTitle className="text-2xl font-bold text-center mb-4 text-[#0EA5E9]">
             升級您的冥想之旅
           </DialogTitle>
         </DialogHeader>
@@ -84,6 +83,8 @@ export const RandomPricingPopup = () => {
               price={plan.price}
               features={plan.features}
               isPopular={plan.isPopular}
+              isSelected={selectedPlan === plan.title}
+              onSelect={() => setSelectedPlan(plan.title)}
             />
           ))}
         </div>
