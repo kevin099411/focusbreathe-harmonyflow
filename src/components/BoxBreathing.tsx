@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { AudioPlayer } from "./AudioPlayer";
 
 const BREATH_PHASES = {
-  INHALE: { text: "Inhale", duration: 4000 },
-  HOLD1: { text: "Hold", duration: 4000 },
-  EXHALE: { text: "Exhale", duration: 4000 },
-  HOLD2: { text: "Hold", duration: 4000 },
+  INHALE: { text: "吸氣", duration: 4000 },
+  HOLD1: { text: "屏息", duration: 4000 },
+  EXHALE: { text: "呼氣", duration: 4000 },
+  HOLD2: { text: "屏息", duration: 4000 },
 };
 
 type Phase = keyof typeof BREATH_PHASES;
@@ -14,6 +15,8 @@ export const BoxBreathing = () => {
   const [currentPhase, setCurrentPhase] = useState<Phase>("INHALE");
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(0);
+
+  const audioUrl = "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3";
 
   useEffect(() => {
     if (!isActive) return;
@@ -44,11 +47,9 @@ export const BoxBreathing = () => {
   return (
     <div className="flex flex-col items-center justify-center p-8 space-y-8">
       <div className="relative w-64 h-64">
-        {/* Decorative background circles */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/20 to-[#D946EF]/20 rounded-full animate-pulse" />
         <div className="absolute inset-2 bg-gradient-to-tr from-[#E5DEFF]/30 to-[#FFDEE2]/30 rounded-full" />
         
-        {/* Main breathing circle */}
         <div className={cn(
           "absolute inset-4 rounded-full border-4 border-[#9b87f5] transition-all duration-500",
           "flex items-center justify-center",
@@ -57,16 +58,15 @@ export const BoxBreathing = () => {
           currentPhase === "EXHALE" && "scale-90"
         )}>
           <div className="text-center">
-            <p className="text-lg font-semibold text-[#7E69AB]">
+            <p className="text-2xl font-semibold text-[#7E69AB]">
               {BREATH_PHASES[currentPhase].text}
             </p>
-            <p className="text-sm text-[#8E9196]">
-              {Math.ceil((1 - progress) * 4)} seconds
+            <p className="text-lg text-[#8E9196]">
+              {Math.ceil((1 - progress) * 4)}
             </p>
           </div>
         </div>
 
-        {/* Progress indicator */}
         <svg
           className="absolute inset-0 w-full h-full -rotate-90"
           viewBox="0 0 100 100"
@@ -95,23 +95,22 @@ export const BoxBreathing = () => {
         </svg>
       </div>
 
-      <button
-        onClick={() => setIsActive(!isActive)}
-        className={cn(
-          "px-6 py-2 rounded-full text-white font-medium transition-all",
-          "shadow-lg hover:shadow-xl",
-          "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
-          "hover:from-[#8B5CF6] hover:to-[#D946EF]",
-          "active:scale-95"
-        )}
-      >
-        {isActive ? "Pause" : "Start"} Box Breathing
-      </button>
+      <div className="flex flex-col items-center gap-4">
+        <button
+          onClick={() => setIsActive(!isActive)}
+          className={cn(
+            "px-6 py-2 rounded-full text-white font-medium transition-all",
+            "shadow-lg hover:shadow-xl",
+            "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
+            "hover:from-[#8B5CF6] hover:to-[#D946EF]",
+            "active:scale-95"
+          )}
+        >
+          {isActive ? "暫停" : "開始"}
+        </button>
 
-      <p className="text-center text-gray-600 max-w-md">
-        Box breathing can help reduce stress and improve focus. Each phase lasts 4 seconds,
-        forming a square pattern of breath control.
-      </p>
+        <AudioPlayer audioUrl={audioUrl} />
+      </div>
     </div>
   );
 };
