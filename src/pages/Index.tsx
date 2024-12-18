@@ -16,7 +16,7 @@ const Index = () => {
       duration: "10 分鐘",
       description: "以平靜的心態開始新的一天",
       image: "/lovable-uploads/f9eb763f-9881-4ec7-9087-fa5a993f7e47.png",
-      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-1.mp3"
+      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/1%20Minute%20of%20Peaceful%20Rain%20Sounds%20_%20Clear%20Your%20Mind%20_%20Relax%20_%20Calming%20Rain_1734424276340.mp3"
     },
     {
       title: "專注呼吸",
