@@ -11,7 +11,7 @@ export const LanguageSwitcher = () => {
       onClick={() => setLanguage(language === 'en' ? 'zh' : 'en')}
       className="mt-1 px-2 py-1 h-auto text-sm"
     >
-      {language === 'en' ? '中文' : 'English'}
+      {language === 'en' ? '繁體中文' : 'English'}
     </Button>
   );
 };
