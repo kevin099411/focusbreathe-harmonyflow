@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#9b87f5]/5 to-[#D946EF]/5">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#FFDEE2]/5 to-[#D946EF]/5">
       <DailyPricingPopup />
       
       <div className="fixed inset-0 -z-10">
         {/* Wave Gradients */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(155,135,245,0.1),rgba(217,70,239,0.05))] animate-wind" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(155,135,245,0.1),rgba(217,70,239,0.05))] animate-wind" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,222,226,0.1),rgba(217,70,239,0.05))] animate-wind" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,222,226,0.1),rgba(217,70,239,0.05))] animate-wind" />
         
         {/* Floating Elements */}
         <div className="absolute inset-0">
@@ -25,7 +25,7 @@ const Index = () => {
         {/* Hero Section */}
         <section className="pt-24 pb-12 px-4">
           <div className="container mx-auto max-w-4xl text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#FFDEE2] to-[#D946EF]">
               靜坐與呼吸練習
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -34,7 +34,7 @@ const Index = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/meditate"
-                className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors duration-200"
+                className="inline-flex items-center px-6 py-3 rounded-full bg-[#FFDEE2] text-gray-800 hover:bg-[#FFDEE2]/90 transition-colors duration-200"
               >
                 開始靜坐
               </Link>
@@ -51,9 +51,9 @@ const Index = () => {
         {/* Meditation Introduction Section with Video */}
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl">
-            <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
+            <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-[#FFDEE2]/20">
               <div className="p-8">
-                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-8">
+                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-[#FFDEE2] to-[#D946EF] mb-8">
                   靜坐的好處
                 </h2>
                 
@@ -73,8 +73,8 @@ const Index = () => {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-primary">身體健康</h3>
-                    <ul className="space-y-2 text-gray-700">
+                    <h3 className="text-xl font-semibold text-[#FFDEE2]">身體健康</h3>
+                    <ul className="space-y-2 text-gray-600">
                       <li>• 降低血壓和心率</li>
                       <li>• 增強免疫系統</li>
                       <li>• 改善睡眠質量</li>
@@ -82,8 +82,8 @@ const Index = () => {
                     </ul>
                   </div>
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-accent">心理健康</h3>
-                    <ul className="space-y-2 text-gray-700">
+                    <h3 className="text-xl font-semibold text-[#D946EF]">心理健康</h3>
+                    <ul className="space-y-2 text-gray-600">
                       <li>• 減輕壓力和焦慮</li>
                       <li>• 提高專注力</li>
                       <li>• 增強情緒控制</li>
@@ -99,11 +99,11 @@ const Index = () => {
         {/* Breathing Exercise CTA */}
         <section className="py-16 relative overflow-hidden">
           <div className="container mx-auto max-w-6xl px-4">
-            <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl" />
+            <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-[#FFDEE2]/20 shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FFDEE2]/5 to-[#D946EF]/5 rounded-2xl" />
               <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="flex-1">
-                  <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                  <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FFDEE2] to-[#D946EF]">
                     準備好開始您的呼吸之旅了嗎？
                   </h2>
                   <p className="text-gray-600 mb-6">
@@ -111,24 +111,24 @@ const Index = () => {
                   </p>
                   <Link
                     to="/breathwork"
-                    className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors duration-200"
+                    className="inline-flex items-center px-6 py-3 rounded-full bg-[#FFDEE2] text-gray-800 hover:bg-[#FFDEE2]/90 transition-colors duration-200"
                   >
                     開始練習 →
                   </Link>
                 </div>
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-2xl animate-pulse" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#FFDEE2]/20 to-[#D946EF]/20 rounded-full blur-2xl animate-pulse" />
                   <BreathingCircle
                     phase="INHALE"
                     text="深呼吸"
                     timeRemaining={4}
                     gradientColors={{
-                      from: "blue-400",
+                      from: "pink-300",
                       to: "purple-400"
                     }}
                     scale="scale-100"
-                    borderColor="blue-400"
-                    textColor="text-blue-500"
+                    borderColor="pink-300"
+                    textColor="text-pink-500"
                   />
                 </div>
               </div>
