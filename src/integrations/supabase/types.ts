@@ -64,24 +64,30 @@ export type Database = {
         Row: {
           created_at: string
           credit_card_last4: string | null
+          first_name: string | null
           full_name: string | null
           id: string
+          last_name: string | null
           phone: string | null
           updated_at: string
         }
         Insert: {
           created_at?: string
           credit_card_last4?: string | null
+          first_name?: string | null
           full_name?: string | null
           id: string
+          last_name?: string | null
           phone?: string | null
           updated_at?: string
         }
         Update: {
           created_at?: string
           credit_card_last4?: string | null
+          first_name?: string | null
           full_name?: string | null
           id?: string
+          last_name?: string | null
           phone?: string | null
           updated_at?: string
         }
