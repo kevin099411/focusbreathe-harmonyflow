@@ -1,5 +1,4 @@
 import { MeditationCategories } from "@/components/MeditationCategories";
-import { TimeSelection } from "@/components/TimeSelection";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const Meditate = () => {
@@ -12,7 +11,6 @@ const Meditate = () => {
         </div>
         <div className="space-y-8">
           <MeditationCategories />
-          <TimeSelection />
         </div>
       </div>
     </div>
