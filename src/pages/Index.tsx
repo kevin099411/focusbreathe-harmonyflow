@@ -52,7 +52,7 @@ const Index = () => {
             <LanguageSwitcher />
           </div>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl animate-fade-in delay-100">
-            對生命至關重要！跟隨 Sri Sri Ravi Shankar 的呼吸技巧，轉變您的生活。
+            對生命至關重要！跟隨 呼吸的奇蹟 的呼吸技巧，轉變您的生活。
           </p>
           <Link 
             to="/breathwork"
@@ -79,11 +79,11 @@ const Index = () => {
         </section>
       )}
 
-      {/* Sri Sri Breathing Techniques */}
+      {/* 呼吸的奇蹟 Breathing Techniques */}
       <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
-            Sri Sri Ravi Shankar呼吸技巧
+            呼吸的奇蹟呼吸技巧
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {featuredMeditations.map((meditation, index) => (
