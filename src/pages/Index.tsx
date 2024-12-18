@@ -25,7 +25,7 @@ const Index = () => {
         {/* Hero Section */}
         <section className="pt-24 pb-12 px-4">
           <div className="container mx-auto max-w-4xl text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#FFDEE2] to-[#D946EF]">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#333333]">
               靜坐與呼吸練習
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -34,13 +34,13 @@ const Index = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/meditate"
-                className="inline-flex items-center px-6 py-3 rounded-full bg-[#FFDEE2] text-gray-800 hover:bg-[#FFDEE2]/90 transition-colors duration-200"
+                className="inline-flex items-center px-6 py-3 rounded-full bg-[#FFDEE2] text-[#333333] hover:bg-[#FFDEE2]/90 transition-colors duration-200"
               >
                 開始靜坐
               </Link>
               <Link
                 to="/breathwork"
-                className="inline-flex items-center px-6 py-3 rounded-full bg-white/80 text-gray-800 hover:bg-white/90 transition-colors duration-200"
+                className="inline-flex items-center px-6 py-3 rounded-full bg-white/80 text-[#333333] hover:bg-white/90 transition-colors duration-200"
               >
                 呼吸練習
               </Link>
@@ -53,7 +53,7 @@ const Index = () => {
           <div className="container mx-auto max-w-4xl">
             <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-[#FFDEE2]/20">
               <div className="p-8">
-                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-[#FFDEE2] to-[#D946EF] mb-8">
+                <h2 className="text-3xl font-bold text-center text-[#333333] mb-8">
                   靜坐的好處
                 </h2>
                 
@@ -73,7 +73,7 @@ const Index = () => {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-[#FFDEE2]">身體健康</h3>
+                    <h3 className="text-xl font-semibold text-[#333333]">身體健康</h3>
                     <ul className="space-y-2 text-gray-600">
                       <li>• 降低血壓和心率</li>
                       <li>• 增強免疫系統</li>
@@ -82,7 +82,7 @@ const Index = () => {
                     </ul>
                   </div>
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-[#D946EF]">心理健康</h3>
+                    <h3 className="text-xl font-semibold text-[#333333]">心理健康</h3>
                     <ul className="space-y-2 text-gray-600">
                       <li>• 減輕壓力和焦慮</li>
                       <li>• 提高專注力</li>
@@ -103,7 +103,7 @@ const Index = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-[#FFDEE2]/5 to-[#D946EF]/5 rounded-2xl" />
               <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="flex-1">
-                  <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#FFDEE2] to-[#D946EF]">
+                  <h2 className="text-3xl font-bold mb-4 text-[#333333]">
                     準備好開始您的呼吸之旅了嗎？
                   </h2>
                   <p className="text-gray-600 mb-6">
@@ -111,7 +111,7 @@ const Index = () => {
                   </p>
                   <Link
                     to="/breathwork"
-                    className="inline-flex items-center px-6 py-3 rounded-full bg-[#FFDEE2] text-gray-800 hover:bg-[#FFDEE2]/90 transition-colors duration-200"
+                    className="inline-flex items-center px-6 py-3 rounded-full bg-[#FFDEE2] text-[#333333] hover:bg-[#FFDEE2]/90 transition-colors duration-200"
                   >
                     開始練習 →
                   </Link>
@@ -128,7 +128,7 @@ const Index = () => {
                     }}
                     scale="scale-100"
                     borderColor="pink-300"
-                    textColor="text-pink-500"
+                    textColor="text-[#333333]"
                   />
                 </div>
               </div>
