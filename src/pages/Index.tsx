@@ -48,33 +48,29 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Video Section */}
-        <section className="py-8 px-4">
-          <div className="container mx-auto max-w-4xl">
-            <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
-              <video 
-                className="w-full h-auto rounded-t-3xl"
-                src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
-                controls
-                autoPlay
-                muted
-                loop
-                playsInline
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </div>
-        </section>
-
-        {/* Meditation Introduction Section */}
+        {/* Meditation Introduction Section with Video */}
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl">
             <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
-              <div className="p-8 space-y-6">
-                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+              <div className="p-8">
+                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-8">
                   靜心冥想的好處
                 </h2>
+                
+                {/* Video */}
+                <div className="mb-8">
+                  <video 
+                    className="w-full h-auto rounded-xl"
+                    src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
+                    controls
+                    autoPlay
+                    loop
+                    playsInline
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <h3 className="text-xl font-semibold text-primary">身體健康</h3>
