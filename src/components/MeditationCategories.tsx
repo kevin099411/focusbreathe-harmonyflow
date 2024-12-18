@@ -14,7 +14,9 @@ interface Category {
   title: string;
   description: string;
   icon: string;
-  audioUrl?: string;
+  audioUrls: {
+    [key: string]: string;
+  };
 }
 
 const categories: Category[] = [
@@ -23,41 +25,66 @@ const categories: Category[] = [
     title: "ADHD 852hz 改善",
     description: "閱讀時的背景聲音",
     icon: "🧠",
-    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
+    audioUrls: {
+      "5": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
+      "10": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
+      "20": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
+      "30": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
+    }
   },
   {
     id: "colored-noise",
     title: "彩色噪音",
     description: "白噪音、粉噪音和棕噪音助於專注",
     icon: "🌊",
-    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a"
+    audioUrls: {
+      "5": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a",
+      "10": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a",
+      "20": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a",
+      "30": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a"
+    }
   },
   {
     id: "focus",
     title: "專注",
     description: "增強集中力和清晰度",
     icon: "🎯",
-    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3"
+    audioUrls: {
+      "5": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3",
+      "10": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3",
+      "20": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3",
+      "30": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3"
+    }
   },
   {
     id: "relax",
     title: "放鬆",
     description: "深度放鬆和緩解壓力",
     icon: "🧘",
-    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
+    audioUrls: {
+      "5": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
+      "10": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
+      "20": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
+      "30": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3"
+    }
   },
   {
     id: "deep-work",
     title: "深度工作",
     description: "延長專注時段",
     icon: "💪",
-    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3"
+    audioUrls: {
+      "5": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3",
+      "10": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3",
+      "20": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3",
+      "30": "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Ultimate%20Focus%20Playlist_%20Instrumental%20Music%20for%20Deep%20Work%20&%20Productivity_1734491684407.mp3"
+    }
   }
 ];
 
 export const MeditationCategories = ({ onSelect }: { onSelect?: (category: string) => void }) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedDuration, setSelectedDuration] = useState<number>(20);
+  const [selectedDuration, setSelectedDuration] = useState<number>(5);
   const session = useSession();
   const navigate = useNavigate();
 
@@ -82,6 +109,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   };
 
   const selectedCategoryData = categories.find(cat => cat.id === selectedCategory);
+  const selectedAudioUrl = selectedCategoryData?.audioUrls[selectedDuration.toString()];
 
   return (
     <div className="space-y-3">
@@ -121,7 +149,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
             onDurationChange={setSelectedDuration}
           />
           <AudioPlayer 
-            audioUrl={selectedCategoryData?.audioUrl}
+            audioUrl={selectedAudioUrl}
             duration={selectedDuration}
             onTimerEnd={handleTimerEnd}
           />
