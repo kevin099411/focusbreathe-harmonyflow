@@ -14,10 +14,10 @@ const Index = () => {
         
         {/* Floating Elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-float-delay" />
-          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-1/3 right-1/3 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-float-delay" />
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#FFDEE2]/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-[#FFDEE2]/10 rounded-full blur-3xl animate-float-delay" />
+          <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-[#FFDEE2]/10 rounded-full blur-3xl animate-float" />
+          <div className="absolute bottom-1/3 right-1/3 w-64 h-64 bg-[#FFDEE2]/10 rounded-full blur-3xl animate-float-delay" />
         </div>
       </div>
       
@@ -28,7 +28,7 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-[#333333]">
               靜坐與呼吸練習
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-[#666666] mb-8 max-w-2xl mx-auto">
               通過正念靜坐和呼吸練習，找到內心的平靜。每天只需幾分鐘，就能改善身心健康。
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -48,47 +48,55 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Meditation Introduction Section with Video */}
+        {/* Breathing Guide Section */}
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl">
-            <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-[#FFDEE2]/20">
-              <div className="p-8">
-                <h2 className="text-3xl font-bold text-center text-[#333333] mb-8">
-                  靜坐的好處
-                </h2>
-                
-                {/* Video */}
-                <div className="mb-8">
-                  <video 
-                    className="w-full h-auto rounded-xl"
-                    src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
-                    controls
-                    autoPlay
-                    loop
-                    playsInline
-                  >
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-[#333333]">身體健康</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• 降低血壓和心率</li>
-                      <li>• 增強免疫系統</li>
-                      <li>• 改善睡眠質量</li>
-                      <li>• 減輕身體疼痛</li>
-                    </ul>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <h2 className="text-3xl font-semibold text-[#333333]">呼吸練習指南</h2>
+                <div className="space-y-4">
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#FFDEE2]/20">
+                    <h3 className="text-xl font-medium text-[#333333] mb-2">方箱呼吸法 4-4-4-4</h3>
+                    <p className="text-[#666666]">
+                      1. 吸氣4秒<br/>
+                      2. 屏息4秒<br/>
+                      3. 呼氣4秒<br/>
+                      4. 屏息4秒<br/>
+                      重複此循環以達到平靜效果
+                    </p>
                   </div>
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-[#333333]">心理健康</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>• 減輕壓力和焦慮</li>
-                      <li>• 提高專注力</li>
-                      <li>• 增強情緒控制</li>
-                      <li>• 促進心靈平靜</li>
-                    </ul>
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#FFDEE2]/20">
+                    <h3 className="text-xl font-medium text-[#333333] mb-2">4-7-8呼吸法</h3>
+                    <p className="text-[#666666]">
+                      1. 吸氣4秒<br/>
+                      2. 屏息7秒<br/>
+                      3. 呼氣8秒<br/>
+                      特別適合幫助入睡和減輕焦慮
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <h2 className="text-3xl font-semibold text-[#333333]">靜坐指南</h2>
+                <div className="space-y-4">
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#FFDEE2]/20">
+                    <h3 className="text-xl font-medium text-[#333333] mb-2">初學者建議</h3>
+                    <p className="text-[#666666]">
+                      1. 選擇安靜的環境<br/>
+                      2. 保持舒適的坐姿<br/>
+                      3. 專注於呼吸<br/>
+                      4. 從5-10分鐘開始<br/>
+                      5. 保持耐心和規律
+                    </p>
+                  </div>
+                  <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-[#FFDEE2]/20">
+                    <h3 className="text-xl font-medium text-[#333333] mb-2">進階技巧</h3>
+                    <p className="text-[#666666]">
+                      1. 身體掃描練習<br/>
+                      2. 觀察思緒流動<br/>
+                      3. 延長練習時間<br/>
+                      4. 結合呼吸技巧
+                    </p>
                   </div>
                 </div>
               </div>
@@ -96,7 +104,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Breathing Exercise CTA */}
+        {/* CTA Section */}
         <section className="py-16 relative overflow-hidden">
           <div className="container mx-auto max-w-6xl px-4">
             <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-[#FFDEE2]/20 shadow-xl">
@@ -106,7 +114,7 @@ const Index = () => {
                   <h2 className="text-3xl font-bold mb-4 text-[#333333]">
                     準備好開始您的呼吸之旅了嗎？
                   </h2>
-                  <p className="text-gray-600 mb-6">
+                  <p className="text-[#666666] mb-6">
                     通過我們的引導式呼吸練習，學習如何正確呼吸，改善身心健康。
                   </p>
                   <Link
