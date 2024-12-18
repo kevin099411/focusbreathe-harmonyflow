@@ -4,6 +4,7 @@ import { BreathingCircle } from "@/components/BreathingCircle";
 import { Link } from "react-router-dom";
 import { AudioUploader } from "@/components/AudioUploader";
 import { useSession } from "@supabase/auth-helpers-react";
+import { RandomPricingPopup } from "@/components/RandomPricingPopup";
 
 const Index = () => {
   const session = useSession();
@@ -34,6 +35,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/10 to-secondary/10">
+      <RandomPricingPopup />
       <div 
         className="fixed inset-0 -z-10 bg-cover bg-center opacity-10 animate-wind scale-110 origin-center"
         style={{
