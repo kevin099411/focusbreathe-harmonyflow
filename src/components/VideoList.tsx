@@ -1,12 +1,10 @@
 import { VideoCard } from "./VideoCard";
 import { VideoDialog } from "./VideoDialog";
 import { UpgradePrompt } from "./UpgradePrompt";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { useVideoSet } from "@/hooks/useVideoSet";
 import { useWatchedVideos } from "@/hooks/useWatchedVideos";
 
 export const VideoList = () => {
-  const { language } = useLanguage();
   const currentVideos = useVideoSet();
   const { watchedVideos, selectedVideo, setSelectedVideo, handleVideoClick } = useWatchedVideos();
 
@@ -17,7 +15,7 @@ export const VideoList = () => {
           <VideoCard
             key={video.id}
             {...video}
-            title={video.title[language]}
+            title={video.title.zh}
             isLocked={watchedVideos.length >= 3 && !watchedVideos.includes(video.id)}
             isWatched={watchedVideos.includes(video.id)}
             onWatch={() => handleVideoClick(video)}
@@ -30,7 +28,7 @@ export const VideoList = () => {
       <VideoDialog
         video={selectedVideo ? {
           ...selectedVideo,
-          title: selectedVideo.title[language]
+          title: selectedVideo.title.zh
         } : null}
         onClose={() => setSelectedVideo(null)}
       />

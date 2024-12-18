@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { BreathingBackground } from "./breathing/BreathingBackground";
 import { BreathingTimer } from "./breathing/BreathingTimer";
 import { BreathingProgressCircle } from "./breathing/BreathingProgressCircle";
@@ -8,18 +7,15 @@ import { BreathingControlButton } from "./breathing/BreathingControlButton";
 
 const BREATH_PHASES = {
   INHALE: { 
-    en: { text: "Inhale" },
-    zh: { text: "吸氣" },
+    text: "吸氣",
     duration: 4000 
   },
   HOLD: { 
-    en: { text: "Hold" },
-    zh: { text: "屏息" },
+    text: "屏息",
     duration: 7000 
   },
   EXHALE: { 
-    en: { text: "Exhale" },
-    zh: { text: "呼氣" },
+    text: "呼氣",
     duration: 8000 
   },
 };
@@ -31,7 +27,6 @@ export const BreathingFourSevenEight = () => {
   const [isActive, setIsActive] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const { language } = useLanguage();
 
   const audioUrl = "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3";
 
@@ -102,8 +97,8 @@ export const BreathingFourSevenEight = () => {
   };
 
   const buttonText = {
-    en: { start: "Start", pause: "Pause" },
-    zh: { start: "開始", pause: "暫停" }
+    start: "開始",
+    pause: "暫停"
   };
 
   return (
@@ -125,7 +120,7 @@ export const BreathingFourSevenEight = () => {
           <BreathingTimer
             timeRemaining={Math.ceil((1 - progress) * BREATH_PHASES[currentPhase].duration / 1000)}
             textColor={getTextColor()}
-            phaseText={BREATH_PHASES[currentPhase][language].text}
+            phaseText={BREATH_PHASES[currentPhase].text}
           />
         </div>
 
@@ -138,7 +133,7 @@ export const BreathingFourSevenEight = () => {
       <BreathingControlButton
         isActive={isActive}
         onClick={handleStartPause}
-        text={isActive ? buttonText[language].pause : buttonText[language].start}
+        text={isActive ? buttonText.pause : buttonText.start}
       />
 
       <audio ref={audioRef} src={audioUrl} loop />

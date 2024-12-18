@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Link } from "react-router-dom";
 import { AudioUploader } from "@/components/AudioUploader";
 import { useSession } from "@supabase/auth-helpers-react";
@@ -45,12 +44,9 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-4 relative overflow-hidden">
         <div className="container mx-auto relative z-10">
-          <div className="flex justify-between items-center mb-8">
-            <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary animate-fade-in">
-              『強大的呼吸法』為自己細胞充電！
-            </h1>
-            <LanguageSwitcher />
-          </div>
+          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary animate-fade-in">
+            『強大的呼吸法』為自己細胞充電！
+          </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl animate-fade-in delay-100">
             對生命至關重要！跟隨 呼吸的奇蹟 的呼吸技巧，轉變您的生活。
           </p>
@@ -79,6 +75,7 @@ const Index = () => {
         </section>
       )}
 
+      {/* Featured Sections */}
       {/* 呼吸的奇蹟 Breathing Techniques */}
       <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
