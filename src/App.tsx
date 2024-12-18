@@ -7,6 +7,7 @@ import { Layout } from "./components/Layout";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 import Index from "./pages/Index";
 import Meditate from "./pages/Meditate";
 import Breathwork from "./pages/Breathwork";
