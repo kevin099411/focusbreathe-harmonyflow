@@ -12,7 +12,7 @@ const Index = () => {
   
   const meditationSessions = [
     {
-      title: "早晨冥想",
+      title: "早晨靜坐",
       duration: "10 分鐘",
       description: "以平靜的心態開始新的一天",
       image: "/lovable-uploads/f9eb763f-9881-4ec7-9087-fa5a993f7e47.png",
