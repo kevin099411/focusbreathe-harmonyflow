@@ -3,8 +3,12 @@ import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Link } from "react-router-dom";
+import { AudioUploader } from "@/components/AudioUploader";
+import { useSession } from "@supabase/auth-helpers-react";
 
 const Index = () => {
+  const session = useSession();
+  
   const featuredMeditations = [
     {
       title: "五分鐘專注重置",
@@ -77,6 +81,20 @@ const Index = () => {
           </Link>
         </div>
       </section>
+
+      {/* Audio Upload Section */}
+      {session && (
+        <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
+          <div className="container mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
+              上傳音頻
+            </h2>
+            <div className="max-w-xl mx-auto">
+              <AudioUploader />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Sri Sri Breathing Techniques */}
       <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
