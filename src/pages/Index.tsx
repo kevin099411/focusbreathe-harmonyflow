@@ -1,7 +1,6 @@
 import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { BreathingCircle } from "@/components/breathing/BreathingCircle";
 import { Link } from "react-router-dom";
-import { MeditationVideo } from "@/components/MeditationVideo";
 
 const Index = () => {
   return (
@@ -49,38 +48,10 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Meditation Videos Section */}
-        <section className="py-16 px-4">
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
-                <MeditationVideo
-                  src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7256086520346496282.mp4?t=2024-12-18T07%3A14%3A25.545Z"
-                  title="寧靜冥想"
-                  audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-1.mp3"
-                />
-              </div>
-              <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
-                <MeditationVideo
-                  src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7327725062625266976.mp4"
-                  title="自然冥想"
-                  audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-2.mp3"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Meditation Introduction Section */}
         <section className="py-16 px-4">
           <div className="container mx-auto max-w-4xl">
             <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
-              <div className="aspect-video w-full">
-                <MeditationVideo
-                  src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
-                  title="靜心冥想的力量"
-                />
-              </div>
               <div className="p-8 space-y-6">
                 <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
                   靜心冥想的好處
