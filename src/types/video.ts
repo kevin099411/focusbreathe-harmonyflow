@@ -15,58 +15,58 @@ export const VIDEO_SETS: Video[][] = [
     {
       id: "video1",
       title: {
-        en: "Breathing Techniques for Stress Relief | Art of Living",
-        zh: "緩解壓力的呼吸技巧 | 生活的藝術"
+        en: "Maggie Virgin | Meditation for Anxiety & Stress Relief",
+        zh: "冥想紓解焦慮和壓力 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/CQjGqtH-2YI/maxresdefault.jpg",
-      youtubeId: "CQjGqtH-2YI"
+      thumbnail: "https://img.youtube.com/vi/ztTexqGQ0VI/maxresdefault.jpg",
+      youtubeId: "ztTexqGQ0VI"
     },
     {
       id: "video2",
       title: {
-        en: "Guided Meditation for Inner Peace | Art of Living",
-        zh: "內在平靜引導冥想 | 生活的藝術"
+        en: "Maggie Virgin | 10 Min Morning Meditation",
+        zh: "10分鐘晨間冥想 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/y1p1YCeHSiY/maxresdefault.jpg",
-      youtubeId: "y1p1YCeHSiY"
+      thumbnail: "https://img.youtube.com/vi/ENYYb5vIMkU/maxresdefault.jpg",
+      youtubeId: "ENYYb5vIMkU"
     },
     {
       id: "video3",
       title: {
-        en: "Morning Yoga Routine | Art of Living",
-        zh: "晨間瑜伽練習 | 生活的藝術"
+        en: "Maggie Virgin | Sleep Meditation Music",
+        zh: "睡眠冥想音樂 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/8TuRYV71Rgo/maxresdefault.jpg",
-      youtubeId: "8TuRYV71Rgo"
+      thumbnail: "https://img.youtube.com/vi/DqBC3K_SgkM/maxresdefault.jpg",
+      youtubeId: "DqBC3K_SgkM"
     }
   ],
   [
     {
       id: "video4",
       title: {
-        en: "Meditation for Better Sleep | Art of Living",
-        zh: "改善睡眠的冥想練習 | 生活的藝術"
+        en: "Maggie Virgin | Meditation for Inner Peace",
+        zh: "內在平靜冥想 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/aEqlQvczMJQ/maxresdefault.jpg",
-      youtubeId: "aEqlQvczMJQ"
+      thumbnail: "https://img.youtube.com/vi/d4S4twjeWTs/maxresdefault.jpg",
+      youtubeId: "d4S4twjeWTs"
     },
     {
       id: "video5",
       title: {
-        en: "Breathing Exercise for Energy | Art of Living",
-        zh: "提升能量的呼吸練習 | 生活的藝術"
+        en: "Maggie Virgin | Healing Meditation Music",
+        zh: "療癒冥想音樂 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/v3yBqz5HF8w/maxresdefault.jpg",
-      youtubeId: "v3yBqz5HF8w"
+      thumbnail: "https://img.youtube.com/vi/Zk7Oc5GlNr4/maxresdefault.jpg",
+      youtubeId: "Zk7Oc5GlNr4"
     },
     {
       id: "video6",
       title: {
-        en: "5-Minute Meditation for Focus | Art of Living",
-        zh: "5分鐘專注力冥想 | 生活的藝術"
+        en: "Maggie Virgin | Deep Sleep Music",
+        zh: "深度睡眠音樂 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/inpok4MKVLM/maxresdefault.jpg",
-      youtubeId: "inpok4MKVLM"
+      thumbnail: "https://img.youtube.com/vi/1ZYbU82GVz4/maxresdefault.jpg",
+      youtubeId: "1ZYbU82GVz4"
     }
   ]
 ];
