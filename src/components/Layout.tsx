@@ -42,7 +42,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     const translations: Record<string, { en: string; zh: string }> = {
       meditate: {
         en: "Meditate",
-        zh: "冥想"
+        zh: "靜坐"
       },
       breathwork: {
         en: "Daily Knowledge",
@@ -58,7 +58,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-secondary/20">
         <div className="text-center p-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">很抱歉，發生了錯誤</h2>
           <p className="text-gray-600 mb-6">請重新整理頁面或稍後再試</p>
@@ -75,13 +75,12 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="min-h-screen relative flex flex-col">
-      {/* Header */}
       <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <Link to="/" className="flex items-center space-x-2">
               <Wind className="h-5 w-5 text-primary" />
-              <span className="text-lg font-bold text-primary">FocusZen</span>
+              <span className="text-lg font-bold text-primary">呼吸的奇蹟</span>
             </Link>
             <nav className="flex items-center space-x-6">
               <Link to="/meditate" className="text-gray-600 hover:text-primary">
@@ -98,12 +97,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </header>
 
-      {/* Main content */}
       <main className="pt-14 flex-grow">
         {children}
       </main>
 
-      {/* Footer */}
       <footer className="bg-white py-6 mt-auto">
         <div className="container mx-auto px-4">
           <div className="flex justify-center space-x-6">
@@ -127,7 +124,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </footer>
 
-      {/* Back to top button */}
       {showBackToTop && (
         <Button
           variant="secondary"

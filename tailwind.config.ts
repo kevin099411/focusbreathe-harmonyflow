@@ -25,12 +25,12 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FF7F32", // Art of Living orange
-          foreground: "#FFFFFF",
+          DEFAULT: "#FFDEE2", // Soft pink from the image
+          foreground: "#000000",
         },
         secondary: {
-          DEFAULT: "#1B365D", // Art of Living deep blue
-          foreground: "#FFFFFF",
+          DEFAULT: "#D3E4FD", // Soft blue from the image
+          foreground: "#000000",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
