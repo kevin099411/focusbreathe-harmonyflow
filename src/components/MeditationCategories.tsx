@@ -6,7 +6,6 @@ import { useSession } from "@supabase/auth-helpers-react";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { AudioPlayer } from "./AudioPlayer";
-import { ScrollArea } from "./ui/scroll-area";
 import { DurationSelector } from "./DurationSelector";
 
 interface Category {
@@ -136,27 +135,25 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100vh-24rem)] md:h-[350px] rounded-xl pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
-          {categories.map((category) => (
-            <Card
-              key={category.id}
-              className={`p-4 cursor-pointer transition-all duration-300 hover:scale-105 
-                ${selectedCategory === category.id 
-                  ? 'bg-gradient-to-br from-[#FFDEE2]/30 to-[#E7F0FD]/30 border-[#FFDEE2]' 
-                  : 'bg-white/70 hover:bg-gradient-to-br hover:from-[#FFDEE2]/20 hover:to-[#E7F0FD]/20'} 
-                backdrop-blur-md shadow-lg hover:shadow-xl rounded-xl border border-transparent hover:border-[#FFDEE2]/50`}
-              onClick={() => handleSelect(category)}
-            >
-              <div className="flex flex-col items-center text-center space-y-2">
-                <span className="text-2xl md:text-3xl">{category.icon}</span>
-                <h3 className="text-base md:text-lg font-medium text-[#333333]">{category.title}</h3>
-                <p className="text-xs md:text-sm text-gray-600">{category.description}</p>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </ScrollArea>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
+        {categories.map((category) => (
+          <Card
+            key={category.id}
+            className={`p-4 cursor-pointer transition-all duration-300 hover:scale-105 
+              ${selectedCategory === category.id 
+                ? 'bg-gradient-to-br from-[#FFDEE2]/30 to-[#E7F0FD]/30 border-[#FFDEE2]' 
+                : 'bg-white/70 hover:bg-gradient-to-br hover:from-[#FFDEE2]/20 hover:to-[#E7F0FD]/20'} 
+              backdrop-blur-md shadow-lg hover:shadow-xl rounded-xl border border-transparent hover:border-[#FFDEE2]/50`}
+            onClick={() => handleSelect(category)}
+          >
+            <div className="flex flex-col items-center text-center space-y-2">
+              <span className="text-2xl md:text-3xl">{category.icon}</span>
+              <h3 className="text-base md:text-lg font-medium text-[#333333]">{category.title}</h3>
+              <p className="text-xs md:text-sm text-gray-600">{category.description}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
       
       {selectedAudioUrl && (
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-t border-gray-200/20 py-2">
