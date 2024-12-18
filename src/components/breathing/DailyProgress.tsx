@@ -123,9 +123,9 @@ export const DailyProgress = () => {
 
   if (!isAuthenticated) {
     return (
-      <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg">
+      <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg w-full max-w-sm mx-auto">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl text-pink-500">每週進度追蹤</CardTitle>
+          <CardTitle className="text-xl text-pink-500">每週進度追蹤</CardTitle>
           <CardDescription className="text-gray-600">
             登入以追蹤您的呼吸練習進度
           </CardDescription>
@@ -143,9 +143,9 @@ export const DailyProgress = () => {
   }
 
   return (
-    <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg">
+    <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg w-full max-w-sm mx-auto">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl text-pink-500">每週進度</CardTitle>
+        <CardTitle className="text-xl text-pink-500">每週進度</CardTitle>
         <CardDescription className="text-gray-600">
           目標: 每週完成 {goalCount} 次呼吸練習
         </CardDescription>
