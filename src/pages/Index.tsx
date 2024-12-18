@@ -4,10 +4,28 @@ import { Link } from "react-router-dom";
 import { useSession } from "@supabase/auth-helpers-react";
 import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { ChatDrawer } from "@/components/ChatDrawer";
-import { Wind, Waves, Moon, Sun } from "lucide-react";
+import { Wind, Waves, Moon, Sun, Music2 } from "lucide-react";
+import { MeditationCard } from "@/components/MeditationCard";
 
 const Index = () => {
   const session = useSession();
+  
+  const meditationSessions = [
+    {
+      title: "早晨冥想",
+      duration: "10 分鐘",
+      description: "以平靜的心態開始新的一天",
+      image: "/lovable-uploads/f9eb763f-9881-4ec7-9087-fa5a993f7e47.png",
+      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-1.mp3"
+    },
+    {
+      title: "專注呼吸",
+      duration: "15 分鐘",
+      description: "通過呼吸找回內心的平靜",
+      image: "/lovable-uploads/a3c67dbe-417e-47bf-916a-1bc8aae5ba16.png",
+      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-2.mp3"
+    }
+  ];
   
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#9b87f5]/5 to-[#D946EF]/5">
@@ -65,6 +83,27 @@ const Index = () => {
                   <Wind className="w-5 h-5 animate-wind" />
                 </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Meditation Cards Section */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+              精選冥想課程
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {meditationSessions.map((session, index) => (
+                <MeditationCard
+                  key={index}
+                  title={session.title}
+                  duration={session.duration}
+                  description={session.description}
+                  image={session.image}
+                  audioUrl={session.audioUrl}
+                />
+              ))}
             </div>
           </div>
         </section>
