@@ -26,17 +26,17 @@ const Index = () => {
         <section className="pt-24 pb-12 px-4">
           <div className="container mx-auto max-w-4xl text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-              冥想與呼吸練習
+              靜坐與呼吸練習
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              通過正念冥想和呼吸練習，找到內心的平靜。每天只需幾分鐘，就能改善身心健康。
+              通過正念靜坐和呼吸練習，找到內心的平靜。每天只需幾分鐘，就能改善身心健康。
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 to="/meditate"
                 className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-white hover:bg-primary/90 transition-colors duration-200"
               >
-                開始冥想
+                開始靜坐
               </Link>
               <Link
                 to="/breathwork"
@@ -54,7 +54,7 @@ const Index = () => {
             <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
               <div className="p-8">
                 <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-8">
-                  靜心冥想的好處
+                  靜坐的好處
                 </h2>
                 
                 {/* Video */}
