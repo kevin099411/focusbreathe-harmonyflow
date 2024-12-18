@@ -15,7 +15,7 @@ const Meditate = () => {
           <MeditationVideo 
             src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7256086520346496282.mp4"
             title="寧靜冥想"
-            audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-1.mp3"
+            audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7256086520346496282%20(1).mp3"
           />
           <MeditationVideo 
             src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7327725062625266976.mp4"
