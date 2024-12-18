@@ -1,5 +1,7 @@
 import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { Link } from "react-router-dom";
+import { MeditationVideo } from "@/components/MeditationVideo";
+import { SmallBreathingCircle } from "@/components/SmallBreathingCircle";
 
 const Index = () => {
   return (
@@ -38,6 +40,46 @@ const Index = () => {
                 開始靜坐
               </Link>
             </div>
+          </div>
+        </section>
+
+        {/* Video Section */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <MeditationVideo 
+                src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
+                title="靜心冥想"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="py-12 px-4 bg-white/50 backdrop-blur-sm">
+          <div className="container mx-auto max-w-4xl">
+            <h2 className="text-3xl font-bold text-center mb-8 text-[#333333]">冥想的好處</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-6 rounded-xl bg-white/80 shadow-lg">
+                <h3 className="text-xl font-semibold mb-3 text-[#333333]">減輕壓力</h3>
+                <p className="text-[#666666]">通過冥想練習，幫助降低壓力水平，提升心理健康。</p>
+              </div>
+              <div className="p-6 rounded-xl bg-white/80 shadow-lg">
+                <h3 className="text-xl font-semibold mb-3 text-[#333333]">提高專注力</h3>
+                <p className="text-[#666666]">增強注意力集中度，提升工作和學習效率。</p>
+              </div>
+              <div className="p-6 rounded-xl bg-white/80 shadow-lg">
+                <h3 className="text-xl font-semibold mb-3 text-[#333333]">改善睡眠</h3>
+                <p className="text-[#666666]">幫助放鬆身心，提升睡眠質量。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Breathing Exercise Circle */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-4xl text-center">
+            <SmallBreathingCircle duration={30} />
           </div>
         </section>
       </main>
