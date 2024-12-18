@@ -14,8 +14,8 @@ export const useAudioPlayer = (audioUrl?: string, duration?: number, onTimerEnd?
     
     setIsPlaying(false);
     setIsLoaded(false);
-    // Set initial remaining time to 30 seconds
-    setRemainingTime(30);
+    // Set initial remaining time based on duration (in minutes)
+    setRemainingTime(duration ? duration * 60 : null);
 
     if (audioRef.current) {
       audioRef.current.pause();
@@ -49,21 +49,20 @@ export const useAudioPlayer = (audioUrl?: string, duration?: number, onTimerEnd?
 
     const handleEnded = () => {
       console.log('Audio playback ended');
-      if (isLooping) {
+      if (isLooping && remainingTime && remainingTime > 0) {
         console.log('Restarting audio (loop)');
         audio.currentTime = 0;
         audio.play().catch(error => {
           console.error('Error restarting audio:', error);
           handlePlayError(error);
         });
-      } else {
-        setIsPlaying(false);
       }
     };
 
     audio.addEventListener('canplay', handleCanPlay);
     audio.addEventListener('error', handleLoadError);
     audio.addEventListener('ended', handleEnded);
+    audio.loop = isLooping;
     
     audio.src = audioUrl;
     audio.load();
@@ -82,7 +81,7 @@ export const useAudioPlayer = (audioUrl?: string, duration?: number, onTimerEnd?
     };
   }, [audioUrl, isLooping]);
 
-  // Timer effect - stops audio after 30 seconds
+  // Timer effect - stops audio when timer reaches zero
   useEffect(() => {
     if (isPlaying && remainingTime !== null) {
       timerRef.current = setInterval(() => {
@@ -145,7 +144,7 @@ export const useAudioPlayer = (audioUrl?: string, duration?: number, onTimerEnd?
       } else if (audioRef.current) {
         console.log('Playing audio:', audioUrl);
         // Reset remaining time when starting playback
-        setRemainingTime(30);
+        setRemainingTime(duration ? duration * 60 : null);
         await audioRef.current.play();
         setIsPlaying(true);
       }
