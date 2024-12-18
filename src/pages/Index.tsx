@@ -6,6 +6,7 @@ import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { ChatDrawer } from "@/components/ChatDrawer";
 import { Wind, Waves, Moon, Sun, Music2, BookOpen } from "lucide-react";
 import { MeditationCard } from "@/components/MeditationCard";
+import { MeditationVideo } from "@/components/MeditationVideo";
 
 const Index = () => {
   const session = useSession();
@@ -65,7 +66,7 @@ const Index = () => {
                 對生命至關重要！跟隨 呼吸的奇蹟 的呼吸技巧，轉變您的生活。
               </p>
               
-              {/* CTA Buttons with glow effect */}
+              {/* CTA Buttons */}
               <div className="relative flex flex-col sm:flex-row justify-center gap-4">
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-accent/50 rounded-full blur-xl animate-pulse" />
@@ -87,6 +88,45 @@ const Index = () => {
                     <span className="mr-2">靜坐指南</span>
                     <BookOpen className="w-5 h-5" />
                   </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Meditation Introduction Section */}
+        <section className="py-16 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <div className="relative bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-white/20">
+              <div className="aspect-video w-full">
+                <MeditationVideo
+                  src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
+                  title="靜心冥想的力量"
+                />
+              </div>
+              <div className="p-8 space-y-6">
+                <h2 className="text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                  靜心冥想的好處
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-primary">身體健康</h3>
+                    <ul className="space-y-2 text-gray-700">
+                      <li>• 降低血壓和心率</li>
+                      <li>• 增強免疫系統</li>
+                      <li>• 改善睡眠質量</li>
+                      <li>• 減輕身體疼痛</li>
+                    </ul>
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-xl font-semibold text-accent">心理健康</h3>
+                    <ul className="space-y-2 text-gray-700">
+                      <li>• 減輕壓力和焦慮</li>
+                      <li>• 提高專注力</li>
+                      <li>• 增強情緒控制</li>
+                      <li>• 促進心靈平靜</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
