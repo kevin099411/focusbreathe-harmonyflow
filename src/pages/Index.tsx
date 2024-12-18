@@ -3,7 +3,7 @@ import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
 import { Link } from "react-router-dom";
 import { useSession } from "@supabase/auth-helpers-react";
-import { RandomPricingPopup } from "@/components/RandomPricingPopup";
+import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 
 const Index = () => {
   const session = useSession();
@@ -34,7 +34,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-primary/10 to-secondary/10">
-      <RandomPricingPopup />
+      <DailyPricingPopup />
       <div 
         className="fixed inset-0 -z-10 bg-cover bg-center opacity-10 animate-wind scale-110 origin-center"
         style={{
@@ -63,7 +63,6 @@ const Index = () => {
       </section>
 
       {/* Featured Sections */}
-      {/* 呼吸的奇蹟 Breathing Techniques */}
       <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
