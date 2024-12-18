@@ -132,7 +132,18 @@ const Index = () => {
                 </div>
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-2xl animate-pulse" />
-                  <BreathingCircle />
+                  <BreathingCircle
+                    phase="INHALE"
+                    text="深呼吸"
+                    timeRemaining={4}
+                    gradientColors={{
+                      from: "blue-400",
+                      to: "purple-400"
+                    }}
+                    scale="scale-100"
+                    borderColor="blue-400"
+                    textColor="text-blue-500"
+                  />
                 </div>
               </div>
             </div>
