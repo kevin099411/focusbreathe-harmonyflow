@@ -112,8 +112,8 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const selectedAudioUrl = selectedCategoryData?.audioUrls[selectedDuration.toString()];
 
   return (
-    <div className="space-y-4 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-4 rounded-3xl backdrop-blur-sm">
-      <div className="flex flex-col space-y-3">
+    <div className="space-y-3 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-3 rounded-3xl backdrop-blur-sm">
+      <div className="flex flex-col space-y-2">
         <div className="flex justify-between items-center">
           <h2 className="text-xl md:text-2xl font-medium text-[#333333] tracking-wide">選擇您的練習</h2>
           <Button onClick={handleShuffle} variant="ghost" size="sm" className="gap-1 text-[#333333] hover:text-[#FFDEE2] transition-colors duration-300">
@@ -129,15 +129,15 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
             onClick={() => handleSelect(categories[0])} 
             variant="ghost" 
             size="lg"
-            className="mt-3 gap-2 text-[#333333] hover:text-[#FFDEE2] hover:bg-white/50 transition-all duration-300 rounded-full px-4 md:px-8 shadow-lg hover:shadow-xl"
+            className="mt-2 gap-2 text-[#333333] hover:text-[#FFDEE2] hover:bg-white/50 transition-all duration-300 rounded-full px-4 md:px-8 shadow-lg hover:shadow-xl"
           >
             開始練習 → 方箱呼吸練習
           </Button>
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100vh-20rem)] md:h-[400px] rounded-xl pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-2">
+      <ScrollArea className="h-[calc(100vh-24rem)] md:h-[350px] rounded-xl pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
           {categories.map((category) => (
             <Card
               key={category.id}
@@ -159,7 +159,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
       </ScrollArea>
       
       {selectedAudioUrl && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-t border-gray-200/20 py-3">
+        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-t border-gray-200/20 py-2">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-end gap-2 max-w-6xl mx-auto">
               <DurationSelector
