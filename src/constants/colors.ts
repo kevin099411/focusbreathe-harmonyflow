@@ -1,6 +1,6 @@
 export const COLORS = {
   primary: {
-    peach: "#ffd3ac",
+    peach: "#fec6a1",
     lightPink: "#FFDEE2",
   },
   text: {
