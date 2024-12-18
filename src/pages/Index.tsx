@@ -4,7 +4,7 @@ import { BreathingCircle } from "@/components/BreathingCircle";
 import { Link } from "react-router-dom";
 import { useSession } from "@supabase/auth-helpers-react";
 import { DailyPricingPopup } from "@/components/DailyPricingPopup";
-import { GroupChat } from "@/components/GroupChat";
+import { ChatDrawer } from "@/components/ChatDrawer";
 
 const Index = () => {
   const session = useSession();
@@ -13,21 +13,21 @@ const Index = () => {
     {
       title: "一分鐘專注重置",
       duration: "30 秒",
-      description: "使用852赫茲頻率進行快速冥想，提升心智清晰度",
+      description: "使用852赫茲頻率進行快速靜坐，提升心智清晰度",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
       audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3?t=2024-12-18T03%3A12%3A19.823Z",
     },
     {
       title: "平靜紛亂思緒",
       duration: "30 秒",
-      description: "引導式冥想，幫助平靜過度活躍的思維",
+      description: "引導式靜坐，幫助平靜過度活躍的思維",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
       audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a",
     },
     {
       title: "852赫茲能量提升",
       duration: "30 秒",
-      description: "使用治癒頻率的能量提升冥想",
+      description: "使用治癒頻率的能量提升靜坐",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
       audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
     },
@@ -66,24 +66,17 @@ const Index = () => {
       {/* Featured Meditations */}
       <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
-            靜坐
-          </h2>
+          <div className="flex justify-between items-center mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-secondary">
+              靜坐
+            </h2>
+            <ChatDrawer />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {featuredMeditations.map((meditation, index) => (
               <MeditationCard key={index} {...meditation} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Group Chat Section */}
-      <section className="py-8 md:py-12 px-4 bg-gradient-to-b from-white/50 to-gray-50/50 backdrop-blur-sm">
-        <div className="container mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8">
-            群組聊天室
-          </h2>
-          <GroupChat />
         </div>
       </section>
     </div>
