@@ -1,6 +1,7 @@
 import { MeditationCategories } from "@/components/MeditationCategories";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { BoxBreathing } from "@/components/BoxBreathing";
+import { BreathingFourSevenEight } from "@/components/BreathingFourSevenEight";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Meditate = () => {
@@ -24,7 +25,7 @@ const Meditate = () => {
               value="breathing"
               className="data-[state=active]:bg-[#2a2a2a] data-[state=active]:text-primary"
             >
-              方箱呼吸
+              呼吸練習
             </TabsTrigger>
           </TabsList>
           
@@ -34,13 +35,26 @@ const Meditate = () => {
           
           <TabsContent value="breathing" className="mt-6">
             <div className="bg-[#1a1a1a] rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-primary mb-4 text-center">
-                方箱呼吸練習
-              </h2>
-              <p className="text-gray-400 text-center mb-8">
-                跟隨動畫指示，進行4-4-4-4呼吸法
-              </p>
-              <BoxBreathing />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h2 className="text-xl font-semibold text-primary mb-4 text-center">
+                    方箱呼吸練習
+                  </h2>
+                  <p className="text-gray-400 text-center mb-8">
+                    跟隨動畫指示，進行4-4-4-4呼吸法
+                  </p>
+                  <BoxBreathing />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-primary mb-4 text-center">
+                    4-7-8呼吸法
+                  </h2>
+                  <p className="text-gray-400 text-center mb-8">
+                    跟隨動畫指示，進行4-7-8呼吸法
+                  </p>
+                  <BreathingFourSevenEight />
+                </div>
+              </div>
             </div>
           </TabsContent>
         </Tabs>
