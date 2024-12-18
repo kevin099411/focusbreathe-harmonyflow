@@ -112,8 +112,8 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const selectedAudioUrl = selectedCategoryData?.audioUrls[selectedDuration.toString()];
 
   return (
-    <div className="space-y-6 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-4 md:p-8 rounded-3xl backdrop-blur-sm">
-      <div className="flex flex-col space-y-4">
+    <div className="space-y-4 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-4 rounded-3xl backdrop-blur-sm">
+      <div className="flex flex-col space-y-3">
         <div className="flex justify-between items-center">
           <h2 className="text-xl md:text-2xl font-medium text-[#333333] tracking-wide">選擇您的練習</h2>
           <Button onClick={handleShuffle} variant="ghost" size="sm" className="gap-1 text-[#333333] hover:text-[#FFDEE2] transition-colors duration-300">
@@ -129,26 +129,26 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
             onClick={() => handleSelect(categories[0])} 
             variant="ghost" 
             size="lg"
-            className="mt-4 gap-2 text-[#333333] hover:text-[#FFDEE2] hover:bg-white/50 transition-all duration-300 rounded-full px-4 md:px-8 shadow-lg hover:shadow-xl"
+            className="mt-3 gap-2 text-[#333333] hover:text-[#FFDEE2] hover:bg-white/50 transition-all duration-300 rounded-full px-4 md:px-8 shadow-lg hover:shadow-xl"
           >
             開始練習 → 方箱呼吸練習
           </Button>
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100vh-24rem)] md:h-[400px] rounded-xl pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
+      <ScrollArea className="h-[calc(100vh-20rem)] md:h-[400px] rounded-xl pb-28">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-2">
           {categories.map((category) => (
             <Card
               key={category.id}
-              className={`p-4 md:p-6 cursor-pointer transition-all duration-300 hover:scale-105 
+              className={`p-4 cursor-pointer transition-all duration-300 hover:scale-105 
                 ${selectedCategory === category.id 
                   ? 'bg-gradient-to-br from-[#FFDEE2]/30 to-[#E7F0FD]/30 border-[#FFDEE2]' 
                   : 'bg-white/70 hover:bg-gradient-to-br hover:from-[#FFDEE2]/20 hover:to-[#E7F0FD]/20'} 
                 backdrop-blur-md shadow-lg hover:shadow-xl rounded-xl border border-transparent hover:border-[#FFDEE2]/50`}
               onClick={() => handleSelect(category)}
             >
-              <div className="flex flex-col items-center text-center space-y-2 md:space-y-3">
+              <div className="flex flex-col items-center text-center space-y-2">
                 <span className="text-2xl md:text-3xl">{category.icon}</span>
                 <h3 className="text-base md:text-lg font-medium text-[#333333]">{category.title}</h3>
                 <p className="text-xs md:text-sm text-gray-600">{category.description}</p>
@@ -159,7 +159,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
       </ScrollArea>
       
       {selectedAudioUrl && (
-        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#E7F0FD]/95 to-[#FFDEE2]/95 backdrop-blur-md border-t border-[#FFDEE2]/20">
+        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#E7F0FD]/80 to-[#FFDEE2]/80 backdrop-blur-md border-t border-[#FFDEE2]/20">
           <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 px-4 py-3">
             <DurationSelector
               duration={selectedDuration}
