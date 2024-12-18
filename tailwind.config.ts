@@ -66,21 +66,10 @@ export default {
             transform: "translate(-1%, 1%) scale(1.15)",
           },
         },
-        glow: {
-          "0%, 100%": {
-            boxShadow: "0 0 15px #0EA5E9, 0 0 30px #0EA5E9, 0 0 45px #0EA5E9",
-            transform: "scale(1)",
-          },
-          "50%": {
-            boxShadow: "0 0 20px #0EA5E9, 0 0 40px #0EA5E9, 0 0 60px #0EA5E9",
-            transform: "scale(1.05)",
-          },
-        },
       },
       animation: {
         breathe: "breathe 8s ease-in-out infinite",
         wind: "wind 30s ease-in-out infinite",
-        glow: "glow 4s ease-in-out infinite",
       },
     },
   },

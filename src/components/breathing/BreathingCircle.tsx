@@ -29,7 +29,7 @@ export const BreathingCircle = ({
         className={cn(
           "absolute inset-0 rounded-full transition-all duration-1000",
           `bg-gradient-to-br from-${gradientColors.from} to-${gradientColors.to}`,
-          phase.includes("HOLD") ? "animate-pulse" : "animate-wind"
+          phase.includes("HOLD") ? "animate-breathe" : "animate-wind"
         )}
       />
 
@@ -41,8 +41,7 @@ export const BreathingCircle = ({
           "bg-white/90 shadow-lg border-2",
           "transition-all duration-1000",
           scale,
-          `border-${borderColor}`,
-          phase.includes("HOLD") && "animate-glow"
+          `border-${borderColor}`
         )}
       >
         <div className="text-center">
