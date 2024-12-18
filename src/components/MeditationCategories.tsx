@@ -44,7 +44,7 @@ const categories: Category[] = [
     title: "放鬆",
     description: "深度放鬆和緩解壓力",
     icon: "🧘",
-    audioUrl: "https://flkaxuwmvfglsbcyphrr.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
+    audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Inner%20Voicings.mp3"
   },
   {
     id: "deep-work",
