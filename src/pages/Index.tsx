@@ -63,48 +63,27 @@ const Index = () => {
         <div className="absolute -left-40 bottom-20 w-96 h-96 bg-secondary/20 rounded-full filter blur-3xl animate-pulse delay-1000" />
       </section>
 
-      {/* Group Chat Section */}
-      <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <GroupChat />
-        </div>
-      </section>
-
-      {/* Featured Sections */}
-      <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
-            呼吸的奇蹟呼吸技巧
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {featuredMeditations.map((meditation, index) => (
-              <MeditationCard key={index} {...meditation} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Breathing Exercise */}
-      <section className="py-8 md:py-12 px-4 bg-gradient-to-b from-white/50 to-gray-50/50 backdrop-blur-sm">
-        <div className="container mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8">
-            練習正念呼吸
-          </h2>
-          <BreathingCircle />
-        </div>
-      </section>
-
       {/* Featured Meditations */}
       <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8 text-center">
-            精選冥想
+            靜坐
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {featuredMeditations.map((meditation, index) => (
               <MeditationCard key={index} {...meditation} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Group Chat Section */}
+      <section className="py-8 md:py-12 px-4 bg-gradient-to-b from-white/50 to-gray-50/50 backdrop-blur-sm">
+        <div className="container mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-secondary mb-6 md:mb-8">
+            群組聊天室
+          </h2>
+          <GroupChat />
         </div>
       </section>
     </div>
