@@ -15,40 +15,59 @@ export const VIDEO_SETS: Video[][] = [
     {
       id: "video1",
       title: {
-        en: "Maggie Virgin | Meditation for Anxiety & Stress Relief",
-        zh: "冥想紓解焦慮和壓力 | Maggie Virgin"
+        en: "Maggie Virgin | Deep Sleep Meditation",
+        zh: "深度睡眠冥想 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/5X7YIhQDKq8/maxresdefault.jpg",
-      youtubeId: "5X7YIhQDKq8"
+      thumbnail: "https://img.youtube.com/vi/AGGbKFUyJ0U/maxresdefault.jpg",
+      youtubeId: "AGGbKFUyJ0U"
     },
     {
       id: "video2",
+      title: {
+        en: "Maggie Virgin | Meditation for Stress Relief",
+        zh: "壓力緩解冥想 | Maggie Virgin"
+      },
+      thumbnail: "https://img.youtube.com/vi/qgyMc_8pp-I/maxresdefault.jpg",
+      youtubeId: "qgyMc_8pp-I"
+    },
+    {
+      id: "video3",
       title: {
         en: "Maggie Virgin | Guided Meditation for Inner Peace",
         zh: "內在平靜引導冥想 | Maggie Virgin"
       },
       thumbnail: "https://img.youtube.com/vi/AwO-BP01umk/maxresdefault.jpg",
       youtubeId: "AwO-BP01umk"
-    },
+    }
+  ],
+  // Second set is identical to ensure videos never change
+  [
     {
-      id: "video3",
+      id: "video1",
       title: {
         en: "Maggie Virgin | Deep Sleep Meditation",
         zh: "深度睡眠冥想 | Maggie Virgin"
       },
       thumbnail: "https://img.youtube.com/vi/AGGbKFUyJ0U/maxresdefault.jpg",
       youtubeId: "AGGbKFUyJ0U"
-    }
-  ],
-  [
+    },
     {
-      id: "video4",
+      id: "video2",
       title: {
-        en: "Maggie Virgin | Meditation for Stress & Anxiety Relief",
-        zh: "壓力和焦慮緩解冥想 | Maggie Virgin"
+        en: "Maggie Virgin | Meditation for Stress Relief",
+        zh: "壓力緩解冥想 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/qRZGxQOAu80/maxresdefault.jpg",
-      youtubeId: "qRZGxQOAu80"
+      thumbnail: "https://img.youtube.com/vi/qgyMc_8pp-I/maxresdefault.jpg",
+      youtubeId: "qgyMc_8pp-I"
+    },
+    {
+      id: "video3",
+      title: {
+        en: "Maggie Virgin | Guided Meditation for Inner Peace",
+        zh: "內在平靜引導冥想 | Maggie Virgin"
+      },
+      thumbnail: "https://img.youtube.com/vi/AwO-BP01umk/maxresdefault.jpg",
+      youtubeId: "AwO-BP01umk"
     }
   ]
 ];
