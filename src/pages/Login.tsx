@@ -24,7 +24,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/10 to-secondary/10 px-4">
-      <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-lg">
+      <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-2xl shadow-xl">
         <div className="flex flex-col items-center justify-center text-center">
           <Wind className="h-12 w-12 text-primary mb-2" />
           <h2 className="text-2xl font-bold text-gray-900">歡迎回來</h2>
@@ -35,11 +35,27 @@ const Login = () => {
           supabaseClient={supabase}
           appearance={{
             theme: ThemeSupa,
+            style: {
+              button: {
+                background: '#0EA5E9',
+                color: 'white',
+                borderRadius: '0.5rem',
+                padding: '0.75rem 1rem',
+                marginBottom: '1rem',
+              },
+              container: {
+                width: '100%',
+              },
+              divider: {
+                background: '#E5E7EB',
+                margin: '1.5rem 0',
+              },
+            },
             variables: {
               default: {
                 colors: {
-                  brand: 'rgb(var(--primary))',
-                  brandAccent: 'rgb(var(--primary))',
+                  brand: '#0EA5E9',
+                  brandAccent: '#0284C7',
                 },
               },
             },
