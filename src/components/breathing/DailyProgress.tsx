@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Award, Check, Trophy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -9,16 +10,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export const DailyProgress = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [completions, setCompletions] = useState<number>(0);
   const [todayCompleted, setTodayCompleted] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const goalCount = 7;
 
   useEffect(() => {
-    fetchCompletions();
+    checkAuth();
   }, []);
+
+  const checkAuth = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    console.log('Auth check:', user ? 'User is authenticated' : 'User is not authenticated');
+    setIsAuthenticated(!!user);
+    if (user) {
+      fetchCompletions();
+    }
+  };
 
   const fetchCompletions = async () => {
     try {
@@ -50,13 +63,19 @@ export const DailyProgress = () => {
   };
 
   const recordCompletion = async () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "請先登入",
+        description: "需要登入才能記錄進度",
+      });
+      navigate('/login');
+      return;
+    }
+
     try {
       const { data: user } = await supabase.auth.getUser();
       if (!user.user) {
-        toast({
-          title: "請先登入",
-          description: "需要登入才能記錄進度",
-        });
+        navigate('/login');
         return;
       }
 
@@ -101,6 +120,27 @@ export const DailyProgress = () => {
       });
     }
   };
+
+  if (!isAuthenticated) {
+    return (
+      <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl text-pink-500">每週進度追蹤</CardTitle>
+          <CardDescription className="text-gray-600">
+            登入以追蹤您的呼吸練習進度
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button 
+            onClick={() => navigate('/login')}
+            className="w-full bg-gradient-to-r from-pink-400 to-blue-400 hover:from-pink-500 hover:to-blue-500 text-white"
+          >
+            立即登入
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="bg-gradient-to-br from-pink-50/80 to-blue-50/80 backdrop-blur-sm border-pink-100 shadow-lg">
