@@ -112,47 +112,53 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const selectedAudioUrl = selectedCategoryData?.audioUrls[selectedDuration.toString()];
 
   return (
-    <div className="space-y-3">
-      <div className="flex justify-between items-center">
-        <h2 className="text-lg font-medium text-[#333333]">選擇您的練習</h2>
-        <p className="mt-2 text-[#333333]">準備好開始您的呼吸之旅了嗎？</p>
-        <p className="mb-4 text-[#333333]">通過我們的引導式呼吸練習，學習如何正確呼吸，改善身心健康。</p>
-        <Button 
-          onClick={() => handleSelect(categories[0])} 
-          variant="ghost" 
-          size="sm" 
-          className="gap-1 text-[#333333] hover:text-primary mb-4"
-        >
-          開始練習 → 方箱呼吸練習
-        </Button>
-        <Button onClick={handleShuffle} variant="ghost" size="sm" className="gap-1 text-gray-300 hover:text-white">
-          <Shuffle className="h-3 w-3" />
-          隨機選擇
-        </Button>
+    <div className="space-y-6 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-8 rounded-3xl backdrop-blur-sm">
+      <div className="flex flex-col space-y-4">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-medium text-[#333333] tracking-wide">選擇您的練習</h2>
+          <Button onClick={handleShuffle} variant="ghost" size="sm" className="gap-1 text-[#333333] hover:text-[#FFDEE2] transition-colors duration-300">
+            <Shuffle className="h-4 w-4" />
+            隨機選擇
+          </Button>
+        </div>
+        
+        <div className="text-center space-y-2">
+          <p className="text-[#333333] text-lg">準備好開始您的呼吸之旅了嗎？</p>
+          <p className="text-[#333333] text-base">通過我們的引導式呼吸練習，學習如何正確呼吸，改善身心健康。</p>
+          <Button 
+            onClick={() => handleSelect(categories[0])} 
+            variant="ghost" 
+            size="lg"
+            className="mt-4 gap-2 text-[#333333] hover:text-[#FFDEE2] hover:bg-white/50 transition-all duration-300 rounded-full px-8 shadow-lg hover:shadow-xl"
+          >
+            開始練習 → 方箱呼吸練習
+          </Button>
+        </div>
       </div>
-      <ScrollArea className="h-[400px] rounded-md">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 p-1">
+
+      <ScrollArea className="h-[400px] rounded-xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-2">
           {categories.map((category) => (
             <Card
               key={category.id}
-              className={`p-2 cursor-pointer transition-all hover:scale-105 bg-[#1a1a1a] border-gray-800 relative ${
-                selectedCategory === category.id
-                  ? "ring-2 ring-primary"
-                  : ""
-              }`}
+              className={`p-6 cursor-pointer transition-all duration-300 hover:scale-105 
+                ${selectedCategory === category.id 
+                  ? 'bg-gradient-to-br from-[#FFDEE2]/30 to-[#E7F0FD]/30 border-[#FFDEE2]' 
+                  : 'bg-white/70 hover:bg-gradient-to-br hover:from-[#FFDEE2]/20 hover:to-[#E7F0FD]/20'} 
+                backdrop-blur-md shadow-lg hover:shadow-xl rounded-xl border border-transparent hover:border-[#FFDEE2]/50`}
               onClick={() => handleSelect(category)}
             >
-              <div className="flex flex-col items-center text-center space-y-1">
-                <span className="text-xl">{category.icon}</span>
-                <h3 className="text-sm font-medium text-white">{category.title}</h3>
-                <p className="text-xs text-gray-400 line-clamp-2">{category.description}</p>
+              <div className="flex flex-col items-center text-center space-y-3">
+                <span className="text-3xl filter drop-shadow-lg">{category.icon}</span>
+                <h3 className="text-lg font-medium text-[#333333]">{category.title}</h3>
+                <p className="text-sm text-gray-600">{category.description}</p>
               </div>
             </Card>
           ))}
         </div>
       </ScrollArea>
       
-      <div className="fixed bottom-0 left-0 right-0 bg-[#1a1a1a] p-4 border-t border-gray-800">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#E7F0FD]/80 to-[#FFDEE2]/80 backdrop-blur-md p-6 border-t border-[#FFDEE2]/20">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <DurationSelector
             duration={selectedDuration}

@@ -19,7 +19,7 @@ export const PlayButton = ({ isPlaying, isLoaded, onClick }: PlayButtonProps) =>
         shadow-lg hover:shadow-xl
         disabled:opacity-50 disabled:cursor-not-allowed
         flex items-center justify-center
-        animate-glow
+        animate-pulse
         hover:scale-110
         backdrop-blur-sm
         relative
@@ -30,16 +30,26 @@ export const PlayButton = ({ isPlaying, isLoaded, onClick }: PlayButtonProps) =>
         before:rounded-full
         before:bg-gradient-to-r
         before:from-[#FFDEE2]/20
-        before:to-[#FFDEE2]/20
-        before:animate-spin
+        before:to-[#E7F0FD]/20
+        before:animate-breathe
         before:duration-3000
         before:-z-10
+        after:content-['']
+        after:absolute
+        after:inset-[-2px]
+        after:rounded-full
+        after:bg-gradient-to-r
+        after:from-[#FFDEE2]
+        after:to-[#E7F0FD]
+        after:animate-pulse
+        after:opacity-50
+        after:-z-20
       `}
       disabled={!isLoaded}
     >
       {isPlaying ? 
-        <Pause className="h-7 w-7 text-gray-700 drop-shadow-lg" /> : 
-        <Play className="h-7 w-7 text-gray-700 ml-1 drop-shadow-lg" />
+        <Pause className="h-7 w-7 text-[#333333] drop-shadow-lg" /> : 
+        <Play className="h-7 w-7 text-[#333333] ml-1 drop-shadow-lg" />
       }
     </Button>
   );
