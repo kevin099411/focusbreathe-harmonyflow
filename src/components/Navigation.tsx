@@ -1,4 +1,4 @@
-import { Wind, ArrowLeft } from "lucide-react";
+import { Wind } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSession } from "@supabase/auth-helpers-react";
 import { Button } from "./ui/button";
@@ -12,14 +12,6 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate(-1)}
-              className="mr-2"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
             <Link to="/" className="flex items-center space-x-2">
               <Wind className="h-5 w-5 text-primary" />
               <span className="text-base font-bold text-primary whitespace-nowrap">呼吸的奇蹟</span>
