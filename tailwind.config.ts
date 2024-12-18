@@ -66,10 +66,39 @@ export default {
             transform: "translate(-1%, 1%) scale(1.15)",
           },
         },
+        float: {
+          "0%, 100%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(-20px)",
+          },
+        },
+        "fade-in": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(10px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        pulse: {
+          "0%, 100%": {
+            opacity: "0.5",
+          },
+          "50%": {
+            opacity: "0.8",
+          },
+        },
       },
       animation: {
         breathe: "breathe 8s ease-in-out infinite",
         wind: "wind 30s ease-in-out infinite",
+        float: "float 6s ease-in-out infinite",
+        "fade-in": "fade-in 0.5s ease-out forwards",
+        pulse: "pulse 4s ease-in-out infinite",
       },
     },
   },

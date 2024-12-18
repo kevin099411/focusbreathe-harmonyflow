@@ -1,84 +1,108 @@
 import { Navigation } from "@/components/Navigation";
-import { MeditationCard } from "@/components/MeditationCard";
 import { BreathingCircle } from "@/components/BreathingCircle";
 import { Link } from "react-router-dom";
 import { useSession } from "@supabase/auth-helpers-react";
 import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { ChatDrawer } from "@/components/ChatDrawer";
+import { Wind, Waves, Moon, Sun } from "lucide-react";
 
 const Index = () => {
   const session = useSession();
   
-  const featuredMeditations = [
-    {
-      title: "一分鐘專注重置",
-      duration: "30 秒",
-      description: "使用852赫茲頻率進行快速靜坐，提升心智清晰度",
-      image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&q=80",
-      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/focus%205%20min.mp3?t=2024-12-18T03%3A12%3A19.823Z",
-    },
-    {
-      title: "平靜紛亂思緒",
-      duration: "30 秒",
-      description: "引導式靜坐，幫助平靜過度活躍的思維",
-      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80",
-      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/rainblow.m4a",
-    },
-    {
-      title: "852赫茲能量提升",
-      duration: "30 秒",
-      description: "使用治癒頻率的能量提升靜坐",
-      image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&q=80",
-      audioUrl: "https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/852%20Hz%20Sound%20Bath%20_%205%20Minute%20Meditation%20_%20Awaken%20Intuition%20_%20Solfeggio%20Frequency%20Series_1734427956931.mp3",
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary/10 to-secondary/10">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#9b87f5]/5 to-[#D946EF]/5">
       <DailyPricingPopup />
-      <div 
-        className="fixed inset-0 -z-10 bg-cover bg-center opacity-10 animate-wind scale-110 origin-center"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80')`
-        }}
-      />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 px-4 relative overflow-hidden">
-        <div className="container mx-auto relative z-10">
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary animate-fade-in">
-            『強大的呼吸法』為自己細胞充電！
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl animate-fade-in delay-100">
-            對生命至關重要！跟隨 呼吸的奇蹟 的呼吸技巧，轉變您的生活。
-          </p>
-          <Link 
-            to="/breathwork"
-            className="inline-block bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-full text-lg font-medium hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in delay-200"
-          >
-            開始您的旅程
-          </Link>
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 -z-10">
+        {/* Wave Gradients */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(155,135,245,0.1),rgba(217,70,239,0.05))] animate-wind" />
+        <div className="absolute top-0 left-0 w-full h-full opacity-30">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#9b87f5]/20 rounded-full filter blur-3xl animate-wind" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#D946EF]/20 rounded-full filter blur-3xl animate-wind delay-1000" />
         </div>
-        <div className="absolute -right-40 top-20 w-96 h-96 bg-primary/20 rounded-full filter blur-3xl animate-pulse" />
-        <div className="absolute -left-40 bottom-20 w-96 h-96 bg-secondary/20 rounded-full filter blur-3xl animate-pulse delay-1000" />
-      </section>
+        
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 text-primary/30 animate-float">
+          <Wind className="w-12 h-12" />
+        </div>
+        <div className="absolute top-40 right-20 text-accent/30 animate-float delay-1000">
+          <Moon className="w-8 h-8" />
+        </div>
+        <div className="absolute bottom-32 left-1/4 text-primary/30 animate-float delay-2000">
+          <Sun className="w-10 h-10" />
+        </div>
+        <div className="absolute bottom-20 right-1/3 text-accent/30 animate-float delay-3000">
+          <Waves className="w-14 h-14" />
+        </div>
+      </div>
+      
+      {/* Main Content */}
+      <main className="relative z-10">
+        {/* Hero Section */}
+        <section className="pt-24 pb-12 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="relative">
+              {/* Glowing circle behind title */}
+              <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl animate-pulse" />
+              
+              <h1 className="relative text-4xl md:text-6xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent animate-fade-in">
+                『強大的呼吸法』為自己細胞充電！
+              </h1>
+              
+              <p className="relative text-xl md:text-2xl text-center text-gray-600 mb-12 max-w-2xl mx-auto animate-fade-in delay-100">
+                對生命至關重要！跟隨 呼吸的奇蹟 的呼吸技巧，轉變您的生活。
+              </p>
+              
+              {/* CTA Button with glow effect */}
+              <div className="relative flex justify-center">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-accent/50 rounded-full blur-xl animate-pulse" />
+                <Link 
+                  to="/breathwork"
+                  className="relative inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-white font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in delay-200"
+                >
+                  <span className="mr-2">開始您的旅程</span>
+                  <Wind className="w-5 h-5 animate-wind" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      {/* Featured Meditations */}
-      <section className="py-8 md:py-12 px-4 bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <div className="flex justify-between items-center mb-6 md:mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-secondary">
-              靜坐
-            </h2>
-            <ChatDrawer />
+        {/* Breathing Circle Section */}
+        <section className="py-16 relative overflow-hidden">
+          <div className="container mx-auto max-w-6xl px-4">
+            <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-xl">
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl" />
+              
+              {/* Content */}
+              <div className="relative flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+                    體驗呼吸的力量
+                  </h2>
+                  <p className="text-gray-600 mb-6">
+                    通過我們的引導式呼吸練習，找到內心的平靜與力量。每一次呼吸都是重新連接身心的機會。
+                  </p>
+                  <Link
+                    to="/breathwork"
+                    className="inline-flex items-center text-primary hover:text-accent transition-colors"
+                  >
+                    開始練習 →
+                  </Link>
+                </div>
+                
+                <div className="relative">
+                  {/* Glowing background for breathing circle */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-2xl animate-pulse" />
+                  <BreathingCircle />
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {featuredMeditations.map((meditation, index) => (
-              <MeditationCard key={index} {...meditation} />
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </div>
   );
 };
