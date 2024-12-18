@@ -18,55 +18,37 @@ export const VIDEO_SETS: Video[][] = [
         en: "Maggie Virgin | Meditation for Anxiety & Stress Relief",
         zh: "冥想紓解焦慮和壓力 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/ztTexqGQ0VI/maxresdefault.jpg",
-      youtubeId: "ztTexqGQ0VI"
+      thumbnail: "https://img.youtube.com/vi/5X7YIhQDKq8/maxresdefault.jpg",
+      youtubeId: "5X7YIhQDKq8"
     },
     {
       id: "video2",
       title: {
-        en: "Maggie Virgin | 10 Min Morning Meditation",
-        zh: "10分鐘晨間冥想 | Maggie Virgin"
+        en: "Maggie Virgin | Guided Meditation for Inner Peace",
+        zh: "內在平靜引導冥想 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/ENYYb5vIMkU/maxresdefault.jpg",
-      youtubeId: "ENYYb5vIMkU"
+      thumbnail: "https://img.youtube.com/vi/AwO-BP01umk/maxresdefault.jpg",
+      youtubeId: "AwO-BP01umk"
     },
     {
       id: "video3",
       title: {
-        en: "Maggie Virgin | Sleep Meditation Music",
-        zh: "睡眠冥想音樂 | Maggie Virgin"
+        en: "Maggie Virgin | Deep Sleep Meditation",
+        zh: "深度睡眠冥想 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/DqBC3K_SgkM/maxresdefault.jpg",
-      youtubeId: "DqBC3K_SgkM"
+      thumbnail: "https://img.youtube.com/vi/AGGbKFUyJ0U/maxresdefault.jpg",
+      youtubeId: "AGGbKFUyJ0U"
     }
   ],
   [
     {
       id: "video4",
       title: {
-        en: "Maggie Virgin | Meditation for Inner Peace",
-        zh: "內在平靜冥想 | Maggie Virgin"
+        en: "Maggie Virgin | Meditation for Stress & Anxiety Relief",
+        zh: "壓力和焦慮緩解冥想 | Maggie Virgin"
       },
-      thumbnail: "https://img.youtube.com/vi/d4S4twjeWTs/maxresdefault.jpg",
-      youtubeId: "d4S4twjeWTs"
-    },
-    {
-      id: "video5",
-      title: {
-        en: "Maggie Virgin | Healing Meditation Music",
-        zh: "療癒冥想音樂 | Maggie Virgin"
-      },
-      thumbnail: "https://img.youtube.com/vi/Zk7Oc5GlNr4/maxresdefault.jpg",
-      youtubeId: "Zk7Oc5GlNr4"
-    },
-    {
-      id: "video6",
-      title: {
-        en: "Maggie Virgin | Deep Sleep Music",
-        zh: "深度睡眠音樂 | Maggie Virgin"
-      },
-      thumbnail: "https://img.youtube.com/vi/1ZYbU82GVz4/maxresdefault.jpg",
-      youtubeId: "1ZYbU82GVz4"
+      thumbnail: "https://img.youtube.com/vi/qRZGxQOAu80/maxresdefault.jpg",
+      youtubeId: "qRZGxQOAu80"
     }
   ]
 ];
