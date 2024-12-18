@@ -31,13 +31,11 @@ export const AudioControls = ({
         isPlaying={isPlaying}
         isLoaded={isLoaded}
         onClick={onPlayPause}
-        className="text-gray-800 hover:text-gray-600"
       />
       <div className="flex items-center gap-2">
         <LoopButton 
           isLooping={isLooping}
           onClick={onLoopToggle}
-          className="text-gray-800 hover:text-gray-600"
         />
         {remainingTime !== null && (
           <div className="flex items-center gap-1">

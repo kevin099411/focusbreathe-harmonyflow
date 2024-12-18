@@ -1,18 +1,20 @@
 import { Play, Pause } from "lucide-react";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 interface PlayButtonProps {
   isPlaying: boolean;
   isLoaded: boolean;
   onClick: () => void;
+  className?: string;
 }
 
-export const PlayButton = ({ isPlaying, isLoaded, onClick }: PlayButtonProps) => {
+export const PlayButton = ({ isPlaying, isLoaded, onClick, className }: PlayButtonProps) => {
   return (
     <Button
       onClick={onClick}
       size="icon"
-      className={`
+      className={cn(`
         w-14 h-14 rounded-full 
         ${isPlaying ? 'bg-[#FFDEE2] hover:bg-[#FFDEE2]/90' : 'bg-[#FFDEE2] hover:bg-[#FFDEE2]/90'} 
         transition-all duration-300
@@ -32,7 +34,7 @@ export const PlayButton = ({ isPlaying, isLoaded, onClick }: PlayButtonProps) =>
         before:to-[#ffd3ac]/20
         before:animate-[glow_2s_ease-in-out_infinite]
         before:-z-10
-      `}
+      `, className)}
       disabled={!isLoaded}
     >
       {isPlaying ? 
