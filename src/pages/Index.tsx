@@ -45,8 +45,8 @@ const Index = () => {
 
         {/* Video Section */}
         <section className="py-12 px-4">
-          <div className="container mx-auto max-w-4xl">
-            <div className="rounded-2xl overflow-hidden shadow-xl">
+          <div className="container mx-auto max-w-[520px]"> {/* Changed from max-w-4xl to max-w-[520px] for TikTok-like dimensions */}
+            <div className="rounded-2xl overflow-hidden shadow-xl aspect-[9/16]"> {/* Added aspect-[9/16] for TikTok-like ratio */}
               <MeditationVideo 
                 src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
                 title="靜心冥想"
