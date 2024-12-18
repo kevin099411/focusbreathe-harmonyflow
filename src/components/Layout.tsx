@@ -92,7 +92,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <Button
           variant="secondary"
           size="icon"
-          className="fixed bottom-20 right-4 w-8 h-8 rounded-full shadow-lg hover:shadow-xl z-50"
+          className="fixed bottom-8 right-4 w-8 h-8 rounded-full shadow-lg hover:shadow-xl z-50"
           onClick={scrollToTop}
         >
           <ArrowUp className="h-4 w-4" />
