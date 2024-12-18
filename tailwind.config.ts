@@ -78,9 +78,9 @@ export default {
         },
       },
       animation: {
-        breathe: "breathe 4s ease-in-out infinite",
-        wind: "wind 15s ease-in-out infinite",
-        glow: "glow 2s ease-in-out infinite",
+        breathe: "breathe 8s ease-in-out infinite",
+        wind: "wind 30s ease-in-out infinite",
+        glow: "glow 4s ease-in-out infinite",
       },
     },
   },
