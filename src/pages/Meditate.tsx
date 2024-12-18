@@ -14,11 +14,13 @@ const Meditate = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <MeditationVideo 
             src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7256086520346496282.mp4?t=2024-12-18T07%3A14%3A25.545Z"
-            title="Peaceful Meditation"
+            title="寧靜冥想"
+            audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-1.mp3"
           />
           <MeditationVideo 
             src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7327725062625266976.mp4"
-            title="Nature Meditation"
+            title="自然冥想"
+            audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/meditation-2.mp3"
           />
         </div>
         
