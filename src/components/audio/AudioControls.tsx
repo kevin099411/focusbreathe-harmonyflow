@@ -26,7 +26,7 @@ export const AudioControls = ({
   };
 
   return (
-    <div className="flex items-center gap-3 p-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg transition-all duration-300 hover:bg-white/30">
+    <div className="flex items-center gap-3 p-2 rounded-2xl">
       <PlayButton 
         isPlaying={isPlaying}
         isLoaded={isLoaded}
@@ -38,7 +38,7 @@ export const AudioControls = ({
           onClick={onLoopToggle}
         />
         {remainingTime !== null && (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 bg-white/50 px-3 py-1 rounded-full">
             <Timer className="h-4 w-4 text-gray-700" />
             <span className="text-sm font-medium text-gray-800">
               {formatTime(remainingTime)}
