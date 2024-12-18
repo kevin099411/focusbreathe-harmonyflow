@@ -15,15 +15,15 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       console.error('Global error caught:', event.error);
       setError(event.error);
       toast({
-        title: "發生錯誤",
-        description: "很抱歉，發生了意外錯誤。請重新整理頁面或稍後再試。",
+        title: language === 'zh' ? "發生錯誤" : "Error Occurred",
+        description: language === 'zh' ? "很抱歉，發生了意外錯誤。請重新整理頁面或稍後再試。" : "Sorry, an unexpected error occurred. Please refresh the page or try again later.",
         variant: "destructive",
       });
     };
 
     window.addEventListener('error', handleError);
     return () => window.removeEventListener('error', handleError);
-  }, []);
+  }, [language]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,13 +60,17 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-secondary/20">
         <div className="text-center p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">很抱歉，發生了錯誤</h2>
-          <p className="text-gray-600 mb-6">請重新整理頁面或稍後再試</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            {language === 'zh' ? "很抱歉，發生了錯誤" : "Sorry, an error occurred"}
+          </h2>
+          <p className="text-gray-600 mb-6">
+            {language === 'zh' ? "請重新整理頁面或稍後再試" : "Please refresh the page or try again later"}
+          </p>
           <Button 
             onClick={() => window.location.reload()}
             variant="outline"
           >
-            重新整理頁面
+            {language === 'zh' ? "重新整理頁面" : "Refresh Page"}
           </Button>
         </div>
       </div>
