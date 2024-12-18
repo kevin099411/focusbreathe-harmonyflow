@@ -73,22 +73,22 @@ export const BreathingFourSevenEight = () => {
   const getGradientColors = () => {
     switch (currentPhase) {
       case "INHALE":
-        return { from: "[#87f5b1]", to: "[#46ef8d]" };
+        return { from: "[#FFDEE2]", to: "[#FFDEE2]" };
       case "HOLD":
-        return { from: "[#9b87f5]", to: "[#D946EF]" };
+        return { from: "[#FFDEE2]", to: "[#FFDEE2]" };
       case "EXHALE":
-        return { from: "[#0EA5E9]", to: "[#46ef8d]" };
+        return { from: "[#FFDEE2]", to: "[#FFDEE2]" };
     }
   };
 
   const getTextColor = () => {
     switch (currentPhase) {
       case "INHALE":
-        return "text-[#87f5b1]";
+        return "text-[#FFDEE2]";
       case "HOLD":
-        return "text-[#9b87f5]";
+        return "text-[#FFDEE2]";
       case "EXHALE":
-        return "text-[#0EA5E9]";
+        return "text-[#FFDEE2]";
     }
   };
 
@@ -113,9 +113,9 @@ export const BreathingFourSevenEight = () => {
           "absolute inset-4 rounded-full transition-all duration-500",
           "flex items-center justify-center backdrop-blur-sm",
           "bg-white/90 shadow-lg border-2",
-          currentPhase === "INHALE" && "scale-110 border-[#87f5b1]",
-          currentPhase === "HOLD" && "scale-105 border-[#9b87f5]",
-          currentPhase === "EXHALE" && "scale-90 border-[#0EA5E9]"
+          currentPhase === "INHALE" && "scale-110 border-[#FFDEE2]",
+          currentPhase === "HOLD" && "scale-105 border-[#FFDEE2]",
+          currentPhase === "EXHALE" && "scale-90 border-[#FFDEE2]"
         )}>
           <BreathingTimer
             timeRemaining={Math.ceil((1 - progress) * BREATH_PHASES[currentPhase].duration / 1000)}

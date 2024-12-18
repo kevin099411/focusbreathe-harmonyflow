@@ -14,7 +14,7 @@ export const PlayButton = ({ isPlaying, isLoaded, onClick }: PlayButtonProps) =>
       size="icon"
       className={`
         w-14 h-14 rounded-full 
-        ${isPlaying ? 'bg-secondary hover:bg-secondary/90' : 'bg-primary hover:bg-primary/90'} 
+        ${isPlaying ? 'bg-[#FFDEE2] hover:bg-[#FFDEE2]/90' : 'bg-[#FFDEE2] hover:bg-[#FFDEE2]/90'} 
         transition-all duration-300
         shadow-lg hover:shadow-xl
         disabled:opacity-50 disabled:cursor-not-allowed
@@ -29,8 +29,8 @@ export const PlayButton = ({ isPlaying, isLoaded, onClick }: PlayButtonProps) =>
         before:inset-0
         before:rounded-full
         before:bg-gradient-to-r
-        before:from-primary/20
-        before:to-secondary/20
+        before:from-[#FFDEE2]/20
+        before:to-[#FFDEE2]/20
         before:animate-spin
         before:duration-3000
         before:-z-10
@@ -38,8 +38,8 @@ export const PlayButton = ({ isPlaying, isLoaded, onClick }: PlayButtonProps) =>
       disabled={!isLoaded}
     >
       {isPlaying ? 
-        <Pause className="h-7 w-7 text-white drop-shadow-lg" /> : 
-        <Play className="h-7 w-7 text-white ml-1 drop-shadow-lg" />
+        <Pause className="h-7 w-7 text-gray-700 drop-shadow-lg" /> : 
+        <Play className="h-7 w-7 text-gray-700 ml-1 drop-shadow-lg" />
       }
     </Button>
   );

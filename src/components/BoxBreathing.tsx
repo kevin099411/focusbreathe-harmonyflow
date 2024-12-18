@@ -78,26 +78,26 @@ export const BoxBreathing = () => {
   const getGradientColors = () => {
     switch (currentPhase) {
       case "INHALE":
-        return { from: "[#9b87f5]", to: "[#D946EF]" };
+        return { from: "[#FFDEE2]", to: "[#FFDEE2]" };
       case "HOLD1":
-        return { from: "[#87f5b1]", to: "[#46ef8d]" };
+        return { from: "[#FFDEE2]", to: "[#FFDEE2]" };
       case "EXHALE":
-        return { from: "[#0EA5E9]", to: "[#46ef8d]" };
+        return { from: "[#FFDEE2]", to: "[#FFDEE2]" };
       case "HOLD2":
-        return { from: "[#D946EF]", to: "[#9b87f5]" };
+        return { from: "[#FFDEE2]", to: "[#FFDEE2]" };
     }
   };
 
   const getTextColor = () => {
     switch (currentPhase) {
       case "INHALE":
-        return "text-[#9b87f5]";
+        return "text-[#FFDEE2]";
       case "HOLD1":
-        return "text-[#87f5b1]";
+        return "text-[#FFDEE2]";
       case "EXHALE":
-        return "text-[#0EA5E9]";
+        return "text-[#FFDEE2]";
       case "HOLD2":
-        return "text-[#D946EF]";
+        return "text-[#FFDEE2]";
     }
   };
 
