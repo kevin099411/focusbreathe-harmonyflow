@@ -1,6 +1,5 @@
-import { PlayButton } from "../PlayButton";
-import { LoopButton } from "../LoopButton";
-import { Timer } from "lucide-react";
+import { AudioProgress } from "./AudioProgress";
+import { AudioControlButtons } from "./AudioControlButtons";
 
 interface AudioControlsProps {
   isPlaying: boolean;
@@ -19,33 +18,16 @@ export const AudioControls = ({
   onPlayPause,
   onLoopToggle,
 }: AudioControlsProps) => {
-  const formatTime = (seconds: number): string => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
   return (
-    <div className="flex items-center gap-3 p-2 rounded-2xl">
-      <PlayButton 
+    <div className="flex items-center justify-between w-full max-w-[200px]">
+      <AudioControlButtons
         isPlaying={isPlaying}
         isLoaded={isLoaded}
-        onClick={onPlayPause}
+        isLooping={isLooping}
+        onPlayPause={onPlayPause}
+        onLoopToggle={onLoopToggle}
       />
-      <div className="flex items-center gap-2">
-        <LoopButton 
-          isLooping={isLooping}
-          onClick={onLoopToggle}
-        />
-        {remainingTime !== null && (
-          <div className="flex items-center gap-1 bg-white/50 px-3 py-1 rounded-full">
-            <Timer className="h-4 w-4 text-gray-700" />
-            <span className="text-sm font-medium text-gray-800">
-              {formatTime(remainingTime)}
-            </span>
-          </div>
-        )}
-      </div>
+      <AudioProgress remainingTime={remainingTime} />
     </div>
   );
 };
