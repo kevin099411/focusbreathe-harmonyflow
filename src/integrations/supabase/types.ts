@@ -9,87 +9,7 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      meditations: {
-        Row: {
-          audio_url: string | null
-          created_at: string
-          description: string | null
-          duration: string
-          id: string
-          title: string
-        }
-        Insert: {
-          audio_url?: string | null
-          created_at?: string
-          description?: string | null
-          duration: string
-          id?: string
-          title: string
-        }
-        Update: {
-          audio_url?: string | null
-          created_at?: string
-          description?: string | null
-          duration?: string
-          id?: string
-          title?: string
-        }
-        Relationships: []
-      }
-      payments: {
-        Row: {
-          amount: number
-          created_at: string | null
-          id: string
-          payment_id: string | null
-          payment_method: string
-          status: string
-          subscription_id: string | null
-          user_id: string
-        }
-        Insert: {
-          amount: number
-          created_at?: string | null
-          id?: string
-          payment_id?: string | null
-          payment_method: string
-          status: string
-          subscription_id?: string | null
-          user_id: string
-        }
-        Update: {
-          amount?: number
-          created_at?: string | null
-          id?: string
-          payment_id?: string | null
-          payment_method?: string
-          status?: string
-          subscription_id?: string | null
-          user_id?: string
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          created_at: string
-          id: string
-          is_premium: boolean | null
-          username: string | null
-        }
-        Insert: {
-          created_at?: string
-          id: string
-          is_premium?: boolean | null
-          username?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          is_premium?: boolean | null
-          username?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
@@ -98,7 +18,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      audio: ".mp3" | ".mp4"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
