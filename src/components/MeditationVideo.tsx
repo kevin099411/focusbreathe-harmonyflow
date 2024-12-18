@@ -45,8 +45,15 @@ export const MeditationVideo = ({ src, title, audioUrl }: MeditationVideoProps) 
         });
       };
 
-      const handlePlay = () => setIsPlaying(true);
-      const handlePause = () => setIsPlaying(false);
+      const handlePlay = () => {
+        console.log('Video started playing:', src);
+        setIsPlaying(true);
+      };
+
+      const handlePause = () => {
+        console.log('Video paused:', src);
+        setIsPlaying(false);
+      };
 
       video.addEventListener('loadstart', handleLoadStart);
       video.addEventListener('canplay', handleCanPlay);
