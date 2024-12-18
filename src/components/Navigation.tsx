@@ -13,24 +13,24 @@ export const Navigation = () => {
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center space-x-2">
             <Link to="/" className="flex items-center space-x-2">
-              <Wind className="h-5 w-5 text-primary" />
-              <span className="text-base font-bold text-primary whitespace-nowrap">呼吸的奇蹟</span>
+              <Wind className="h-5 w-5 text-[#e89eb8]" />
+              <span className="text-base font-bold text-[#e89eb8] whitespace-nowrap hover:opacity-80 transition-opacity">呼吸的奇蹟</span>
             </Link>
           </div>
           
           <div className="flex items-center space-x-6">
-            <Link to="/meditate" className="text-gray-600 hover:text-primary text-sm whitespace-nowrap">
+            <Link to="/meditate" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               靜坐
             </Link>
-            <Link to="/breathwork" className="text-gray-600 hover:text-primary text-sm whitespace-nowrap">
+            <Link to="/breathwork" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               每日知識
             </Link>
-            <Link to="/pricing" className="text-gray-600 hover:text-primary text-sm whitespace-nowrap">
+            <Link to="/pricing" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               價格
             </Link>
             {!session ? (
               <Link to="/login">
-                <Button variant="outline" size="sm" className="text-sm">
+                <Button variant="outline" size="sm" className="text-sm border-[#e89eb8] text-[#e89eb8] hover:bg-[#e89eb8]/10">
                   登入
                 </Button>
               </Link>
