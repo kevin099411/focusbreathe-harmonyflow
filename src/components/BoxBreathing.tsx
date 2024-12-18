@@ -49,7 +49,6 @@ export const BoxBreathing = () => {
     let startTime = Date.now();
     const phaseDuration = BREATH_PHASES[currentPhase].duration;
 
-    // Start audio when breathing exercise starts
     if (audioRef.current) {
       audioRef.current.play().catch(console.error);
     }
@@ -89,18 +88,33 @@ export const BoxBreathing = () => {
   return (
     <div className="flex flex-col items-center justify-center p-8 space-y-8">
       <div className="relative w-64 h-64">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#9b87f5]/20 to-[#D946EF]/20 rounded-full animate-pulse" />
-        <div className="absolute inset-2 bg-gradient-to-tr from-[#E5DEFF]/30 to-[#FFDEE2]/30 rounded-full" />
-        
+        {/* Background gradients */}
         <div className={cn(
-          "absolute inset-4 rounded-full border-4 border-[#9b87f5] transition-all duration-500",
-          "flex items-center justify-center",
-          "bg-white/90 backdrop-blur-sm shadow-lg",
-          currentPhase === "INHALE" && "scale-110",
-          currentPhase === "EXHALE" && "scale-90"
+          "absolute inset-0 bg-gradient-to-br rounded-full transition-all duration-500",
+          currentPhase === "INHALE" && "from-[#9b87f5]/30 to-[#D946EF]/30 animate-wind",
+          currentPhase === "HOLD1" && "from-[#87f5b1]/30 to-[#46ef8d]/30 animate-pulse",
+          currentPhase === "EXHALE" && "from-[#0EA5E9]/30 to-[#46ef8d]/30 animate-wind",
+          currentPhase === "HOLD2" && "from-[#D946EF]/30 to-[#9b87f5]/30 animate-pulse"
+        )} />
+        
+        {/* Main breathing circle */}
+        <div className={cn(
+          "absolute inset-4 rounded-full transition-all duration-500",
+          "flex items-center justify-center backdrop-blur-sm",
+          "bg-white/90 shadow-lg border-2",
+          currentPhase === "INHALE" && "scale-110 border-[#9b87f5]",
+          currentPhase === "HOLD1" && "scale-105 border-[#87f5b1] animate-glow",
+          currentPhase === "EXHALE" && "scale-90 border-[#0EA5E9]",
+          currentPhase === "HOLD2" && "scale-95 border-[#D946EF] animate-glow"
         )}>
           <div className="text-center">
-            <p className="text-2xl font-semibold text-[#7E69AB]">
+            <p className={cn(
+              "text-2xl font-semibold transition-colors duration-300",
+              currentPhase === "INHALE" && "text-[#9b87f5]",
+              currentPhase === "HOLD1" && "text-[#87f5b1]",
+              currentPhase === "EXHALE" && "text-[#0EA5E9]",
+              currentPhase === "HOLD2" && "text-[#D946EF]"
+            )}>
               {BREATH_PHASES[currentPhase][language].text}
             </p>
             <p className="text-lg text-[#8E9196]">
@@ -109,12 +123,13 @@ export const BoxBreathing = () => {
           </div>
         </div>
 
+        {/* Progress circle */}
         <svg
           className="absolute inset-0 w-full h-full -rotate-90"
           viewBox="0 0 100 100"
         >
           <circle
-            className="text-gray-200"
+            className="text-gray-200/50"
             strokeWidth="4"
             stroke="currentColor"
             fill="transparent"
@@ -123,7 +138,13 @@ export const BoxBreathing = () => {
             cy="50"
           />
           <circle
-            className="text-[#9b87f5] transition-all duration-500"
+            className={cn(
+              "transition-all duration-300",
+              currentPhase === "INHALE" && "text-[#9b87f5]",
+              currentPhase === "HOLD1" && "text-[#87f5b1]",
+              currentPhase === "EXHALE" && "text-[#0EA5E9]",
+              currentPhase === "HOLD2" && "text-[#D946EF]"
+            )}
             strokeWidth="4"
             strokeDasharray={283}
             strokeDashoffset={283 * (1 - progress)}
@@ -137,22 +158,21 @@ export const BoxBreathing = () => {
         </svg>
       </div>
 
-      <div className="flex flex-col items-center gap-4">
-        <button
-          onClick={handleStartPause}
-          className={cn(
-            "px-6 py-2 rounded-full text-white font-medium transition-all",
-            "shadow-lg hover:shadow-xl",
-            "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
-            "hover:from-[#8B5CF6] hover:to-[#D946EF]",
-            "active:scale-95"
-          )}
-        >
-          {isActive ? buttonText[language].pause : buttonText[language].start}
-        </button>
+      <button
+        onClick={handleStartPause}
+        className={cn(
+          "px-6 py-2 rounded-full text-white font-medium",
+          "transition-all duration-300 transform hover:scale-105",
+          "shadow-lg hover:shadow-xl active:scale-95",
+          "bg-gradient-to-r from-[#9b87f5] to-[#D946EF]",
+          "hover:from-[#8B5CF6] hover:to-[#D946EF]",
+          "animate-glow"
+        )}
+      >
+        {isActive ? buttonText[language].pause : buttonText[language].start}
+      </button>
 
-        <audio ref={audioRef} src={audioUrl} loop />
-      </div>
+      <audio ref={audioRef} src={audioUrl} loop />
     </div>
   );
 };
