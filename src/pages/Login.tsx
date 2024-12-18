@@ -1,164 +1,97 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { Wind } from "lucide-react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
-  });
 
-  useEffect(() => {
-    console.log("Checking existing session");
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        console.log("User already logged in, redirecting");
-        navigate("/");
-      }
-    });
-  }, [navigate]);
-
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
     
     try {
-      console.log("Attempting signup with email:", formData.email);
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-        options: {
-          data: {
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            phone: formData.phone,
-            full_name: `${formData.firstName} ${formData.lastName}`,
-          },
-        },
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      if (error) {
-        console.error("Signup error:", error);
-        toast({
-          title: "註冊失敗",
-          description: error.message,
-          variant: "destructive",
-        });
-      } else if (data.user) {
-        console.log("Signup successful:", data.user);
-        toast({
-          title: "註冊成功",
-          description: "歡迎加入！",
-        });
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Unexpected error during signup:", error);
+      if (error) throw error;
+
       toast({
-        title: "系統錯誤",
-        description: "請稍後再試",
+        title: "登入成功",
+        description: "歡迎回來！",
+      });
+      
+      navigate("/");
+    } catch (error: any) {
+      toast({
+        title: "登入失敗",
+        description: error.message,
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleSignUpWithGoogle = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+      
+      if (error) throw error;
+    } catch (error: any) {
+      toast({
+        title: "登入失敗",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            註冊帳戶
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            立即開始免費試用
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/10 to-secondary/10 px-4">
+      <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-lg">
+        <div className="flex flex-col items-center justify-center text-center">
+          <Wind className="h-12 w-12 text-primary mb-2" />
+          <h2 className="text-2xl font-bold text-gray-900">歡迎回來</h2>
+          <p className="text-gray-600">登入您的帳戶以繼續</p>
         </div>
 
-        <form onSubmit={handleSignUp} className="mt-8 space-y-6">
+        <form onSubmit={handleLogin} className="mt-8 space-y-6">
           <div className="space-y-4">
-            <div>
-              <Label htmlFor="firstName">名字</Label>
-              <Input
-                id="firstName"
-                name="firstName"
-                type="text"
-                required
-                value={formData.firstName}
-                onChange={handleInputChange}
-                placeholder="請輸入名字"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="lastName">姓氏</Label>
-              <Input
-                id="lastName"
-                name="lastName"
-                type="text"
-                required
-                value={formData.lastName}
-                onChange={handleInputChange}
-                placeholder="請輸入姓氏"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="phone">電話號碼</Label>
-              <Input
-                id="phone"
-                name="phone"
-                type="tel"
-                required
-                value={formData.phone}
-                onChange={handleInputChange}
-                placeholder="請輸入電話號碼"
-              />
-            </div>
-
             <div>
               <Label htmlFor="email">電子郵件</Label>
               <Input
                 id="email"
-                name="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="請輸入電子郵件"
+                className="w-full"
+                placeholder="your@email.com"
               />
             </div>
-
             <div>
               <Label htmlFor="password">密碼</Label>
               <Input
                 id="password"
-                name="password"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
-                value={formData.password}
-                onChange={handleInputChange}
-                placeholder="請輸入密碼"
+                className="w-full"
+                placeholder="••••••••"
               />
             </div>
           </div>
@@ -166,9 +99,27 @@ const Login = () => {
           <Button
             type="submit"
             className="w-full"
-            disabled={isLoading}
+            disabled={loading}
           >
-            {isLoading ? "處理中..." : "註冊"}
+            {loading ? "登入中..." : "登入"}
+          </Button>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white px-2 text-gray-500">或</span>
+            </div>
+          </div>
+
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleSignUpWithGoogle}
+            className="w-full"
+          >
+            使用 Google 帳戶登入
           </Button>
         </form>
       </div>
