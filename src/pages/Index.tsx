@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSession } from "@supabase/auth-helpers-react";
 import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { ChatDrawer } from "@/components/ChatDrawer";
-import { Wind, Waves, Moon, Sun, Music2 } from "lucide-react";
+import { Wind, Waves, Moon, Sun, Music2, BookOpen } from "lucide-react";
 import { MeditationCard } from "@/components/MeditationCard";
 
 const Index = () => {
@@ -65,16 +65,29 @@ const Index = () => {
                 對生命至關重要！跟隨 呼吸的奇蹟 的呼吸技巧，轉變您的生活。
               </p>
               
-              {/* CTA Button with glow effect */}
-              <div className="relative flex justify-center">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-accent/50 rounded-full blur-xl animate-pulse" />
-                <Link 
-                  to="/breathwork"
-                  className="relative inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-white font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in delay-200"
-                >
-                  <span className="mr-2">開始您的旅程</span>
-                  <Wind className="w-5 h-5 animate-wind" />
-                </Link>
+              {/* CTA Buttons with glow effect */}
+              <div className="relative flex flex-col sm:flex-row justify-center gap-4">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-accent/50 rounded-full blur-xl animate-pulse" />
+                  <Link 
+                    to="/breathwork"
+                    className="relative inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-primary to-accent text-white font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in delay-200"
+                  >
+                    <span className="mr-2">開始練習</span>
+                    <Wind className="w-5 h-5 animate-wind" />
+                  </Link>
+                </div>
+
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent/50 to-primary/50 rounded-full blur-xl animate-pulse" />
+                  <Link 
+                    to="/meditate"
+                    className="relative inline-flex items-center px-8 py-4 rounded-full bg-gradient-to-r from-accent to-primary text-white font-medium shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-fade-in delay-300"
+                  >
+                    <span className="mr-2">靜坐指南</span>
+                    <BookOpen className="w-5 h-5" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
