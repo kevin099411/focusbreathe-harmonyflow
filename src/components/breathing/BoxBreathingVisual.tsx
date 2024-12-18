@@ -39,8 +39,8 @@ export const BoxBreathingVisual = ({ phase, progress }: BoxBreathingVisualProps)
         "absolute inset-0 m-auto w-24 h-24 rounded-full",
         "transition-all duration-500 ease-in-out",
         "flex items-center justify-center text-sm font-medium",
-        phase === "INHALE" && "bg-[#87f5b1]/20 scale-125",
-        phase === "HOLD1" && "bg-[#9b87f5]/20 scale-110",
+        phase === "INHALE" && "bg-[#9b87f5]/20 scale-125",
+        phase === "HOLD1" && "bg-[#87f5b1]/20 scale-110",
         phase === "EXHALE" && "bg-[#0EA5E9]/20 scale-90",
         phase === "HOLD2" && "bg-[#D946EF]/20 scale-100"
       )}>
@@ -51,8 +51,8 @@ export const BoxBreathingVisual = ({ phase, progress }: BoxBreathingVisualProps)
         )} />
         <span className={cn(
           "relative z-10",
-          phase === "INHALE" && "text-[#87f5b1]",
-          phase === "HOLD1" && "text-[#9b87f5]",
+          phase === "INHALE" && "text-[#9b87f5]",
+          phase === "HOLD1" && "text-[#87f5b1]",
           phase === "EXHALE" && "text-[#0EA5E9]",
           phase === "HOLD2" && "text-[#D946EF]"
         )}>
@@ -68,8 +68,8 @@ export const BoxBreathingVisual = ({ phase, progress }: BoxBreathingVisualProps)
         "absolute inset-0",
         "border-4 rounded-lg",
         "transition-all duration-500",
-        phase === "INHALE" && "border-[#87f5b1]/50 scale-105",
-        phase === "HOLD1" && "border-[#9b87f5]/50",
+        phase === "INHALE" && "border-[#9b87f5]/50 scale-105",
+        phase === "HOLD1" && "border-[#87f5b1]/50",
         phase === "EXHALE" && "border-[#0EA5E9]/50 scale-95",
         phase === "HOLD2" && "border-[#D946EF]/50"
       )} />
@@ -78,10 +78,10 @@ export const BoxBreathingVisual = ({ phase, progress }: BoxBreathingVisualProps)
       <div 
         className={cn(
           "absolute bottom-0 left-0 h-1 bg-gradient-to-r",
-          phase === "INHALE" && "from-[#87f5b1] to-[#9b87f5]",
-          phase === "HOLD1" && "from-[#9b87f5] to-[#0EA5E9]",
+          phase === "INHALE" && "from-[#9b87f5] to-[#87f5b1]",
+          phase === "HOLD1" && "from-[#87f5b1] to-[#0EA5E9]",
           phase === "EXHALE" && "from-[#0EA5E9] to-[#D946EF]",
-          phase === "HOLD2" && "from-[#D946EF] to-[#87f5b1]"
+          phase === "HOLD2" && "from-[#D946EF] to-[#9b87f5]"
         )}
         style={{ width: `${progress * 100}%` }}
       />
