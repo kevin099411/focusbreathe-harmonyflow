@@ -26,21 +26,23 @@ export const AudioControls = ({
   };
 
   return (
-    <div className="flex items-center justify-center gap-4 p-3 bg-gray-900/30 backdrop-blur-sm rounded-2xl shadow-lg transition-all duration-300 hover:bg-gray-900/40">
+    <div className="flex items-center gap-3 p-3 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg transition-all duration-300 hover:bg-white/30">
       <PlayButton 
         isPlaying={isPlaying}
         isLoaded={isLoaded}
         onClick={onPlayPause}
+        className="text-gray-800 hover:text-gray-600"
       />
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <LoopButton 
           isLooping={isLooping}
           onClick={onLoopToggle}
+          className="text-gray-800 hover:text-gray-600"
         />
         {remainingTime !== null && (
-          <div className="flex items-center gap-2">
-            <Timer className="h-5 w-5 text-white/80" />
-            <span className="text-sm font-medium text-white/90">
+          <div className="flex items-center gap-1">
+            <Timer className="h-4 w-4 text-gray-700" />
+            <span className="text-sm font-medium text-gray-800">
               {formatTime(remainingTime)}
             </span>
           </div>

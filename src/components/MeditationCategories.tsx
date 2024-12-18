@@ -136,7 +136,7 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100vh-20rem)] md:h-[400px] rounded-xl pb-28">
+      <ScrollArea className="h-[calc(100vh-20rem)] md:h-[400px] rounded-xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-2">
           {categories.map((category) => (
             <Card
@@ -159,8 +159,8 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
       </ScrollArea>
       
       {selectedAudioUrl && (
-        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-[#E7F0FD]/80 to-[#FFDEE2]/80 backdrop-blur-md border-t border-[#FFDEE2]/20">
-          <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 px-4 py-3">
+        <div className="fixed bottom-8 right-24 z-50">
+          <div className="flex items-center gap-2">
             <DurationSelector
               duration={selectedDuration}
               onDurationChange={setSelectedDuration}
