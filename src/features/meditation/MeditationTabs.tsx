@@ -6,23 +6,23 @@ import { DailyProgress } from "@/components/breathing/DailyProgress";
 
 export const MeditationTabs = () => {
   return (
-    <Tabs defaultValue="meditation" className="space-y-8">
-      <TabsList className="bg-white/70 backdrop-blur-sm border border-[#FFDEE2]/30 rounded-full p-1 animate-fade-in [animation-delay:600ms]">
+    <Tabs defaultValue="meditation" className="space-y-4 md:space-y-8 pb-24">
+      <TabsList className="w-full md:w-auto bg-white/70 backdrop-blur-sm border border-[#FFDEE2]/30 rounded-full p-1 animate-fade-in [animation-delay:600ms] overflow-x-auto flex-nowrap">
         <TabsTrigger 
           value="meditation"
-          className="rounded-full px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FFDEE2] data-[state=active]:to-[#E7F0FD] data-[state=active]:text-[#333333] transition-all duration-300"
+          className="rounded-full px-3 md:px-6 whitespace-nowrap data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FFDEE2] data-[state=active]:to-[#E7F0FD] data-[state=active]:text-[#333333] transition-all duration-300"
         >
           靜坐
         </TabsTrigger>
         <TabsTrigger 
           value="breathing"
-          className="rounded-full px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FFDEE2] data-[state=active]:to-[#E7F0FD] data-[state=active]:text-[#333333] transition-all duration-300"
+          className="rounded-full px-3 md:px-6 whitespace-nowrap data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FFDEE2] data-[state=active]:to-[#E7F0FD] data-[state=active]:text-[#333333] transition-all duration-300"
         >
           呼吸練習
         </TabsTrigger>
         <TabsTrigger 
           value="sleep"
-          className="rounded-full px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FFDEE2] data-[state=active]:to-[#E7F0FD] data-[state=active]:text-[#333333] transition-all duration-300"
+          className="rounded-full px-3 md:px-6 whitespace-nowrap data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#FFDEE2] data-[state=active]:to-[#E7F0FD] data-[state=active]:text-[#333333] transition-all duration-300"
         >
           幫助睡眠呼吸法
         </TabsTrigger>

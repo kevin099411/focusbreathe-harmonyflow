@@ -11,7 +11,7 @@ export const DurationSelector = ({ duration, onDurationChange }: DurationSelecto
       value={duration.toString()}
       onValueChange={(value) => onDurationChange(parseInt(value))}
     >
-      <SelectTrigger className="w-[100px] bg-gray-900/50 text-white border-gray-700">
+      <SelectTrigger className="w-[80px] md:w-[100px] bg-gray-900/50 text-white border-gray-700 text-sm md:text-base">
         <SelectValue placeholder="Duration" />
       </SelectTrigger>
       <SelectContent>
