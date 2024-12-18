@@ -1,12 +1,10 @@
-import { Shuffle } from "lucide-react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
 import { useState } from "react";
 import { useSession } from "@supabase/auth-helpers-react";
 import { toast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
-import { AudioPlayer } from "./AudioPlayer";
-import { DurationSelector } from "./DurationSelector";
+import { CategoryCard } from "./meditation/CategoryCard";
+import { CategoryHeader } from "./meditation/CategoryHeader";
+import { CategoryIntro } from "./meditation/CategoryIntro";
+import { AudioController } from "./meditation/AudioController";
 
 interface Category {
   id: string;
@@ -86,7 +84,6 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   const [selectedDuration, setSelectedDuration] = useState<number>(5);
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const session = useSession();
-  const navigate = useNavigate();
 
   const handleShuffle = () => {
     const availableCategories = categories;
@@ -116,73 +113,27 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   return (
     <div className="space-y-3 bg-gradient-to-br from-[#E7F0FD]/30 to-[#FFDEE2]/30 p-3 rounded-3xl backdrop-blur-sm pb-24">
       <div className="flex flex-col space-y-2">
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl md:text-2xl font-medium text-[#333333] tracking-wide">選擇您的練習</h2>
-          <Button onClick={handleShuffle} variant="ghost" size="sm" className="gap-1 text-[#333333] hover:text-[#FFDEE2] transition-colors duration-300">
-            <Shuffle className="h-4 w-4" />
-            隨機選擇
-          </Button>
-        </div>
-        
-        <div className="text-center space-y-2">
-          <p className="text-[#333333] text-base md:text-lg">準備好開始您的呼吸之旅了嗎？</p>
-          <p className="text-[#333333] text-sm md:text-base">通過我們的引導式呼吸練習，學習如何正確呼吸，改善身心健康。</p>
-          <Button 
-            onClick={() => handleSelect(categories[0])} 
-            variant="ghost" 
-            size="lg"
-            className="mt-2 gap-2 text-[#333333] hover:text-[#FFDEE2] hover:bg-white/50 transition-all duration-300 rounded-full px-4 md:px-8 shadow-lg hover:shadow-xl"
-          >
-            開始練習 → 方箱呼吸練習
-          </Button>
-        </div>
+        <CategoryHeader onShuffle={handleShuffle} />
+        <CategoryIntro onStartPractice={() => handleSelect(categories[0])} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
         {categories.map((category) => (
-          <Card
+          <CategoryCard
             key={category.id}
-            className={`p-4 cursor-pointer transition-all duration-300 hover:scale-105 
-              ${activeCard === category.id 
-                ? 'bg-[#1A1F2C] text-white' 
-                : 'bg-white/70 hover:bg-gradient-to-br hover:from-[#FFDEE2]/20 hover:to-[#E7F0FD]/20'} 
-              backdrop-blur-md shadow-lg hover:shadow-xl rounded-xl border border-transparent hover:border-[#FFDEE2]/50`}
-            onClick={() => handleSelect(category)}
-          >
-            <div className="flex flex-col items-center text-center space-y-2">
-              <span className="text-2xl md:text-3xl">{category.icon}</span>
-              <h3 className={`text-base md:text-lg font-medium ${
-                activeCard === category.id ? 'text-white' : 'text-[#333333]'
-              }`}>
-                {category.title}
-              </h3>
-              <p className={`text-xs md:text-sm ${
-                activeCard === category.id ? 'text-gray-200' : 'text-gray-600'
-              }`}>
-                {category.description}
-              </p>
-            </div>
-          </Card>
+            category={category}
+            isActive={activeCard === category.id}
+            onClick={handleSelect}
+          />
         ))}
       </div>
       
-      {selectedAudioUrl && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-md border-t border-gray-200/20 py-2 mb-0">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-end gap-2 max-w-6xl mx-auto">
-              <DurationSelector
-                duration={selectedDuration}
-                onDurationChange={setSelectedDuration}
-              />
-              <AudioPlayer 
-                audioUrl={selectedAudioUrl}
-                duration={selectedDuration}
-                onTimerEnd={handleTimerEnd}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <AudioController
+        selectedDuration={selectedDuration}
+        onDurationChange={setSelectedDuration}
+        audioUrl={selectedAudioUrl}
+        onTimerEnd={handleTimerEnd}
+      />
     </div>
   );
 };
