@@ -2,6 +2,7 @@ import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { Link } from "react-router-dom";
 import { MeditationVideo } from "@/components/MeditationVideo";
 import { SmallBreathingCircle } from "@/components/SmallBreathingCircle";
+import { MeditationCard } from "@/components/MeditationCard";
 
 const Index = () => {
   return (
@@ -50,6 +51,28 @@ const Index = () => {
               <MeditationVideo 
                 src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
                 title="靜心冥想"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Meditation Cards Section */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <MeditationCard
+                title="早晨靜坐"
+                duration="10"
+                description="以平和的雨聲開始你的一天，讓心靈沉澱在寧靜中。"
+                image="/placeholder.svg"
+                audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/1%20Minute%20of%20Peaceful%20Rain%20Sounds%20_%20Clear%20Your%20Mind%20_%20Relax%20_%20Calming%20Rain_1734424276340.mp3"
+              />
+              <MeditationCard
+                title="中午靜坐"
+                duration="10"
+                description="在忙碌的一天中稍作休息，重新找回平靜與專注。"
+                image="/placeholder.svg"
+                audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7256086520346496282%20(1).mp3"
               />
             </div>
           </div>
