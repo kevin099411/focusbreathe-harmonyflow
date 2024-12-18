@@ -102,8 +102,8 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
 
   const handleTimerEnd = () => {
     toast({
-      title: "冥想結束",
-      description: "您的冥想時間已結束。",
+      title: "靜坐結束",
+      description: "您的靜坐時間已結束。",
     });
     setSelectedCategory(null);
   };
