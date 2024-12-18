@@ -64,14 +64,14 @@ const Index = () => {
                 title="早晨靜坐"
                 duration="10"
                 description="以平和的雨聲開始你的一天，讓心靈沉澱在寧靜中。"
-                image="/placeholder.svg"
+                image="https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop"
                 audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/1%20Minute%20of%20Peaceful%20Rain%20Sounds%20_%20Clear%20Your%20Mind%20_%20Relax%20_%20Calming%20Rain_1734424276340.mp3"
               />
               <MeditationCard
                 title="中午靜坐"
                 duration="10"
                 description="在忙碌的一天中稍作休息，重新找回平靜與專注。"
-                image="/placeholder.svg"
+                image="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop"
                 audioUrl="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/audio/Snaptik.app_7256086520346496282%20(1).mp3"
               />
             </div>
