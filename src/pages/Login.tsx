@@ -12,29 +12,36 @@ const Login = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   useEffect(() => {
+    console.log("Setting up auth state change listener");
+    
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session) => {
-      console.log("Auth event:", event);
+      console.log("Auth event received:", event);
+      console.log("Session state:", session);
       
-      if (event === "SIGNED_IN") {
-        console.log("User signed in:", session?.user.id);
+      if (event === "SIGNED_IN" && session) {
+        console.log("User signed in successfully:", session.user.id);
         navigate("/");
       }
       
-      if (event === "USER_UPDATED") {
-        console.log("User signed up");
+      if (event === "SIGNED_UP") {
+        console.log("User signed up, showing confirmation");
         setShowConfirmation(true);
       }
     });
 
     // Check if user is already signed in
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("Checking existing session:", session);
       if (session) {
-        console.log("User already signed in, redirecting");
+        console.log("Existing session found, redirecting");
         navigate("/");
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      console.log("Cleaning up auth listener");
+      subscription.unsubscribe();
+    };
   }, [navigate]);
 
   return (
