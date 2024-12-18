@@ -114,7 +114,17 @@ export const MeditationCategories = ({ onSelect }: { onSelect?: (category: strin
   return (
     <div className="space-y-3">
       <div className="flex justify-between items-center">
-        <h2 className="text-lg font-medium text-white">選擇您的練習</h2>
+        <h2 className="text-lg font-medium text-[#333333]">選擇您的練習</h2>
+        <p className="mt-2 text-[#333333]">準備好開始您的呼吸之旅了嗎？</p>
+        <p className="mb-4 text-[#333333]">通過我們的引導式呼吸練習，學習如何正確呼吸，改善身心健康。</p>
+        <Button 
+          onClick={() => handleSelect(categories[0])} 
+          variant="ghost" 
+          size="sm" 
+          className="gap-1 text-[#333333] hover:text-primary mb-4"
+        >
+          開始練習 → 方箱呼吸練習
+        </Button>
         <Button onClick={handleShuffle} variant="ghost" size="sm" className="gap-1 text-gray-300 hover:text-white">
           <Shuffle className="h-3 w-3" />
           隨機選擇
