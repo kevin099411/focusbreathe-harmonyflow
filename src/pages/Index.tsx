@@ -78,10 +78,21 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Benefits Section */}
+        {/* Benefits Section with Video */}
         <section className="py-12 px-4 bg-white/50 backdrop-blur-sm">
           <div className="container mx-auto max-w-4xl">
             <h2 className="text-3xl font-bold text-center mb-8 text-[#333333]">冥想的好處</h2>
+            
+            {/* Benefits Video */}
+            <div className="mb-12 max-w-2xl mx-auto">
+              <div className="aspect-[9/16] w-full">
+                <MeditationVideo 
+                  src="https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/videos/Snaptik.app_7274838978107411758.mp4"
+                  title="冥想的好處"
+                />
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="p-6 rounded-xl bg-white/80 shadow-lg">
                 <h3 className="text-xl font-semibold mb-3 text-[#333333]">減輕壓力</h3>
