@@ -8,7 +8,7 @@ const Testing = () => {
         {/* User Profile Section */}
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <h1 className="text-2xl font-bold text-gray-800">測試用戶</h1>
-          <p className="text-gray-500">與潮汐相遇的第 1 天</p>
+          <p className="text-gray-500">與靜坐相遇的第 1 天</p>
           
           {/* Premium Banner */}
           <div className="mt-4 bg-gray-900 text-white rounded-lg p-4 flex justify-between items-center">
@@ -59,11 +59,11 @@ const Testing = () => {
         {/* My Journey */}
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl">我的潮汐</h3>
+            <h3 className="text-xl">我的靜坐</h3>
             <span className="text-gray-400">{`>`}</span>
           </div>
           <div className="flex justify-center items-center py-8 text-gray-500">
-            開始你的潮汐之旅
+            靜坐開始
           </div>
         </div>
       </div>
