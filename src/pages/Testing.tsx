@@ -38,7 +38,7 @@ const Testing = () => {
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <div className="flex items-center space-x-2 mb-4">
             <span className="text-xl">今日</span>
-            <span className="text-gray-400">></span>
+            <span className="text-gray-400">{`>`}</span>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-purple-50 rounded-lg p-4">
@@ -60,7 +60,7 @@ const Testing = () => {
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl">我的潮汐</h3>
-            <span className="text-gray-400">></span>
+            <span className="text-gray-400">{`>`}</span>
           </div>
           <div className="flex justify-center items-center py-8 text-gray-500">
             開始你的潮汐之旅
