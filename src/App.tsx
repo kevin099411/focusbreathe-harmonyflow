@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 import Meditate from "./pages/Meditate";
 import Breathwork from "./pages/Breathwork";
 import Pricing from "./pages/Pricing";
+import Testing from "./pages/Testing";
 import Login from "./pages/Login";
 
 const queryClient = new QueryClient({
@@ -45,6 +46,7 @@ const App = () => {
                 <Route path="/" element={<Index />} />
                 <Route path="/meditate" element={<Meditate />} />
                 <Route path="/breathwork" element={<Breathwork />} />
+                <Route path="/testing" element={<Testing />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={

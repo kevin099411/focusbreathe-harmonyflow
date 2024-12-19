@@ -24,7 +24,6 @@ export const Navigation = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={toggleMenu}
             className="md:hidden p-2 text-[#e89eb8] hover:opacity-80 transition-opacity"
@@ -32,7 +31,6 @@ export const Navigation = () => {
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
           
-          {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-6">
             <Link to="/meditate" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               靜坐
@@ -40,20 +38,15 @@ export const Navigation = () => {
             <Link to="/breathwork" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               每日知識
             </Link>
+            <Link to="/testing" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
+              測試
+            </Link>
             <Link to="/pricing" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               價格
             </Link>
-            {!session ? (
-              <Link to="/login">
-                <Button variant="outline" size="sm" className="text-sm border-[#e89eb8] text-[#e89eb8] hover:bg-[#e89eb8]/10">
-                  登入
-                </Button>
-              </Link>
-            ) : null}
           </div>
         </div>
 
-        {/* Mobile navigation */}
         {isMenuOpen && (
           <div className="md:hidden py-4 bg-white/95 border-t border-gray-100">
             <div className="flex flex-col space-y-4 px-4">
@@ -72,22 +65,19 @@ export const Navigation = () => {
                 每日知識
               </Link>
               <Link 
+                to="/testing" 
+                className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                測試
+              </Link>
+              <Link 
                 to="/pricing" 
                 className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 價格
               </Link>
-              {!session ? (
-                <Link 
-                  to="/login"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <Button variant="outline" size="sm" className="w-full text-sm border-[#e89eb8] text-[#e89eb8] hover:bg-[#e89eb8]/10">
-                    登入
-                  </Button>
-                </Link>
-              ) : null}
             </div>
           </div>
         )}
