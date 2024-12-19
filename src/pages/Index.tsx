@@ -1,12 +1,9 @@
-import { DailyPricingPopup } from "@/components/DailyPricingPopup";
 import { BreathingCircle } from "@/components/breathing/BreathingCircle";
 import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#FFDEE2]/5 to-[#D946EF]/5">
-      <DailyPricingPopup />
-      
       <div className="fixed inset-0 -z-10">
         {/* Wave Gradients */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,222,226,0.1),rgba(217,70,239,0.05))] animate-wind" />
