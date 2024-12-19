@@ -48,6 +48,7 @@ export const DailyPricingPopup = () => {
       title: "基礎冥想",
       price: "9.99",
       features: [
+        "7天免費試用",
         "5個引導冥想",
         "基礎呼吸練習",
         "每日正念提示",
@@ -58,6 +59,7 @@ export const DailyPricingPopup = () => {
       title: "高級禪修",
       price: "19.99",
       features: [
+        "7天免費試用",
         "20個引導冥想",
         "進階呼吸技巧",
         "個人冥想追蹤",
@@ -70,6 +72,7 @@ export const DailyPricingPopup = () => {
       title: "大師套餐",
       price: "49.99",
       features: [
+        "7天免費試用",
         "無限制引導冥想",
         "一對一冥想指導",
         "定制冥想計劃",
@@ -87,6 +90,7 @@ export const DailyPricingPopup = () => {
           <DialogTitle className="text-2xl font-bold text-center mb-4 text-[#0EA5E9]">
             開始您的冥想之旅
           </DialogTitle>
+          <p className="text-center text-gray-600">所有方案都包含7天免費試用期</p>
         </DialogHeader>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
           {pricingPlans.map((plan, index) => (

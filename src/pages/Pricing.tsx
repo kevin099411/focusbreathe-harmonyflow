@@ -9,6 +9,7 @@ const Pricing = () => {
       title: "基礎冥想",
       price: "9.99",
       features: [
+        "7天免費試用",
         "5個引導冥想",
         "基礎呼吸練習",
         "每日正念提示",
@@ -19,6 +20,7 @@ const Pricing = () => {
       title: "高級禪修",
       price: "19.99",
       features: [
+        "7天免費試用",
         "20個引導冥想",
         "進階呼吸技巧",
         "個人冥想追蹤",
@@ -31,6 +33,7 @@ const Pricing = () => {
       title: "大師套餐",
       price: "49.99",
       features: [
+        "7天免費試用",
         "無限制引導冥想",
         "一對一冥想指導",
         "定制冥想計劃",
@@ -44,8 +47,9 @@ const Pricing = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pt-16">
       <div className="container mx-auto px-4 py-6 md:py-12">
-        <div className="flex justify-between items-center mb-6 md:mb-12">
-          <h1 className="text-2xl md:text-4xl font-bold text-[#0EA5E9]">選擇方案</h1>
+        <div className="flex flex-col items-center mb-6 md:mb-12">
+          <h1 className="text-2xl md:text-4xl font-bold text-[#0EA5E9] mb-4">選擇方案</h1>
+          <p className="text-center text-gray-600">所有方案都包含7天免費試用期</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto px-2 md:px-8">
           {pricingPlans.map((plan, index) => (
