@@ -87,12 +87,8 @@ export type Database = {
           description: string
           id: string
           image_url: string | null
-          inventory: number | null
           order_index: number | null
           price: number
-          product_cost: number | null
-          profit: number | null
-          sale_price: number | null
           seo_description: string | null
           seo_keywords: string | null
           seo_title: string | null
@@ -105,12 +101,8 @@ export type Database = {
           description: string
           id?: string
           image_url?: string | null
-          inventory?: number | null
           order_index?: number | null
           price: number
-          product_cost?: number | null
-          profit?: number | null
-          sale_price?: number | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title?: string | null
@@ -123,12 +115,8 @@ export type Database = {
           description?: string
           id?: string
           image_url?: string | null
-          inventory?: number | null
           order_index?: number | null
           price?: number
-          product_cost?: number | null
-          profit?: number | null
-          sale_price?: number | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title?: string | null
