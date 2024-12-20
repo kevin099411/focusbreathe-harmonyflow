@@ -14,6 +14,7 @@ import Breathwork from "./pages/Breathwork";
 import Pricing from "./pages/Pricing";
 import Testing from "./pages/Testing";
 import Login from "./pages/Login";
+import ProductManagement from "./pages/ProductManagement";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,6 +50,7 @@ const App = () => {
                 <Route path="/testing" element={<Testing />} />
                 <Route path="/pricing" element={<Pricing />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/products" element={<ProductManagement />} />
                 <Route path="*" element={
                   <div className="min-h-screen flex items-center justify-center">
                     <div className="text-center">

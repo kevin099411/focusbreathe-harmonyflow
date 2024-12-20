@@ -1,38 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useSession } from '@supabase/auth-helpers-react';
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { supabase } from '@/integrations/supabase/client';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { Loader2, Upload, Trash2, GripVertical } from 'lucide-react';
-
-interface Product {
-  id: string;
-  title: string;
-  description: string;
-  price: number;
-  image_url?: string;
-  seo_title?: string;
-  seo_description?: string;
-  seo_keywords?: string;
-  order_index: number;
-}
+import { Product, NewProduct } from '@/types/product';
+import { ProductForm } from '@/components/product/ProductForm';
+import { ProductList } from '@/components/product/ProductList';
 
 export default function ProductManagement() {
   const session = useSession();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
-  const [newProduct, setNewProduct] = useState<Partial<Product>>({
-    title: '',
-    description: '',
-    price: 0,
-    seo_title: '',
-    seo_description: '',
-    seo_keywords: '',
-  });
 
   useEffect(() => {
     fetchProducts();
@@ -86,14 +64,14 @@ export default function ProductManagement() {
 
         if (error) throw error;
         await fetchProducts();
-      } else {
-        setNewProduct(prev => ({ ...prev, image_url: publicUrl }));
       }
 
       toast({
         title: '成功',
         description: '圖片上傳成功',
       });
+
+      return publicUrl;
     } catch (error) {
       console.error('Error uploading image:', error);
       toast({
@@ -106,22 +84,13 @@ export default function ProductManagement() {
     }
   };
 
-  const handleCreateProduct = async () => {
+  const handleCreateProduct = async (newProduct: Partial<NewProduct>) => {
     try {
       const { error } = await supabase
         .from('products')
-        .insert([{ ...newProduct, order_index: products.length }]);
+        .insert([{ ...newProduct, order_index: products.length, user_id: session?.user?.id }]);
 
       if (error) throw error;
-
-      setNewProduct({
-        title: '',
-        description: '',
-        price: 0,
-        seo_title: '',
-        seo_description: '',
-        seo_keywords: '',
-      });
       await fetchProducts();
 
       toast({
@@ -171,7 +140,6 @@ export default function ProductManagement() {
 
     setProducts(items);
 
-    // Update order indices in database
     try {
       const updates = items.map((item, index) => ({
         id: item.id,
@@ -204,131 +172,17 @@ export default function ProductManagement() {
   return (
     <div className="container mx-auto p-4 space-y-8">
       <h1 className="text-2xl font-bold">產品管理</h1>
-
-      {/* New Product Form */}
-      <div className="bg-white p-6 rounded-lg shadow space-y-4">
-        <h2 className="text-xl font-semibold">新增產品</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Input
-            placeholder="產品名稱"
-            value={newProduct.title}
-            onChange={e => setNewProduct(prev => ({ ...prev, title: e.target.value }))}
-          />
-          <Input
-            type="number"
-            placeholder="價格"
-            value={newProduct.price}
-            onChange={e => setNewProduct(prev => ({ ...prev, price: parseFloat(e.target.value) }))}
-          />
-          <Textarea
-            placeholder="產品描述"
-            value={newProduct.description}
-            onChange={e => setNewProduct(prev => ({ ...prev, description: e.target.value }))}
-            className="md:col-span-2"
-          />
-          <Input
-            placeholder="SEO 標題"
-            value={newProduct.seo_title}
-            onChange={e => setNewProduct(prev => ({ ...prev, seo_title: e.target.value }))}
-          />
-          <Input
-            placeholder="SEO 關鍵字"
-            value={newProduct.seo_keywords}
-            onChange={e => setNewProduct(prev => ({ ...prev, seo_keywords: e.target.value }))}
-          />
-          <Textarea
-            placeholder="SEO 描述"
-            value={newProduct.seo_description}
-            onChange={e => setNewProduct(prev => ({ ...prev, seo_description: e.target.value }))}
-            className="md:col-span-2"
-          />
-          <div className="md:col-span-2">
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              disabled={uploading}
-            />
-          </div>
-          <Button
-            onClick={handleCreateProduct}
-            className="md:col-span-2"
-            disabled={uploading}
-          >
-            {uploading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                上傳中...
-              </>
-            ) : (
-              '新增產品'
-            )}
-          </Button>
-        </div>
-      </div>
-
-      {/* Products List */}
-      <div className="bg-white p-6 rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4">產品列表</h2>
-        {loading ? (
-          <div className="flex justify-center">
-            <Loader2 className="h-8 w-8 animate-spin" />
-          </div>
-        ) : (
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="products">
-              {(provided) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                  className="space-y-4"
-                >
-                  {products.map((product, index) => (
-                    <Draggable
-                      key={product.id}
-                      draggableId={product.id}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
-                        >
-                          <div {...provided.dragHandleProps}>
-                            <GripVertical className="h-5 w-5 text-gray-400" />
-                          </div>
-                          {product.image_url && (
-                            <img
-                              src={product.image_url}
-                              alt={product.title}
-                              className="w-16 h-16 object-cover rounded"
-                            />
-                          )}
-                          <div className="flex-1">
-                            <h3 className="font-semibold">{product.title}</h3>
-                            <p className="text-sm text-gray-500">
-                              ${product.price}
-                            </p>
-                          </div>
-                          <Button
-                            variant="destructive"
-                            size="icon"
-                            onClick={() => handleDeleteProduct(product.id)}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        )}
-      </div>
+      <ProductForm
+        onSubmit={handleCreateProduct}
+        uploading={uploading}
+        onImageUpload={handleImageUpload}
+      />
+      <ProductList
+        products={products}
+        loading={loading}
+        onDelete={handleDeleteProduct}
+        onDragEnd={onDragEnd}
+      />
     </div>
   );
 }
