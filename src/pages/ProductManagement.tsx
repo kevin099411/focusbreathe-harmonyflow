@@ -37,14 +37,14 @@ export default function ProductManagement() {
     }
   };
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>, productId?: string) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file = event.target.files?.[0];
       if (!file) return;
 
       setUploading(true);
       const fileExt = file.name.split('.').pop();
-      const filePath = `${productId || 'new'}-${Math.random()}.${fileExt}`;
+      const filePath = `${Math.random()}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
         .from('products')
@@ -55,16 +55,6 @@ export default function ProductManagement() {
       const { data: { publicUrl } } = supabase.storage
         .from('products')
         .getPublicUrl(filePath);
-
-      if (productId) {
-        const { error } = await supabase
-          .from('products')
-          .update({ image_url: publicUrl })
-          .eq('id', productId);
-
-        if (error) throw error;
-        await fetchProducts();
-      }
 
       toast({
         title: '成功',
@@ -88,7 +78,14 @@ export default function ProductManagement() {
     try {
       const { error } = await supabase
         .from('products')
-        .insert([{ ...newProduct, order_index: products.length, user_id: session?.user?.id }]);
+        .insert({
+          ...newProduct,
+          order_index: products.length,
+          user_id: session?.user?.id,
+          description: newProduct.description || '',
+          price: newProduct.price || 0,
+          title: newProduct.title || '',
+        });
 
       if (error) throw error;
       await fetchProducts();
@@ -144,6 +141,9 @@ export default function ProductManagement() {
       const updates = items.map((item, index) => ({
         id: item.id,
         order_index: index,
+        description: item.description,
+        price: item.price,
+        title: item.title,
       }));
 
       const { error } = await supabase

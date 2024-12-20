@@ -13,4 +13,4 @@ export interface Product {
   user_id?: string | null;
 }
 
-export type NewProduct = Omit<Product, 'id' | 'created_at' | 'updated_at'>;
+export type NewProduct = Omit<Product, 'id' | 'created_at' | 'updated_at' | 'order_index'>;
