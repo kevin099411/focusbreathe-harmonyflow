@@ -44,11 +44,6 @@ export const Navigation = () => {
             <Link to="/pricing" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               價格
             </Link>
-            {session?.user && (
-              <Link to="/products" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
-                產品管理
-              </Link>
-            )}
           </div>
         </div>
 
@@ -83,19 +78,10 @@ export const Navigation = () => {
               >
                 價格
               </Link>
-              {session?.user && (
-                <Link 
-                  to="/products" 
-                  className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  產品管理
-                </Link>
-              )}
             </div>
           </div>
         )}
       </div>
     </nav>
   );
-};
+}
