@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FileUploader } from './FileUploader';
 import { ImagePreview } from './ImagePreview';
 import { toast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface ProductImageUploaderProps {
   onImagesUploaded: (urls: string[]) => void;
@@ -58,6 +59,10 @@ export function ProductImageUploader({ onImagesUploaded }: ProductImageUploaderP
     }
   };
 
+  const removeImage = (indexToRemove: number) => {
+    setUploadedImages(prev => prev.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
     <div className="space-y-4">
       <FileUploader
@@ -67,7 +72,11 @@ export function ProductImageUploader({ onImagesUploaded }: ProductImageUploaderP
       />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {uploadedImages.map((url, index) => (
-          <ImagePreview key={index} url={url} />
+          <ImagePreview 
+            key={url} 
+            url={url} 
+            onRemove={() => removeImage(index)}
+          />
         ))}
       </div>
     </div>

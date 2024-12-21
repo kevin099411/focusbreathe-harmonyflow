@@ -37,54 +37,15 @@ export default function ProductManagement() {
     }
   };
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    try {
-      const file = event.target.files?.[0];
-      if (!file) return;
-
-      setUploading(true);
-      const fileExt = file.name.split('.').pop();
-      const filePath = `${Math.random()}.${fileExt}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from('products')
-        .upload(filePath, file);
-
-      if (uploadError) throw uploadError;
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('products')
-        .getPublicUrl(filePath);
-
-      toast({
-        title: '成功',
-        description: '圖片上傳成功',
-      });
-
-      return publicUrl;
-    } catch (error) {
-      console.error('Error uploading image:', error);
-      toast({
-        title: '錯誤',
-        description: '圖片上傳失敗',
-        variant: 'destructive',
-      });
-    } finally {
-      setUploading(false);
-    }
-  };
-
   const handleCreateProduct = async (newProduct: Partial<NewProduct>) => {
     try {
+      setUploading(true);
       const { error } = await supabase
         .from('products')
         .insert({
           ...newProduct,
           order_index: products.length,
           user_id: session?.user?.id,
-          description: newProduct.description || '',
-          price: newProduct.price || 0,
-          title: newProduct.title || '',
         });
 
       if (error) throw error;
@@ -101,6 +62,8 @@ export default function ProductManagement() {
         description: '產品創建失敗',
         variant: 'destructive',
       });
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -141,9 +104,6 @@ export default function ProductManagement() {
       const updates = items.map((item, index) => ({
         id: item.id,
         order_index: index,
-        description: item.description,
-        price: item.price,
-        title: item.title,
       }));
 
       const { error } = await supabase
@@ -175,7 +135,6 @@ export default function ProductManagement() {
       <ProductForm
         onSubmit={handleCreateProduct}
         uploading={uploading}
-        onImageUpload={handleImageUpload}
       />
       <ProductList
         products={products}
