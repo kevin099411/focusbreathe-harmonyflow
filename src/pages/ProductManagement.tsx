@@ -38,6 +38,15 @@ export default function ProductManagement() {
   };
 
   const handleCreateProduct = async (newProduct: Partial<NewProduct>) => {
+    if (!newProduct.title || !newProduct.description || !newProduct.price) {
+      toast({
+        title: '錯誤',
+        description: '請填寫必要欄位',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       setUploading(true);
       const { error } = await supabase
@@ -46,6 +55,9 @@ export default function ProductManagement() {
           ...newProduct,
           order_index: products.length,
           user_id: session?.user?.id,
+          title: newProduct.title,
+          description: newProduct.description,
+          price: newProduct.price,
         });
 
       if (error) throw error;
@@ -104,6 +116,9 @@ export default function ProductManagement() {
       const updates = items.map((item, index) => ({
         id: item.id,
         order_index: index,
+        title: item.title,
+        description: item.description,
+        price: item.price,
       }));
 
       const { error } = await supabase

@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Loader2, X } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { NewProduct } from '@/types/product';
 import { ProductImageUploader } from './ProductImageUploader';
-import { Badge } from '@/components/ui/badge';
+import { TagManager } from './TagManager';
+import { PricingFields } from './PricingFields';
+import { SeoFields } from './SeoFields';
 
 interface ProductFormProps {
   onSubmit: (product: Partial<NewProduct>) => Promise<void>;
@@ -26,7 +28,6 @@ export function ProductForm({ onSubmit, uploading }: ProductFormProps) {
   });
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
-  const [newTag, setNewTag] = useState('');
 
   const handleSubmit = async () => {
     await onSubmit({
@@ -49,18 +50,12 @@ export function ProductForm({ onSubmit, uploading }: ProductFormProps) {
     setTags([]);
   };
 
-  const handleAddTag = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && newTag.trim()) {
-      e.preventDefault();
-      if (!tags.includes(newTag.trim())) {
-        setTags([...tags, newTag.trim()]);
-      }
-      setNewTag('');
-    }
+  const handlePriceChange = (field: string, value: number) => {
+    setNewProduct(prev => ({ ...prev, [field]: value }));
   };
 
-  const removeTag = (tagToRemove: string) => {
-    setTags(tags.filter(tag => tag !== tagToRemove));
+  const handleSeoChange = (field: string, value: string) => {
+    setNewProduct(prev => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -78,56 +73,17 @@ export function ProductForm({ onSubmit, uploading }: ProductFormProps) {
           onChange={e => setNewProduct(prev => ({ ...prev, title: e.target.value }))}
         />
 
-        <div className="space-y-2">
-          <div className="flex flex-wrap gap-2">
-            {tags.map(tag => (
-              <Badge key={tag} variant="secondary" className="gap-1">
-                {tag}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-4 w-4 p-0 hover:bg-transparent"
-                  onClick={() => removeTag(tag)}
-                >
-                  <X className="h-3 w-3" />
-                </Button>
-              </Badge>
-            ))}
-          </div>
-          <Input
-            placeholder="添加標籤 (按Enter確認)"
-            value={newTag}
-            onChange={e => setNewTag(e.target.value)}
-            onKeyDown={handleAddTag}
-          />
-        </div>
+        <TagManager
+          tags={tags}
+          onTagsChange={setTags}
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Input
-            type="number"
-            placeholder="價格"
-            value={newProduct.price}
-            onChange={e => setNewProduct(prev => ({ ...prev, price: parseFloat(e.target.value) }))}
-          />
-          <Input
-            type="number"
-            placeholder="促銷價格"
-            value={newProduct.sale_price}
-            onChange={e => setNewProduct(prev => ({ ...prev, sale_price: parseFloat(e.target.value) }))}
-          />
-          <Input
-            type="number"
-            placeholder="庫存"
-            value={newProduct.inventory}
-            onChange={e => setNewProduct(prev => ({ ...prev, inventory: parseInt(e.target.value) }))}
-          />
-        </div>
-
-        <Input
-          type="number"
-          placeholder="成本"
-          value={newProduct.product_cost}
-          onChange={e => setNewProduct(prev => ({ ...prev, product_cost: parseFloat(e.target.value) }))}
+        <PricingFields
+          price={newProduct.price || 0}
+          salePrice={newProduct.sale_price || 0}
+          inventory={newProduct.inventory || 0}
+          productCost={newProduct.product_cost || 0}
+          onPriceChange={handlePriceChange}
         />
 
         <Textarea
@@ -137,23 +93,12 @@ export function ProductForm({ onSubmit, uploading }: ProductFormProps) {
           className="min-h-[100px]"
         />
 
-        <div className="space-y-4">
-          <Input
-            placeholder="SEO 標題"
-            value={newProduct.seo_title}
-            onChange={e => setNewProduct(prev => ({ ...prev, seo_title: e.target.value }))}
-          />
-          <Input
-            placeholder="SEO 關鍵字"
-            value={newProduct.seo_keywords}
-            onChange={e => setNewProduct(prev => ({ ...prev, seo_keywords: e.target.value }))}
-          />
-          <Textarea
-            placeholder="SEO 描述"
-            value={newProduct.seo_description}
-            onChange={e => setNewProduct(prev => ({ ...prev, seo_description: e.target.value }))}
-          />
-        </div>
+        <SeoFields
+          seoTitle={newProduct.seo_title || ''}
+          seoKeywords={newProduct.seo_keywords || ''}
+          seoDescription={newProduct.seo_description || ''}
+          onSeoChange={handleSeoChange}
+        />
 
         <Button
           onClick={handleSubmit}
