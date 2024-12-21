@@ -2,6 +2,8 @@ import { Check } from "lucide-react";
 import { PayPalButton } from "./PayPalButton";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 interface PricingCardProps {
   title: string;
@@ -90,6 +92,13 @@ export const PricingCard = ({
           />
         </div>
       )}
+      <div className="mt-4">
+        <Link to="/product-management">
+          <Button variant="outline" className="w-full">
+            管理產品
+          </Button>
+        </Link>
+      </div>
       {isLoading && (
         <div className="absolute inset-0 bg-black/20 rounded-2xl flex items-center justify-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
