@@ -1,7 +1,33 @@
 import { BreathingCircle } from "@/components/breathing/BreathingCircle";
 import { Link } from "react-router-dom";
+import { useSession } from "@supabase/auth-helpers-react";
+import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Product } from "@/types/product";
 
 const Index = () => {
+  const session = useSession();
+
+  const { data: products, isLoading } = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      console.log('Fetching products...');
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching products:', error);
+        throw error;
+      }
+
+      console.log('Products fetched:', data);
+      return data as Product[];
+    },
+  });
+
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#FFDEE2]/5 to-[#D946EF]/5">
       <div className="fixed inset-0 -z-10">
@@ -93,7 +119,60 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Breathing Exercise CTA */}
+        {/* Add Product Management Section */}
+        {session && (
+          <section className="py-16 px-4">
+            <div className="container mx-auto max-w-4xl">
+              <div className="bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden shadow-xl border border-[#FFDEE2]/20 p-8">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FFDEE2] to-[#D946EF]">
+                    產品管理
+                  </h2>
+                  <Link to="/products">
+                    <Button className="bg-[#D946EF] hover:bg-[#D946EF]/90">
+                      管理產品
+                    </Button>
+                  </Link>
+                </div>
+
+                {isLoading ? (
+                  <div className="text-center py-8">載入中...</div>
+                ) : products && products.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {products.slice(0, 4).map((product) => (
+                      <div 
+                        key={product.id} 
+                        className="bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-colors"
+                      >
+                        {product.image_url && (
+                          <img 
+                            src={product.image_url} 
+                            alt={product.title}
+                            className="w-full h-48 object-cover rounded-lg mb-4"
+                          />
+                        )}
+                        <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
+                        <p className="text-gray-600 mb-2">{product.description}</p>
+                        <p className="text-[#D946EF] font-bold">${product.price}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-gray-600 mb-4">還沒有任何產品</p>
+                    <Link to="/products">
+                      <Button className="bg-[#D946EF] hover:bg-[#D946EF]/90">
+                        新增產品
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Keep existing Breathing Exercise CTA section */}
         <section className="py-16 relative overflow-hidden">
           <div className="container mx-auto max-w-6xl px-4">
             <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-[#FFDEE2]/20 shadow-xl">
