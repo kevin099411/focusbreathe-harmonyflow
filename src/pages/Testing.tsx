@@ -1,10 +1,17 @@
 import { Heart, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { CsvUploader } from "@/components/product/CsvUploader";
 
 const Testing = () => {
   return (
     <div className="container mx-auto px-4 pt-20">
       <div className="max-w-4xl mx-auto space-y-8">
+        {/* CSV Uploader Section */}
+        <div className="bg-white rounded-xl p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-800 mb-4">導入產品</h2>
+          <CsvUploader />
+        </div>
+
         {/* User Profile Section */}
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <h1 className="text-2xl font-bold text-gray-800">測試用戶</h1>

@@ -169,58 +169,151 @@ export type Database = {
       }
       products: {
         Row: {
+          allow_backorders: boolean | null
+          attribute_1_global: boolean | null
+          attribute_1_name: string | null
+          attribute_1_value: string | null
+          attribute_1_visible: boolean | null
+          attribute_2_global: boolean | null
+          attribute_2_name: string | null
+          attribute_2_value: string | null
+          attribute_2_visible: boolean | null
+          button_text: string | null
+          categories: string[] | null
           created_at: string
+          crosssell_ids: string[] | null
           description: string
+          download_expiry: number | null
+          download_limit: number | null
+          external_url: string | null
+          featured: boolean | null
+          gtin: string | null
+          height: number | null
           id: string
           image_url: string | null
           inventory: number | null
+          length: number | null
           order_index: number | null
           price: number
           product_cost: number | null
           profit: number | null
+          purchase_note: string | null
+          sale_end_date: string | null
           sale_price: number | null
+          sale_start_date: string | null
           seo_description: string | null
           seo_keywords: string | null
           seo_title: string | null
+          shipping_class: string | null
+          sku: string | null
+          sold_individually: boolean | null
+          tax_class: string | null
+          tax_status: string | null
           title: string
           updated_at: string
+          upsell_ids: string[] | null
           user_id: string | null
+          visibility: string | null
+          weight: number | null
+          width: number | null
         }
         Insert: {
+          allow_backorders?: boolean | null
+          attribute_1_global?: boolean | null
+          attribute_1_name?: string | null
+          attribute_1_value?: string | null
+          attribute_1_visible?: boolean | null
+          attribute_2_global?: boolean | null
+          attribute_2_name?: string | null
+          attribute_2_value?: string | null
+          attribute_2_visible?: boolean | null
+          button_text?: string | null
+          categories?: string[] | null
           created_at?: string
+          crosssell_ids?: string[] | null
           description: string
+          download_expiry?: number | null
+          download_limit?: number | null
+          external_url?: string | null
+          featured?: boolean | null
+          gtin?: string | null
+          height?: number | null
           id?: string
           image_url?: string | null
           inventory?: number | null
+          length?: number | null
           order_index?: number | null
           price: number
           product_cost?: number | null
           profit?: number | null
+          purchase_note?: string | null
+          sale_end_date?: string | null
           sale_price?: number | null
+          sale_start_date?: string | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title?: string | null
+          shipping_class?: string | null
+          sku?: string | null
+          sold_individually?: boolean | null
+          tax_class?: string | null
+          tax_status?: string | null
           title: string
           updated_at?: string
+          upsell_ids?: string[] | null
           user_id?: string | null
+          visibility?: string | null
+          weight?: number | null
+          width?: number | null
         }
         Update: {
+          allow_backorders?: boolean | null
+          attribute_1_global?: boolean | null
+          attribute_1_name?: string | null
+          attribute_1_value?: string | null
+          attribute_1_visible?: boolean | null
+          attribute_2_global?: boolean | null
+          attribute_2_name?: string | null
+          attribute_2_value?: string | null
+          attribute_2_visible?: boolean | null
+          button_text?: string | null
+          categories?: string[] | null
           created_at?: string
+          crosssell_ids?: string[] | null
           description?: string
+          download_expiry?: number | null
+          download_limit?: number | null
+          external_url?: string | null
+          featured?: boolean | null
+          gtin?: string | null
+          height?: number | null
           id?: string
           image_url?: string | null
           inventory?: number | null
+          length?: number | null
           order_index?: number | null
           price?: number
           product_cost?: number | null
           profit?: number | null
+          purchase_note?: string | null
+          sale_end_date?: string | null
           sale_price?: number | null
+          sale_start_date?: string | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title?: string | null
+          shipping_class?: string | null
+          sku?: string | null
+          sold_individually?: boolean | null
+          tax_class?: string | null
+          tax_status?: string | null
           title?: string
           updated_at?: string
+          upsell_ids?: string[] | null
           user_id?: string | null
+          visibility?: string | null
+          weight?: number | null
+          width?: number | null
         }
         Relationships: []
       }
