@@ -36,13 +36,13 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <TooltipProvider>
-      <QueryClientProvider client={queryClient}>
-        <SessionContextProvider supabaseClient={supabase}>
-          <Toaster />
-          <Sonner />
+    <QueryClientProvider client={queryClient}>
+      <SessionContextProvider supabaseClient={supabase}>
+        <TooltipProvider>
           <BrowserRouter>
             <Layout>
+              <Toaster />
+              <Sonner />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/meditate" element={<Meditate />} />
@@ -65,9 +65,9 @@ const App = () => {
               </Routes>
             </Layout>
           </BrowserRouter>
-        </SessionContextProvider>
-      </QueryClientProvider>
-    </TooltipProvider>
+        </TooltipProvider>
+      </SessionContextProvider>
+    </QueryClientProvider>
   );
 };
 
