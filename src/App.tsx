@@ -1,3 +1,4 @@
+import React from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -36,38 +37,40 @@ const queryClient = new QueryClient({
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SessionContextProvider supabaseClient={supabase}>
-        <TooltipProvider>
-          <BrowserRouter>
-            <Layout>
-              <Toaster />
-              <Sonner />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/meditate" element={<Meditate />} />
-                <Route path="/breathwork" element={<Breathwork />} />
-                <Route path="/testing" element={<Testing />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/products" element={<ProductManagement />} />
-                <Route path="*" element={
-                  <div className="min-h-screen flex items-center justify-center">
-                    <div className="text-center">
-                      <h2 className="text-2xl font-bold mb-4">頁面未找到</h2>
-                      <p className="text-gray-600 mb-6">抱歉，您請求的頁面不存在。</p>
-                      <Button onClick={() => window.location.href = '/'}>
-                        返回首頁
-                      </Button>
+    <React.StrictMode>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <SessionContextProvider supabaseClient={supabase}>
+            <TooltipProvider>
+              <Layout>
+                <Toaster />
+                <Sonner />
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/meditate" element={<Meditate />} />
+                  <Route path="/breathwork" element={<Breathwork />} />
+                  <Route path="/testing" element={<Testing />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/products" element={<ProductManagement />} />
+                  <Route path="*" element={
+                    <div className="min-h-screen flex items-center justify-center">
+                      <div className="text-center">
+                        <h2 className="text-2xl font-bold mb-4">頁面未找到</h2>
+                        <p className="text-gray-600 mb-6">抱歉，您請求的頁面不存在。</p>
+                        <Button onClick={() => window.location.href = '/'}>
+                          返回首頁
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                } />
-              </Routes>
-            </Layout>
-          </BrowserRouter>
-        </TooltipProvider>
-      </SessionContextProvider>
-    </QueryClientProvider>
+                  } />
+                </Routes>
+              </Layout>
+            </TooltipProvider>
+          </SessionContextProvider>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </React.StrictMode>
   );
 };
 
