@@ -38,9 +38,6 @@ export const Navigation = () => {
             <Link to="/breathwork" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               每日知識
             </Link>
-            <Link to="/products" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
-              商品
-            </Link>
             <Link to="/testing" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               會員
             </Link>
@@ -68,13 +65,6 @@ export const Navigation = () => {
                 每日知識
               </Link>
               <Link 
-                to="/products" 
-                className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                商品
-              </Link>
-              <Link 
                 to="/testing" 
                 className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
                 onClick={() => setIsMenuOpen(false)}
@@ -94,4 +84,4 @@ export const Navigation = () => {
       </div>
     </nav>
   );
-}
+};
