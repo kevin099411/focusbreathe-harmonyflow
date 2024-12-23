@@ -10,13 +10,13 @@ import Pricing from "./pages/Pricing";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route element={<Layout />}>
         <Route index element={<Index />} />
-        <Route path="/meditate" element={<Meditate />} />
-        <Route path="/breathwork" element={<Breathwork />} />
-        <Route path="/products" element={<ProductCatalog />} />
-        <Route path="/testing" element={<Testing />} />
-        <Route path="/pricing" element={<Pricing />} />
+        <Route path="meditate" element={<Meditate />} />
+        <Route path="breathwork" element={<Breathwork />} />
+        <Route path="products" element={<ProductCatalog />} />
+        <Route path="testing" element={<Testing />} />
+        <Route path="pricing" element={<Pricing />} />
       </Route>
     </Routes>
   );
