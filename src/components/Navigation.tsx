@@ -1,14 +1,9 @@
 import { Wind, Menu, X } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSession } from "@supabase/auth-helpers-react";
-import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export const Navigation = () => {
-  const session = useSession();
-  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -32,6 +27,9 @@ export const Navigation = () => {
           </button>
           
           <div className="hidden md:flex items-center space-x-6">
+            <Link to="/products" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
+              商店
+            </Link>
             <Link to="/meditate" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               靜坐
             </Link>
@@ -50,6 +48,13 @@ export const Navigation = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 bg-white/95 border-t border-gray-100">
             <div className="flex flex-col space-y-4 px-4">
+              <Link 
+                to="/products" 
+                className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                商店
+              </Link>
               <Link 
                 to="/meditate" 
                 className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
