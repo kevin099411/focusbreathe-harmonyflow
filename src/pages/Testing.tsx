@@ -1,7 +1,6 @@
 import { Heart, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useSession } from "@supabase/auth-helpers-react";
-import { PayPalButton } from "@/components/PayPalButton";
 
 const Testing = () => {
   const session = useSession();
@@ -23,9 +22,9 @@ const Testing = () => {
             {!session ? (
               <p className="text-sm text-gray-300">請先登入</p>
             ) : (
-              <div className="w-32">
-                <PayPalButton amount="19.99" planTitle="TIDE Plus Membership" />
-              </div>
+              <button className="px-4 py-2 bg-[#D4AF37] text-black rounded-full text-sm">
+                開通會員
+              </button>
             )}
           </div>
         </div>
