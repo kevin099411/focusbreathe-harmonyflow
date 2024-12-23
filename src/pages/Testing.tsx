@@ -1,20 +1,17 @@
 import { Heart, Clock } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { CsvUploader } from "@/components/product/CsvUploader";
+import { useSession } from "@supabase/auth-helpers-react";
+import { PayPalButton } from "@/components/PayPalButton";
 
 const Testing = () => {
+  const session = useSession();
+
   return (
     <div className="container mx-auto px-4 pt-20">
       <div className="max-w-4xl mx-auto space-y-8">
-        {/* CSV Uploader Section */}
-        <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">導入產品</h2>
-          <CsvUploader />
-        </div>
-
         {/* User Profile Section */}
         <div className="bg-white rounded-xl p-6 shadow-sm">
-          <h1 className="text-2xl font-bold text-gray-800">測試用戶</h1>
+          <h1 className="text-2xl font-bold text-gray-800">會員中心</h1>
           <p className="text-gray-500">與靜坐相遇的第 1 天</p>
           
           {/* Premium Banner */}
@@ -23,9 +20,13 @@ const Testing = () => {
               <h3 className="font-semibold">TIDE plus</h3>
               <p className="text-sm text-gray-300">新用戶 7 天免費試用</p>
             </div>
-            <button className="px-4 py-2 bg-[#D4AF37] text-black rounded-full text-sm">
-              開通會員
-            </button>
+            {!session ? (
+              <p className="text-sm text-gray-300">請先登入</p>
+            ) : (
+              <div className="w-32">
+                <PayPalButton amount="19.99" planTitle="TIDE Plus Membership" />
+              </div>
+            )}
           </div>
         </div>
 
