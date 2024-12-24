@@ -5,6 +5,7 @@ import { toast } from '@/hooks/use-toast';
 import { Product, NewProduct } from '@/types/product';
 import { ProductForm } from '@/components/product/ProductForm';
 import { ProductList } from '@/components/product/ProductList';
+import { CsvUploader } from '@/components/product/CsvUploader';
 
 export default function ProductManagement() {
   const session = useSession();
@@ -147,6 +148,12 @@ export default function ProductManagement() {
   return (
     <div className="container mx-auto p-4 space-y-8">
       <h1 className="text-2xl font-bold">產品管理</h1>
+      
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold mb-4">批量上傳產品</h2>
+        <CsvUploader />
+      </div>
+
       <ProductForm
         onSubmit={handleCreateProduct}
         uploading={uploading}
