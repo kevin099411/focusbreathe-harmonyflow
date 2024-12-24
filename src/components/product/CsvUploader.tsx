@@ -53,7 +53,7 @@ export function CsvUploader() {
       const products: any = await processFile(file);
       console.log('Processed products:', products);
 
-      const { error } = await fetch('/api/process-csv', {
+      const response = await fetch('/api/process-csv', {
         method: 'POST',
         headers: {
           'Content-Type': 'text/csv',
@@ -61,7 +61,9 @@ export function CsvUploader() {
         body: file,
       });
 
-      if (error) throw error;
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       toast({
         title: "成功",
