@@ -6,6 +6,7 @@ import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { PayPalButton } from '@/components/PayPalButton';
+import { DownloadTemplate } from '@/components/product/DownloadTemplate';
 
 export default function ProductCatalog() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -49,7 +50,10 @@ export default function ProductCatalog() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">商店</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">商店</h1>
+        <DownloadTemplate />
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product) => (
