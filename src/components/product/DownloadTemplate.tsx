@@ -3,7 +3,7 @@ import { Download } from 'lucide-react';
 
 export function DownloadTemplate() {
   const handleDownload = () => {
-    // CSV header and example row
+    // CSV header and example row with WordPress compatible fields
     const headers = [
       'Name',
       'Description',
@@ -25,7 +25,22 @@ export function DownloadTemplate() {
       'Attribute 2 Visible',
       'Attribute 2 Global',
       'Picture',
-      'Tag'
+      'Tag',
+      'Regular price',
+      'Virtual',
+      'Downloadable',
+      'Stock status',
+      'Backorders allowed',
+      'Sold individually',
+      'Weight (kg)',
+      'Length (cm)',
+      'Width (cm)',
+      'Height (cm)',
+      'Allow customer reviews',
+      'Purchase note',
+      'Categories',
+      'Tax status',
+      'Tax class'
     ].join(',');
 
     const exampleRow = [
@@ -49,7 +64,22 @@ export function DownloadTemplate() {
       'yes',
       'yes',
       'https://example.com/image.jpg',
-      'Category1,Category2'
+      'Category1,Category2',
+      '99.99',
+      'no',
+      'no',
+      'instock',
+      'no',
+      'no',
+      '0.5',
+      '10',
+      '10',
+      '10',
+      'yes',
+      'Thank you for your purchase',
+      'Electronics,Gadgets',
+      'taxable',
+      'standard'
     ].join(',');
 
     const csvContent = `${headers}\n${exampleRow}`;
