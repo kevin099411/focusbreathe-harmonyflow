@@ -5,12 +5,13 @@ export const processCSVFile = (file: File): Promise<any[]> => {
     Papa.parse(file, {
       header: true,
       complete: (results) => {
+        console.log('Parsing CSV file:', results);
         const products = results.data.map((row: any) => ({
           title: row['Name'] || '',
           description: row['Description'] || '',
-          price: parseFloat(row['Price'] || row['price'] || '0'),
+          price: parseFloat(row['Regular price'] || row['Price'] || '0'),
           sale_price: parseFloat(row['Sale price'] || '0') || null,
-          inventory: parseInt(row['Inventory'] || '0'),
+          inventory: parseInt(row['Stock'] || row['Inventory'] || '0'),
           sku: row['SKU'] || '',
           featured: row['Is Featured Product?']?.toLowerCase() === 'yes',
           visibility: row['Catalog Visibility'] || 'visible',
@@ -26,7 +27,16 @@ export const processCSVFile = (file: File): Promise<any[]> => {
           attribute_2_visible: row['Attribute 2 Visible']?.toLowerCase() === 'yes',
           attribute_2_global: row['Attribute 2 Global']?.toLowerCase() === 'yes',
           image_url: row['Picture'] || null,
-          categories: row['Tag'] ? row['Tag'].split(',').map((cat: string) => cat.trim()) : [],
+          categories: row['Categories']?.split(',').map((cat: string) => cat.trim()) || [],
+          tax_status: row['Tax status'] || null,
+          tax_class: row['Tax class'] || null,
+          weight: parseFloat(row['Weight (kg)'] || '0') || null,
+          length: parseFloat(row['Length (cm)'] || '0') || null,
+          width: parseFloat(row['Width (cm)'] || '0') || null,
+          height: parseFloat(row['Height (cm)'] || '0') || null,
+          allow_backorders: row['Backorders allowed']?.toLowerCase() === 'yes',
+          sold_individually: row['Sold individually']?.toLowerCase() === 'yes',
+          purchase_note: row['Purchase note'] || null
         }));
         
         console.log('Processed products:', products);

@@ -29,11 +29,16 @@ export function CsvUploader() {
       const products = await processCSVFile(file);
       console.log('Processed products:', products);
 
-      const { error } = await supabase
-        .from('products')
-        .insert(products);
+      // Insert products in batches to handle large files
+      const batchSize = 100;
+      for (let i = 0; i < products.length; i += batchSize) {
+        const batch = products.slice(i, i + batchSize);
+        const { error } = await supabase
+          .from('products')
+          .insert(batch);
 
-      if (error) throw error;
+        if (error) throw error;
+      }
 
       toast({
         title: "成功",
@@ -53,7 +58,8 @@ export function CsvUploader() {
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-semibold">上傳產品</h2>
         <DownloadTemplate />
       </div>
       {uploading ? (
@@ -63,6 +69,7 @@ export function CsvUploader() {
           onDrop={onDrop}
           accept={{ 'text/csv': ['.csv'] }}
           isDragActive={isDragActive}
+          setIsDragActive={setIsDragActive}
         />
       )}
     </div>
