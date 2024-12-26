@@ -4,6 +4,7 @@ import { FileDropzone } from './FileDropzone';
 import { ProcessingIndicator } from './ProcessingIndicator';
 import { processCSVFile } from '@/utils/csvProcessor';
 import { supabase } from '@/integrations/supabase/client';
+import { DownloadTemplate } from './DownloadTemplate';
 
 export function CsvUploader() {
   const [uploading, setUploading] = useState(false);
@@ -28,7 +29,6 @@ export function CsvUploader() {
       const products = await processCSVFile(file);
       console.log('Processed products:', products);
 
-      // Insert products into Supabase
       const { error } = await supabase
         .from('products')
         .insert(products);
@@ -52,7 +52,10 @@ export function CsvUploader() {
   }, []);
 
   return (
-    <div>
+    <div className="space-y-4">
+      <div className="flex justify-end">
+        <DownloadTemplate />
+      </div>
       {uploading ? (
         <ProcessingIndicator />
       ) : (
