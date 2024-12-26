@@ -3,6 +3,7 @@ import { toast } from '@/hooks/use-toast';
 import { FileDropzone } from './FileDropzone';
 import { ProcessingIndicator } from './ProcessingIndicator';
 import { processCSVFile } from '@/utils/csvProcessor';
+import { supabase } from '@/integrations/supabase/client';
 
 export function CsvUploader() {
   const [uploading, setUploading] = useState(false);
@@ -25,18 +26,14 @@ export function CsvUploader() {
     try {
       console.log('Processing CSV file...');
       const products = await processCSVFile(file);
+      console.log('Processed products:', products);
 
-      const response = await fetch('/api/process-csv', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/csv',
-        },
-        body: file,
-      });
+      // Insert products into Supabase
+      const { error } = await supabase
+        .from('products')
+        .insert(products);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (error) throw error;
 
       toast({
         title: "成功",
