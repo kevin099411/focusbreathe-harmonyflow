@@ -6,6 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { StoreHeader } from '@/components/store/StoreHeader';
 import { ProductGrid } from '@/components/store/ProductGrid';
 import { useNavigate } from 'react-router-dom';
+import { useSession } from '@supabase/auth-helpers-react';
 
 interface Product {
   title: string;
@@ -18,14 +19,9 @@ export default function Store() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const session = useSession();
 
   useEffect(() => {
-    checkUser();
-    fetchWordPressProducts();
-  }, []);
-
-  const checkUser = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       toast({
         title: "請先登入",
@@ -33,10 +29,10 @@ export default function Store() {
         variant: "destructive",
       });
       navigate('/login');
-      return false;
+      return;
     }
-    return true;
-  };
+    fetchWordPressProducts();
+  }, [session, navigate]);
 
   const fetchWordPressProducts = async () => {
     try {
@@ -72,8 +68,6 @@ export default function Store() {
       console.log('Parsed products:', parsedProducts);
       setProducts(parsedProducts);
       
-      // Get current user
-      const { data: { session } } = await supabase.auth.getSession();
       if (!session?.user?.id) {
         console.log('No authenticated user found, skipping product save');
         return;
@@ -81,6 +75,7 @@ export default function Store() {
 
       // Save products to Supabase with user_id
       for (const product of parsedProducts) {
+        console.log('Inserting product with user_id:', session.user.id);
         const { error } = await supabase
           .from('products')
           .insert({
@@ -88,7 +83,7 @@ export default function Store() {
             description: product.description,
             price: parseFloat(product.price) || 0,
             image_url: product.imageUrl,
-            user_id: session.user.id // Set the user_id field
+            user_id: session.user.id // Explicitly set the user_id
           });
 
         if (error) {
