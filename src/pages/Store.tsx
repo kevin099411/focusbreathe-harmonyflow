@@ -5,6 +5,7 @@ import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { StoreHeader } from '@/components/store/StoreHeader';
 import { ProductGrid } from '@/components/store/ProductGrid';
+import { useNavigate } from 'react-router-dom';
 
 interface Product {
   title: string;
@@ -16,10 +17,26 @@ interface Product {
 export default function Store() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    checkUser();
     fetchWordPressProducts();
   }, []);
+
+  const checkUser = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      toast({
+        title: "請先登入",
+        description: "您需要先登入才能存取商店功能",
+        variant: "destructive",
+      });
+      navigate('/login');
+      return false;
+    }
+    return true;
+  };
 
   const fetchWordPressProducts = async () => {
     try {
@@ -55,7 +72,14 @@ export default function Store() {
       console.log('Parsed products:', parsedProducts);
       setProducts(parsedProducts);
       
-      // Save products to Supabase
+      // Get current user
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session?.user?.id) {
+        console.log('No authenticated user found, skipping product save');
+        return;
+      }
+
+      // Save products to Supabase with user_id
       for (const product of parsedProducts) {
         const { error } = await supabase
           .from('products')
@@ -64,6 +88,7 @@ export default function Store() {
             description: product.description,
             price: parseFloat(product.price) || 0,
             image_url: product.imageUrl,
+            user_id: session.user.id // Set the user_id field
           });
 
         if (error) {
