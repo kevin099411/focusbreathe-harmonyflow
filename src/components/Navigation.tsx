@@ -1,4 +1,4 @@
-import { Wind, Menu, X } from "lucide-react";
+import { Wind, Menu, X, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -27,8 +27,12 @@ export const Navigation = () => {
           </button>
           
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/products" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
-              商店
+            <Link 
+              to="/store" 
+              className="flex items-center space-x-2 text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap"
+            >
+              <ShoppingBag className="h-4 w-4" />
+              <span>商店</span>
             </Link>
             <Link to="/meditate" className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm whitespace-nowrap">
               靜坐
@@ -49,11 +53,12 @@ export const Navigation = () => {
           <div className="md:hidden py-4 bg-white/95 border-t border-gray-100">
             <div className="flex flex-col space-y-4 px-4">
               <Link 
-                to="/products" 
-                className="text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
+                to="/store" 
+                className="flex items-center space-x-2 text-[#e89eb8] hover:opacity-80 transition-opacity text-sm py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                商店
+                <ShoppingBag className="h-4 w-4" />
+                <span>商店</span>
               </Link>
               <Link 
                 to="/meditate" 
