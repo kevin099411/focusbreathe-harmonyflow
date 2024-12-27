@@ -15,6 +15,7 @@ import Testing from "./pages/Testing";
 import Login from "./pages/Login";
 import ProductManagement from "./pages/ProductManagement";
 import ProductCatalog from "./pages/ProductCatalog";
+import Store from "./pages/Store";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/products" element={<ProductCatalog />} />
                 <Route path="/manage-products" element={<ProductManagement />} />
+                <Route path="/store" element={<Store />} />
               </Routes>
             </Layout>
           </TooltipProvider>
