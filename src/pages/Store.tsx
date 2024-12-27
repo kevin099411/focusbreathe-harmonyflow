@@ -73,7 +73,6 @@ export default function Store() {
         return;
       }
 
-      // Save products to Supabase with user_id
       for (const product of parsedProducts) {
         console.log('Inserting product with user_id:', session.user.id);
         const { error } = await supabase
@@ -83,7 +82,7 @@ export default function Store() {
             description: product.description,
             price: parseFloat(product.price) || 0,
             image_url: product.imageUrl,
-            user_id: session.user.id // Explicitly set the user_id
+            user_id: session.user.id
           });
 
         if (error) {
@@ -119,6 +118,10 @@ export default function Store() {
   return (
     <div className="container mx-auto px-4 py-8">
       <StoreHeader />
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">精選商品</h2>
+        <div className="h-1 w-20 bg-primary rounded"></div>
+      </div>
       <ProductGrid products={products} />
     </div>
   );
