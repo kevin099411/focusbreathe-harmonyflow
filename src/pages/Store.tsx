@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { DOMParser } from '@xmldom/xmldom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Loader2 } from 'lucide-react';
+import { Loader2, ShoppingBag } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -99,20 +99,27 @@ export default function Store() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">商店</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold">商店</h1>
+        <ShoppingBag className="h-6 w-6 text-[#e89eb8]" />
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product, index) => (
-          <Card key={index} className="overflow-hidden">
+          <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
             {product.imageUrl && (
-              <img
-                src={product.imageUrl}
-                alt={product.title}
-                className="w-full h-48 object-cover"
-              />
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={product.imageUrl}
+                  alt={product.title}
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
+                />
+              </div>
             )}
             <div className="p-4">
-              <h2 className="text-lg font-semibold mb-2">{product.title}</h2>
+              <h2 className="text-lg font-semibold mb-2 text-[#333333] line-clamp-2">
+                {product.title}
+              </h2>
               <div 
                 className="text-gray-600 text-sm mb-4 line-clamp-3"
                 dangerouslySetInnerHTML={{ __html: product.description }}
@@ -121,7 +128,10 @@ export default function Store() {
                 <span className="text-lg font-bold text-[#e89eb8]">
                   ${parseFloat(product.price).toFixed(2)}
                 </span>
-                <Button>
+                <Button 
+                  variant="secondary"
+                  className="hover:bg-[#e89eb8] hover:text-white transition-colors"
+                >
                   查看詳情
                 </Button>
               </div>
