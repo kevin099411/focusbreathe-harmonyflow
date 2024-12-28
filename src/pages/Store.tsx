@@ -18,45 +18,32 @@ export default function Store() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchWordPressProducts();
+    fetchProducts();
   }, []);
 
-  const fetchWordPressProducts = async () => {
+  const fetchProducts = async () => {
     try {
-      console.log('Fetching WordPress products...');
-      const response = await fetch('https://friyvfuogjdcjjxwbqty.supabase.co/storage/v1/object/public/products/zenring.WordPress.2024-12-26.xml?t=2024-12-26T06%3A15%3A39.228Z');
-      const xmlText = await response.text();
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-      
-      const items = xmlDoc.getElementsByTagName('item');
-      const parsedProducts: Product[] = [];
-      
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        const postType = item.getElementsByTagName('wp:post_type')[0]?.textContent;
-        
-        if (postType === 'product') {
-          const product: Product = {
-            title: item.getElementsByTagName('title')[0]?.textContent || 'Untitled Product',
-            description: item.getElementsByTagName('content:encoded')[0]?.textContent || '',
-            price: item.getElementsByTagName('regular_price')[0]?.textContent || '0',
-          };
+      console.log('Fetching products from Supabase...');
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .order('order_index', { ascending: true });
 
-          const attachmentUrl = item.getElementsByTagName('wp:attachment_url')[0]?.textContent;
-          if (attachmentUrl) {
-            product.imageUrl = attachmentUrl;
-          }
-          
-          parsedProducts.push(product);
-        }
-      }
+      if (error) throw error;
+
+      // Transform the data to match the Product interface
+      const transformedProducts = data.map(product => ({
+        title: product.title,
+        description: product.description,
+        price: product.price.toString(),
+        imageUrl: product.image_url
+      }));
       
-      console.log('Parsed products:', parsedProducts);
-      setProducts(parsedProducts);
+      console.log('Fetched products:', transformedProducts);
+      setProducts(transformedProducts);
       
     } catch (error) {
-      console.error('Error fetching WordPress products:', error);
+      console.error('Error fetching products:', error);
       toast({
         title: '錯誤',
         description: '無法載入產品',
