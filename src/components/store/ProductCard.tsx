@@ -1,10 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Upload } from "lucide-react";
-import { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
-import { toast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { ShoppingCart } from "lucide-react";
 
 interface Product {
   title: string;
@@ -18,71 +14,18 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const [imageUrl, setImageUrl] = useState(product.imageUrl);
-  const [isUploading, setIsUploading] = useState(false);
-
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const file = acceptedFiles[0];
-    if (!file) return;
-
-    try {
-      setIsUploading(true);
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const { data, error } = await supabase.functions.invoke('upload-product-image', {
-        body: formData,
-      });
-
-      if (error) throw error;
-      
-      setImageUrl(data.publicUrl);
-      toast({
-        title: "上傳成功",
-        description: "圖片已成功上傳",
-      });
-
-    } catch (error) {
-      console.error('Upload error:', error);
-      toast({
-        title: "上傳失敗",
-        description: "圖片上傳失敗，請重試",
-        variant: "destructive",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      'image/*': ['.jpeg', '.jpg', '.png', '.gif']
-    },
-    maxSize: 5 * 1024 * 1024, // 5MB
-    multiple: false
-  });
-
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 bg-white">
-      <div 
-        {...getRootProps()}
-        className={`relative h-64 overflow-hidden bg-gray-100 cursor-pointer
-          ${isDragActive ? 'border-2 border-dashed border-primary' : ''}`}
-      >
-        <input {...getInputProps()} />
-        {imageUrl ? (
+      <div className="relative h-64 overflow-hidden bg-gray-100">
+        {product.imageUrl ? (
           <img
-            src={imageUrl}
+            src={product.imageUrl}
             alt={product.title}
             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
           />
         ) : (
           <div className="flex flex-col items-center justify-center h-full">
-            <Upload className="h-12 w-12 text-gray-400" />
-            <p className="text-sm text-gray-600 mt-2">
-              {isDragActive ? '放開以上傳圖片' : '拖放圖片至此處，或點擊上傳'}
-            </p>
+            <p className="text-sm text-gray-600">No image available</p>
           </div>
         )}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
