@@ -27,20 +27,16 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
     try {
       setIsUploading(true);
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
+      const formData = new FormData();
+      formData.append('file', file);
 
-      const { data, error: uploadError } = await supabase.storage
-        .from('products')
-        .upload(fileName, file);
+      const { data, error } = await supabase.functions.invoke('upload-product-image', {
+        body: formData,
+      });
 
-      if (uploadError) throw uploadError;
-
-      const { data: { publicUrl } } = supabase.storage
-        .from('products')
-        .getPublicUrl(fileName);
-
-      setImageUrl(publicUrl);
+      if (error) throw error;
+      
+      setImageUrl(data.publicUrl);
       toast({
         title: "上傳成功",
         description: "圖片已成功上傳",
