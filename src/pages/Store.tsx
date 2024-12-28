@@ -5,8 +5,6 @@ import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { StoreHeader } from '@/components/store/StoreHeader';
 import { ProductGrid } from '@/components/store/ProductGrid';
-import { useNavigate } from 'react-router-dom';
-import { useSession } from '@supabase/auth-helpers-react';
 
 interface Product {
   title: string;
@@ -18,21 +16,10 @@ interface Product {
 export default function Store() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-  const session = useSession();
 
   useEffect(() => {
-    if (!session) {
-      toast({
-        title: "請先登入",
-        description: "您需要先登入才能存取商店功能",
-        variant: "destructive",
-      });
-      navigate('/login');
-      return;
-    }
     fetchWordPressProducts();
-  }, [session, navigate]);
+  }, []);
 
   const fetchWordPressProducts = async () => {
     try {
@@ -68,33 +55,6 @@ export default function Store() {
       console.log('Parsed products:', parsedProducts);
       setProducts(parsedProducts);
       
-      if (!session?.user?.id) {
-        console.log('No authenticated user found, skipping product save');
-        return;
-      }
-
-      for (const product of parsedProducts) {
-        console.log('Inserting product with user_id:', session.user.id);
-        const { error } = await supabase
-          .from('products')
-          .insert({
-            title: product.title,
-            description: product.description,
-            price: parseFloat(product.price) || 0,
-            image_url: product.imageUrl,
-            user_id: session.user.id
-          });
-
-        if (error) {
-          console.error('Error saving product:', error);
-          toast({
-            title: '錯誤',
-            description: '保存產品時出錯',
-            variant: 'destructive',
-          });
-        }
-      }
-
     } catch (error) {
       console.error('Error fetching WordPress products:', error);
       toast({
