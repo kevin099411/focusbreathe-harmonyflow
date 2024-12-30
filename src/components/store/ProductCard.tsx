@@ -22,6 +22,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     // Remove 'public/' prefix if it exists
     const cleanImageUrl = imageUrl.replace('public/', '');
     
+    // Construct the full Supabase storage URL
     return `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/products/${cleanImageUrl.split('/').pop()}`;
   };
 
