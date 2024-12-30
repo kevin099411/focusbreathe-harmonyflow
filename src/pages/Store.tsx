@@ -48,9 +48,9 @@ export default function Store() {
       // Transform the data to match the Product interface
       const transformedProducts = data.map(product => ({
         title: product.title,
-        description: product.description,
+        description: product.description || '',
         price: product.price.toString(),
-        imageUrl: product.image_url
+        imageUrl: product.image_url?.replace('public/', '') // Remove 'public/' prefix if present
       }));
       
       console.log('Fetched products:', transformedProducts);
