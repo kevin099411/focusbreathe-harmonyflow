@@ -27,17 +27,24 @@ export function ProductImageUploader({ onImagesUploaded }: ProductImageUploaderP
       const uploadPromises = imageFiles.map(async (file) => {
         const fileExt = file.name.split('.').pop();
         const fileName = `${Math.random()}.${fileExt}`;
+        console.log('Uploading file:', fileName);
 
         const { data, error } = await supabase.storage
           .from('products')
           .upload(fileName, file);
 
-        if (error) throw error;
+        if (error) {
+          console.error('Upload error:', error);
+          throw error;
+        }
+
+        console.log('Upload successful:', data);
 
         const { data: { publicUrl } } = supabase.storage
           .from('products')
           .getPublicUrl(fileName);
 
+        console.log('Public URL:', publicUrl);
         return publicUrl;
       });
 
