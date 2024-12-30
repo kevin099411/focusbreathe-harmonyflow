@@ -14,14 +14,21 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  // Log the image URL for debugging
+  console.log('Product image URL:', product.imageUrl);
+
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 bg-white">
       <div className="relative h-64 overflow-hidden bg-gray-100">
         {product.imageUrl ? (
           <img
-            src={product.imageUrl}
+            src={`${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/products/${product.imageUrl.split('/').pop()}`}
             alt={product.title}
             className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+            onError={(e) => {
+              console.error('Error loading image:', e);
+              e.currentTarget.src = '/placeholder.svg';
+            }}
           />
         ) : (
           <div className="flex flex-col items-center justify-center h-full">
