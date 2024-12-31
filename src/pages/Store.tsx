@@ -4,6 +4,8 @@ import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { StoreHeader } from '@/components/store/StoreHeader';
 import { ProductGrid } from '@/components/store/ProductGrid';
+import { CartProvider } from '@/contexts/CartContext';
+import { CartDrawer } from '@/components/store/CartDrawer';
 
 interface Product {
   title: string;
@@ -45,12 +47,11 @@ export default function Store() {
         return;
       }
 
-      // Transform the data to match the Product interface
       const transformedProducts = data.map(product => ({
         title: product.title,
         description: product.description || '',
         price: product.price.toString(),
-        imageUrl: product.image_url?.replace('public/', '') // Remove 'public/' prefix if present
+        imageUrl: product.image_url?.replace('public/', '')
       }));
       
       console.log('Fetched products:', transformedProducts);
@@ -95,21 +96,26 @@ export default function Store() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <StoreHeader />
-      {products.length === 0 ? (
-        <div className="text-center py-8">
-          <p className="text-gray-500">目前沒有商品</p>
+    <CartProvider>
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-between items-center mb-8">
+          <StoreHeader />
+          <CartDrawer />
         </div>
-      ) : (
-        <>
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">精選商品</h2>
-            <div className="h-1 w-20 bg-primary rounded"></div>
+        {products.length === 0 ? (
+          <div className="text-center py-8">
+            <p className="text-gray-500">目前沒有商品</p>
           </div>
-          <ProductGrid products={products} />
-        </>
-      )}
-    </div>
+        ) : (
+          <>
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">精選商品</h2>
+              <div className="h-1 w-20 bg-primary rounded"></div>
+            </div>
+            <ProductGrid products={products} />
+          </>
+        )}
+      </div>
+    </CartProvider>
   );
 }
