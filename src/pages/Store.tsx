@@ -72,21 +72,21 @@ export default function Store() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-primary/20 to-secondary/20">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-primary/20 to-secondary/20">
         <StoreHeader />
         <div className="text-center py-8">
           <p className="text-red-500">{error}</p>
           <button 
             onClick={() => fetchProducts()}
-            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90"
+            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
           >
             重試
           </button>
@@ -97,24 +97,26 @@ export default function Store() {
 
   return (
     <CartProvider>
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <StoreHeader />
-          <CartDrawer />
-        </div>
-        {products.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-gray-500">目前沒有商品</p>
+      <div className="min-h-screen bg-gradient-to-br from-primary/20 to-secondary/20">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex justify-between items-center mb-8">
+            <StoreHeader />
+            <CartDrawer />
           </div>
-        ) : (
-          <>
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">精選商品</h2>
-              <div className="h-1 w-20 bg-primary rounded"></div>
+          {products.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-gray-500">目前沒有商品</p>
             </div>
-            <ProductGrid products={products} />
-          </>
-        )}
+          ) : (
+            <>
+              <div className="mb-8 animate-fade-in">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">精選商品</h2>
+                <div className="h-1 w-20 bg-primary rounded"></div>
+              </div>
+              <ProductGrid products={products} />
+            </>
+          )}
+        </div>
       </div>
     </CartProvider>
   );

@@ -21,6 +21,7 @@ interface ProductCardProps {
 export const ProductCard = ({ product }: ProductCardProps) => {
   const [showDetails, setShowDetails] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { addItem } = useCart();
   
   const productImages = [
@@ -51,26 +52,29 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <>
-      <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 bg-white">
-        <ProductImageCarousel
-          images={productImages}
-          currentImageIndex={currentImageIndex}
-          onPrevImage={handlePrevImage}
-          onNextImage={handleNextImage}
-          onImageClick={() => setShowDetails(true)}
-        />
-        <div className="absolute top-2 right-2">
-          <Button
-            variant="secondary"
-            size="sm"
-            className="bg-white/90 hover:bg-white"
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowDetails(true);
-            }}
-          >
-            <Info className="h-4 w-4" />
-          </Button>
+      <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 bg-white/90 backdrop-blur-sm">
+        <div className="relative">
+          <ProductImageCarousel
+            images={productImages}
+            currentImageIndex={currentImageIndex}
+            onPrevImage={handlePrevImage}
+            onNextImage={handleNextImage}
+            onImageClick={() => setShowDetails(true)}
+            onImageLoad={() => setImageLoaded(true)}
+          />
+          <div className="absolute top-2 right-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="bg-white/90 hover:bg-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowDetails(true);
+              }}
+            >
+              <Info className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
         <div className="p-6">
           <h2 className="text-xl font-semibold mb-3 text-gray-800 group-hover:text-primary transition-colors duration-300 line-clamp-2">
@@ -86,7 +90,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </span>
             <Button 
               variant="secondary"
-              className="flex items-center space-x-2 bg-[#FFB5BE] text-white hover:bg-[#E99AA3] active:bg-[#D68F97] transition-colors"
+              className="flex items-center space-x-2 bg-primary text-white hover:bg-primary/90 active:bg-primary/80 transition-colors"
               onClick={handleAddToCart}
             >
               <ShoppingCart className="h-4 w-4" />
