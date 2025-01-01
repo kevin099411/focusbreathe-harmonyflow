@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react';
-import { toast } from "@/hooks/use-toast";
 
 interface CartItem {
   id: string;
@@ -36,11 +35,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       
       return [...currentItems, { ...newItem, quantity: 1 }];
-    });
-    
-    toast({
-      title: "已加入購物車",
-      description: `${newItem.title} 已成功加入購物車`,
     });
   };
 
