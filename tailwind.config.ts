@@ -25,7 +25,7 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#FFDEE2",
+          DEFAULT: "#FFB5BE", // Darker pink for primary color
           foreground: "#333333",
         },
         secondary: {

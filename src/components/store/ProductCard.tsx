@@ -86,7 +86,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </span>
             <Button 
               variant="secondary"
-              className="flex items-center space-x-2 bg-primary text-white hover:bg-primary/90"
+              className="flex items-center space-x-2 bg-[#FFB5BE] text-white hover:bg-[#E99AA3] active:bg-[#D68F97] transition-colors"
               onClick={handleAddToCart}
             >
               <ShoppingCart className="h-4 w-4" />
