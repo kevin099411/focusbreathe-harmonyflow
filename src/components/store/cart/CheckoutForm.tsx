@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PayPalButton } from "@/components/PayPalButton";
-import { ArrowLeft } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 interface CheckoutFormProps {
@@ -23,7 +22,6 @@ interface CheckoutFormProps {
 }
 
 export const CheckoutForm = ({
-  onBack,
   total,
   customerName,
   setCustomerName,
@@ -41,7 +39,6 @@ export const CheckoutForm = ({
   const paypalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Scroll to PayPal button when form is mounted
     if (paypalRef.current) {
       paypalRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -49,15 +46,6 @@ export const CheckoutForm = ({
 
   return (
     <div className="flex-1 p-4 overflow-y-auto">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="mb-4"
-        onClick={onBack}
-      >
-        <ArrowLeft className="h-5 w-5" />
-      </Button>
-
       <div className="space-y-4 max-w-md mx-auto">
         <div className="space-y-2">
           <Label htmlFor="customerName">姓名</Label>
