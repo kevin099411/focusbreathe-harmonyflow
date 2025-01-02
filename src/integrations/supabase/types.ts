@@ -81,6 +81,39 @@ export type Database = {
         }
         Relationships: []
       }
+      payment_methods: {
+        Row: {
+          account_holder: string | null
+          account_number: string | null
+          bank_name: string | null
+          branch_name: string | null
+          created_at: string
+          id: string
+          name: string
+          swift_code: string | null
+        }
+        Insert: {
+          account_holder?: string | null
+          account_number?: string | null
+          bank_name?: string | null
+          branch_name?: string | null
+          created_at?: string
+          id?: string
+          name: string
+          swift_code?: string | null
+        }
+        Update: {
+          account_holder?: string | null
+          account_number?: string | null
+          bank_name?: string | null
+          branch_name?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          swift_code?: string | null
+        }
+        Relationships: []
+      }
       product_images: {
         Row: {
           created_at: string
