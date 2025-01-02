@@ -27,26 +27,19 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
       }
 
       return new Promise((resolve, reject) => {
-        // Remove any existing PayPal script to avoid conflicts
-        const existingScript = document.querySelector('script[src*="paypal"]');
-        if (existingScript) {
-          document.body.removeChild(existingScript);
-          scriptLoaded.current = false;
-        }
-
         const script = document.createElement('script');
         script.src = `https://www.paypal.com/sdk/js?client-id=AZwwE0pNpx1qeR_mB9Qt2TxsNT1ADDRpRl9_6fIsZ89WLaOO9UHqP5DmY51tAhs_JgOcSnhWFgQXMR5L&currency=USD`;
         script.async = true;
-        script.crossOrigin = "anonymous";
+        script.defer = true;
         
-        // Add specific attributes to handle CORS
-        script.setAttribute('data-namespace', 'paypal-button');
+        // Set proper attributes for CORS
+        script.setAttribute('crossorigin', 'anonymous');
+        script.setAttribute('data-namespace', 'paypal_sdk');
         
         script.onload = () => {
           console.log('PayPal script loaded successfully');
           scriptLoaded.current = true;
-          // Add a longer delay to ensure PayPal is fully initialized
-          setTimeout(resolve, 500);
+          resolve(undefined);
         };
         
         script.onerror = (err) => {
@@ -54,6 +47,12 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
           scriptLoaded.current = false;
           reject(err);
         };
+        
+        // Clean up any existing PayPal scripts
+        const existingScript = document.querySelector('script[src*="paypal"]');
+        if (existingScript) {
+          existingScript.remove();
+        }
         
         document.body.appendChild(script);
       });
@@ -65,23 +64,21 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
         return;
       }
 
-      if (!window.paypal) {
-        console.error('PayPal SDK not available');
-        await loadPayPalScript().catch((err) => {
-          console.error('Error reloading PayPal script:', err);
-          throw err;
-        });
-      }
-
       try {
-        // Clear the container before rendering
-        paypalRef.current.innerHTML = '';
-        
-        if (typeof window.paypal?.Buttons !== 'function') {
+        if (!window.paypal) {
+          await loadPayPalScript();
+          // Give PayPal SDK time to initialize
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
+        if (!window.paypal?.Buttons) {
           throw new Error('PayPal Buttons API not available');
         }
-        
-        await window.paypal.Buttons({
+
+        // Clear existing content
+        paypalRef.current.innerHTML = '';
+
+        const paypalButtonsComponent = window.paypal.Buttons({
           style: {
             layout: 'vertical',
             color: 'gold',
@@ -110,7 +107,11 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
               });
             } catch (error) {
               console.error('Error capturing PayPal order:', error);
-              throw error;
+              toast({
+                title: "Error",
+                description: "Failed to process payment. Please try again.",
+                variant: "destructive",
+              });
             }
           },
           onError: (err: any) => {
@@ -121,34 +122,46 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
               variant: "destructive",
             });
           }
-        }).render(paypalRef.current);
+        });
+
+        if (await paypalButtonsComponent.isEligible()) {
+          await paypalButtonsComponent.render(paypalRef.current);
+        } else {
+          throw new Error('PayPal Buttons not eligible');
+        }
       } catch (error) {
         console.error('Error rendering PayPal button:', error);
         toast({
           title: "Error",
-          description: "Failed to render PayPal button. Please try again.",
+          description: "Failed to load PayPal. Please refresh and try again.",
           variant: "destructive",
         });
-        // Try to reload the script on error
         scriptLoaded.current = false;
       }
     };
 
-    const initializePayPal = async () => {
-      try {
-        await loadPayPalScript();
-        await renderPayPalButton();
-      } catch (error) {
-        console.error('PayPal initialization error:', error);
-        toast({
-          title: "Error",
-          description: "Failed to initialize PayPal. Please try again.",
-          variant: "destructive",
-        });
+    // Initialize PayPal with retry logic
+    const initializeWithRetry = async (retries = 3) => {
+      for (let i = 0; i < retries; i++) {
+        try {
+          await renderPayPalButton();
+          break;
+        } catch (error) {
+          console.error(`PayPal initialization attempt ${i + 1} failed:`, error);
+          if (i === retries - 1) {
+            toast({
+              title: "Error",
+              description: "Could not initialize PayPal. Please refresh the page.",
+              variant: "destructive",
+            });
+          } else {
+            await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+          }
+        }
       }
     };
 
-    initializePayPal();
+    initializeWithRetry();
 
     return () => {
       if (paypalRef.current) {
