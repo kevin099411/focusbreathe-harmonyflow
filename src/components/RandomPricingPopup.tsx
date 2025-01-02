@@ -6,6 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { PricingCard } from "./PricingCard";
+import { CartProvider } from "@/contexts/CartContext";
 
 export const RandomPricingPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,27 +69,29 @@ export const RandomPricingPopup = () => {
   ];
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center mb-4 text-[#0EA5E9]">
-            升級您的冥想之旅
-          </DialogTitle>
-        </DialogHeader>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
-          {pricingPlans.map((plan, index) => (
-            <PricingCard
-              key={index}
-              title={plan.title}
-              price={plan.price}
-              features={plan.features}
-              isPopular={plan.isPopular}
-              isSelected={selectedPlan === plan.title}
-              onSelect={() => setSelectedPlan(plan.title)}
-            />
-          ))}
-        </div>
-      </DialogContent>
-    </Dialog>
+    <CartProvider>
+      <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center mb-4 text-[#0EA5E9]">
+              升級您的冥想之旅
+            </DialogTitle>
+          </DialogHeader>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4">
+            {pricingPlans.map((plan, index) => (
+              <PricingCard
+                key={index}
+                title={plan.title}
+                price={plan.price}
+                features={plan.features}
+                isPopular={plan.isPopular}
+                isSelected={selectedPlan === plan.title}
+                onSelect={() => setSelectedPlan(plan.title)}
+              />
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </CartProvider>
   );
 };
