@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Loader2 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { StoreHeader } from '@/components/store/StoreHeader';
-import { ProductGrid } from '@/components/store/ProductGrid';
 import { CartProvider } from '@/contexts/CartContext';
 import { CartDrawer } from '@/components/store/CartDrawer';
+import { StoreLoading } from '@/components/store/StoreLoading';
+import { StoreError } from '@/components/store/StoreError';
+import { ProductsSection } from '@/components/store/ProductsSection';
 
 interface Product {
   title: string;
@@ -97,28 +98,11 @@ export default function Store() {
   };
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-primary/20 to-secondary/20">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
+    return <StoreLoading />;
   }
 
   if (error) {
-    return (
-      <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-primary/20 to-secondary/20">
-        <StoreHeader />
-        <div className="text-center py-8">
-          <p className="text-red-500">{error}</p>
-          <button 
-            onClick={() => fetchProducts()}
-            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
-          >
-            重試
-          </button>
-        </div>
-      </div>
-    );
+    return <StoreError error={error} onRetry={fetchProducts} />;
   }
 
   return (
@@ -134,13 +118,7 @@ export default function Store() {
               <p className="text-gray-500">目前沒有商品</p>
             </div>
           ) : (
-            <>
-              <div className="mb-8 animate-fade-in">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">精選商品</h2>
-                <div className="h-1 w-20 bg-primary rounded"></div>
-              </div>
-              <ProductGrid products={products} />
-            </>
+            <ProductsSection products={products} />
           )}
         </div>
       </div>
