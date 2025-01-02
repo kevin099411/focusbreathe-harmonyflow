@@ -29,23 +29,38 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
         const script = document.createElement('script');
         script.src = `https://www.paypal.com/sdk/js?client-id=AZwwE0pNpx1qeR_mB9Qt2TxsNT1ADDRpRl9_6fIsZ89WLaOO9UHqP5DmY51tAhs_JgOcSnhWFgQXMR5L&currency=USD`;
         script.async = true;
+        
+        // Add crossorigin attribute to handle CORS issues
+        script.crossOrigin = "anonymous";
+        
         script.onload = () => {
           scriptLoaded.current = true;
-          resolve(undefined);
+          // Add a small delay to ensure PayPal is fully initialized
+          setTimeout(resolve, 100);
         };
+        
         script.onerror = (err) => {
           console.error('Failed to load PayPal SDK:', err);
           reject(err);
         };
+        
         document.body.appendChild(script);
       });
     };
 
     const renderPayPalButton = async () => {
-      if (!paypalRef.current || !window.paypal) return;
+      if (!paypalRef.current || !window.paypal) {
+        console.error('PayPal container or SDK not available');
+        return;
+      }
 
       try {
         paypalRef.current.innerHTML = '';
+        
+        // Check if Buttons API is available
+        if (typeof window.paypal.Buttons !== 'function') {
+          throw new Error('PayPal Buttons API not available');
+        }
         
         await window.paypal.Buttons({
           style: {
@@ -93,16 +108,21 @@ export const PayPalButton = ({ amount, planTitle }: PayPalButtonProps) => {
       }
     };
 
-    loadPayPalScript()
-      .then(renderPayPalButton)
-      .catch((error) => {
+    const initializePayPal = async () => {
+      try {
+        await loadPayPalScript();
+        await renderPayPalButton();
+      } catch (error) {
         console.error('PayPal initialization error:', error);
         toast({
           title: "Error",
           description: "Failed to initialize PayPal. Please try again.",
           variant: "destructive",
         });
-      });
+      }
+    };
+
+    initializePayPal();
 
     return () => {
       if (paypalRef.current) {

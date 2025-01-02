@@ -6,6 +6,7 @@ interface CartItem {
   price: string;
   quantity: number;
   imageUrl?: string;
+  selectedColor?: string;
 }
 
 interface CartContextType {
@@ -24,11 +25,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addItem = (newItem: Omit<CartItem, 'quantity'>) => {
     setItems(currentItems => {
-      const existingItem = currentItems.find(item => item.id === newItem.id);
+      const existingItem = currentItems.find(item => 
+        item.id === newItem.id && item.selectedColor === newItem.selectedColor
+      );
       
       if (existingItem) {
         return currentItems.map(item =>
-          item.id === newItem.id
+          item.id === newItem.id && item.selectedColor === newItem.selectedColor
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
