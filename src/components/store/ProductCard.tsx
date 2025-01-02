@@ -5,6 +5,8 @@ import { ShoppingCart, Info } from "lucide-react";
 import { ProductImageCarousel } from "./ProductImageCarousel";
 import { ProductDetails } from "./ProductDetails";
 import { useCart } from "@/contexts/CartContext";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface Product {
   id?: string;
@@ -12,6 +14,7 @@ interface Product {
   description: string;
   price: string;
   imageUrl?: string;
+  colors?: { name: string; images: string[] }[];
 }
 
 interface ProductCardProps {
@@ -21,10 +24,10 @@ interface ProductCardProps {
 export const ProductCard = ({ product }: ProductCardProps) => {
   const [showDetails, setShowDetails] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.name || '');
   const { addItem } = useCart();
   
-  const productImages = [
+  const productImages = product.colors?.find(c => c.name === selectedColor)?.images || [
     "/lovable-uploads/66f66b3c-2013-413d-a29e-e15d124078da.png",
     "/lovable-uploads/b5c616bd-3ca3-413b-a1ac-54d27ae3bef7.png",
     "/lovable-uploads/f7741374-ae1d-4fe4-9c35-696661798343.png",
@@ -46,8 +49,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
       id: product.id || Math.random().toString(),
       title: product.title,
       price: product.price,
-      imageUrl: productImages[currentImageIndex]
+      imageUrl: productImages[currentImageIndex],
+      selectedColor
     });
+  };
+
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+    setCurrentImageIndex(0);
   };
 
   return (
@@ -60,7 +69,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             onPrevImage={handlePrevImage}
             onNextImage={handleNextImage}
             onImageClick={() => setShowDetails(true)}
-            onImageLoad={() => setImageLoaded(true)}
           />
           <div className="absolute top-2 right-2">
             <Button
@@ -84,6 +92,26 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             className="text-gray-600 text-sm mb-4 line-clamp-3 h-[4.5rem]"
             dangerouslySetInnerHTML={{ __html: product.description }}
           />
+          
+          {product.colors && (
+            <div className="mb-4">
+              <RadioGroup 
+                value={selectedColor} 
+                onValueChange={handleColorChange}
+                className="flex gap-4"
+              >
+                {product.colors.map((color) => (
+                  <div key={color.name} className="flex items-center space-x-2">
+                    <RadioGroupItem value={color.name} id={color.name} />
+                    <Label htmlFor={color.name} className="capitalize">
+                      {color.name === 'grey' ? '灰色' : color.name === 'green' ? '綠色' : color.name}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </div>
+          )}
+
           <div className="flex items-center justify-between mt-4">
             <span className="text-2xl font-bold text-primary">
               NT${parseFloat(product.price).toLocaleString()}
@@ -110,6 +138,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         onNextImage={handleNextImage}
         onImageSelect={setCurrentImageIndex}
         onAddToCart={handleAddToCart}
+        selectedColor={selectedColor}
+        onColorChange={handleColorChange}
       />
     </>
   );

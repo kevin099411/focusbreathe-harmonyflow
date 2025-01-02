@@ -2,12 +2,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { ProductImageCarousel } from "./ProductImageCarousel";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface ProductDetailsProps {
   product: {
     title: string;
     description: string;
     price: string;
+    colors?: { name: string; images: string[] }[];
   };
   showDetails: boolean;
   onCloseDetails: () => void;
@@ -17,6 +20,8 @@ interface ProductDetailsProps {
   onNextImage: (e: React.MouseEvent) => void;
   onImageSelect: (index: number) => void;
   onAddToCart: () => void;
+  selectedColor: string;
+  onColorChange: (color: string) => void;
 }
 
 export function ProductDetails({
@@ -29,6 +34,8 @@ export function ProductDetails({
   onNextImage,
   onImageSelect,
   onAddToCart,
+  selectedColor,
+  onColorChange,
 }: ProductDetailsProps) {
   return (
     <Dialog open={showDetails} onOpenChange={onCloseDetails}>
@@ -51,6 +58,27 @@ export function ProductDetails({
               className="text-base text-gray-700"
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
+            
+            {product.colors && (
+              <div className="pt-4">
+                <h3 className="text-sm font-medium mb-2">選擇顏色</h3>
+                <RadioGroup 
+                  value={selectedColor} 
+                  onValueChange={onColorChange}
+                  className="flex gap-4"
+                >
+                  {product.colors.map((color) => (
+                    <div key={color.name} className="flex items-center space-x-2">
+                      <RadioGroupItem value={color.name} id={`detail-${color.name}`} />
+                      <Label htmlFor={`detail-${color.name}`} className="capitalize">
+                        {color.name === 'grey' ? '灰色' : color.name === 'green' ? '綠色' : color.name}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+            )}
+
             <div className="grid grid-cols-4 gap-2 mt-4">
               {productImages.map((img, index) => (
                 <div
